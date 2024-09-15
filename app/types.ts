@@ -45,3 +45,11 @@ export interface HeadingBlock {
     color: string;
   };
 }
+
+export interface CodeBlock {
+  type: "code";
+  code: {
+    rich_text: RichTextItem[];
+    language: string;
+  };
+}

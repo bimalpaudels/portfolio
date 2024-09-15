@@ -1,5 +1,5 @@
 import { Heading2Block, RichTextItem } from "@/app/types";
-import { Heading, Heading2 } from "@/app/componenets";
+import { Heading, Heading2, Code } from "@/app/componenets";
 
 export default function NotionRenderer({ blocks }: any) {
   return (
@@ -13,7 +13,8 @@ export default function NotionRenderer({ blocks }: any) {
             return <Heading key={block.id} {...block} />;
 
           case "code":
-            console.log(block);
+            console.log(block.code.rich_text);
+            return <Code key={block.id} {...block} />;
         }
       })}
     </div>

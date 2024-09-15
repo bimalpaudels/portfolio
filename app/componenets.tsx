@@ -1,5 +1,12 @@
-import { Heading2Block, RichTextItem, HeadingBlock } from "@/app/types";
+import {
+  Heading2Block,
+  RichTextItem,
+  HeadingBlock,
+  CodeBlock,
+} from "@/app/types";
 import { colorMap } from "@/app/mapping";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { arta } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 const RichText: React.FC<{ item: RichTextItem }> = ({ item }) => {
   const { annotations, text } = item;
@@ -69,4 +76,12 @@ export function Heading(props: HeadingBlock) {
   );
 }
 
-export function Code() {}
+export function Code({ code }: CodeBlock) {
+  const { rich_text, language } = code;
+  const codeContent = rich_text.map((item) => item.text.content).join("\n");
+  return (
+    <SyntaxHighlighter language={language} style={arta}>
+      {codeContent}
+    </SyntaxHighlighter>
+  );
+}
