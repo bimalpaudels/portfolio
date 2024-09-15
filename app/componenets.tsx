@@ -24,7 +24,7 @@ const RichText: React.FC<{ item: RichTextItem }> = ({ item }) => {
 
 export function Heading2({ heading_2 }: Heading2Block) {
   // Depreciated
-  const { rich_text, is_toggleable, color } = heading_2;
+  const { rich_text, color } = heading_2;
   const headingClassName = `text-2xl font-bold mb-4 ${
     colorMap[color] || colorMap.default
   }`;
@@ -40,7 +40,7 @@ export function Heading2({ heading_2 }: Heading2Block) {
 export function Heading(props: HeadingBlock) {
   const heading_content = props[props.type];
   if (!heading_content) return null;
-  const { rich_text, is_toggleable, color } = heading_content;
+  const { rich_text, color } = heading_content;
   const headingClassName = `font-bold mb-4 ${
     colorMap[color] || colorMap.default
   }`;
