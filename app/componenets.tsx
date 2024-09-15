@@ -6,7 +6,7 @@ import {
 } from "@/app/types";
 import { colorMap } from "@/app/mapping";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { arta } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 const RichText: React.FC<{ item: RichTextItem }> = ({ item }) => {
   const { annotations, text } = item;
@@ -80,7 +80,7 @@ export function Code({ code }: CodeBlock) {
   const { rich_text, language } = code;
   const codeContent = rich_text.map((item) => item.text.content).join("\n");
   return (
-    <SyntaxHighlighter language={language} style={arta}>
+    <SyntaxHighlighter language={language} style={tomorrow}>
       {codeContent}
     </SyntaxHighlighter>
   );

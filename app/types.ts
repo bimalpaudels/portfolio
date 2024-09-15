@@ -24,6 +24,7 @@ export interface Heading2Block {
 }
 
 export interface HeadingBlock {
+  id: string;
   type: "heading_1" | "heading_2" | "heading_3" | "paragraph";
   heading_1?: {
     rich_text: RichTextItem[];
@@ -47,9 +48,16 @@ export interface HeadingBlock {
 }
 
 export interface CodeBlock {
+  id: string;
   type: "code";
   code: {
     rich_text: RichTextItem[];
     language: string;
   };
 }
+
+export type Block = HeadingBlock | CodeBlock;
+
+export type BlockList = {
+  blocks: Block[];
+};
