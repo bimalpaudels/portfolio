@@ -33,7 +33,6 @@ export function Heading2({ heading_2 }: Heading2Block) {
       {rich_text.map((item, index) => (
         <RichText key={index} item={item} />
       ))}
-      {is_toggleable && <span className="ml-2">▼</span>}
     </h2>
   );
 }
@@ -71,7 +70,6 @@ export function Heading(props: HeadingBlock) {
       {rich_text.map((item, index) => (
         <RichText key={index} item={item} />
       ))}
-      {is_toggleable && <span className="ml-2">▼</span>}
     </Tag>
   );
 }
