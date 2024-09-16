@@ -1,20 +1,35 @@
-import { Heading, Code } from "@/app/componenets";
-import { BlockList } from "@/app/types";
+import {
+  Heading1,
+  Heading2,
+  Heading3,
+  Paragraph,
+  Code,
+} from "@/app/componenets";
+import { GetBlockResponse } from "@notionhq/client/build/src/api-endpoints";
 
-export default function NotionRenderer({ blocks }: BlockList) {
+type NotionRendererProps = {
+  blocks: GetBlockResponse[];
+};
+
+export default function NotionRenderer({ blocks }: NotionRendererProps) {
   return (
     <div>
       {blocks.map((block) => {
         if (!("type" in block)) {
-          // Handle PartialBlockObjectResponse
           return null;
         }
         switch (block.type) {
           case "heading_1":
+            return <Heading1 key={block.id} {...block} />;
+
           case "heading_2":
+            return <Heading2 key={block.id} {...block} />;
+
           case "heading_3":
+            return <Heading3 key={block.id} {...block} />;
+
           case "paragraph":
-            return <Heading key={block.id} {...block} />;
+            return <Paragraph key={block.id} {...block} />;
 
           case "code":
             return <Code key={block.id} {...block} />;
