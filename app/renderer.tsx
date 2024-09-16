@@ -5,6 +5,10 @@ export default function NotionRenderer({ blocks }: BlockList) {
   return (
     <div>
       {blocks.map((block) => {
+        if (!("type" in block)) {
+          // Handle PartialBlockObjectResponse
+          return null;
+        }
         switch (block.type) {
           case "heading_1":
           case "heading_2":
