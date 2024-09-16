@@ -1,3 +1,8 @@
+import {
+  BlockObjectResponse,
+  PartialBlockObjectResponse,
+} from "@notionhq/client/build/src/api-endpoints";
+
 export interface RichTextItem {
   type: "text";
   text: { content: string; link: string | null };
@@ -59,5 +64,5 @@ export interface CodeBlock {
 export type Block = HeadingBlock | CodeBlock;
 
 export type BlockList = {
-  blocks: Block[];
+  blocks: (Block | PartialBlockObjectResponse)[];
 };
