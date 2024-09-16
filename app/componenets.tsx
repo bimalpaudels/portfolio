@@ -8,7 +8,22 @@ import { colorMap } from "@/app/mapping";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-const RichText: React.FC<{ item: RichTextItem }> = ({ item }) => {
+import {
+  CodeBlockObjectResponse,
+  RichTextItemResponse,
+  TextRichTextItemResponse,
+  Heading3BlockObjectResponse,
+  Heading2BlockObjectResponse,
+  Heading1BlockObjectResponse,
+  ParagraphBlockObjectResponse,
+} from "@notionhq/client/build/src/api-endpoints";
+
+type TextBasedObjectResponse =
+  | Heading1BlockObjectResponse
+  | Heading2BlockObjectResponse
+  | Heading3BlockObjectResponse;
+
+const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({ item }) => {
   const { annotations, text } = item;
   const className = [
     annotations.bold ? "font-bold" : "",
@@ -21,21 +36,6 @@ const RichText: React.FC<{ item: RichTextItem }> = ({ item }) => {
 
   return <span className={className}>{text.content}</span>;
 };
-
-export function Heading2({ heading_2 }: Heading2Block) {
-  // Depreciated
-  const { rich_text, color } = heading_2;
-  const headingClassName = `text-2xl font-bold mb-4 ${
-    colorMap[color] || colorMap.default
-  }`;
-  return (
-    <h2 className={headingClassName}>
-      {rich_text.map((item, index) => (
-        <RichText key={index} item={item} />
-      ))}
-    </h2>
-  );
-}
 
 export function Heading(props: HeadingBlock) {
   const heading_content = props[props.type];
@@ -74,12 +74,51 @@ export function Heading(props: HeadingBlock) {
   );
 }
 
-export function Code({ code }: CodeBlock) {
+export function Code({ code }: CodeBlockObjectResponse) {
   const { rich_text, language } = code;
-  const codeContent = rich_text.map((item) => item.text.content).join("\n");
+  const codeContent = rich_text
+    .filter((item): item is TextRichTextItemResponse => item.type === "text")
+    .map((item) => item.text.content)
+    .join("\n");
   return (
     <SyntaxHighlighter language={language} style={tomorrow}>
       {codeContent}
     </SyntaxHighlighter>
+  );
+}
+
+export function Heading1({ heading_1 }: Heading1BlockObjectResponse) {
+  const { rich_text, color } = heading_1;
+  const headingClassName = `text-3xl font-bold mb-4 ${
+    colorMap[color] || colorMap.default
+  }`;
+  return (
+    <h1 className={headingClassName}>
+      {rich_text
+        .filter(
+          (item): item is TextRichTextItemResponse => item.type === "text"
+        )
+        .map((item, index) => (
+          <RichText key={index} item={item} />
+        ))}
+    </h1>
+  );
+}
+
+export function Heading2({ heading_1 }: Heading1BlockObjectResponse) {
+  const { rich_text, color } = heading_1;
+  const headingClassName = `text-3xl font-bold mb-4 ${
+    colorMap[color] || colorMap.default
+  }`;
+  return (
+    <h2 className={headingClassName}>
+      {rich_text
+        .filter(
+          (item): item is TextRichTextItemResponse => item.type === "text"
+        )
+        .map((item, index) => (
+          <RichText key={index} item={item} />
+        ))}
+    </h2>
   );
 }
