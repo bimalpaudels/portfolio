@@ -12,9 +12,17 @@ import {
   Heading2BlockObjectResponse,
   Heading1BlockObjectResponse,
   ParagraphBlockObjectResponse,
+  MultiSelectPropertyItemObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 
-const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({ item }) => {
+type CustomMultiSelectPropertyItemObjectResponse = Omit<
+  MultiSelectPropertyItemObjectResponse,
+  "object"
+>;
+
+export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
+  item,
+}) => {
   const { annotations, text } = item;
   const className = [
     annotations.bold ? "font-bold" : "",
@@ -111,4 +119,9 @@ export function Code({ code }: CodeBlockObjectResponse) {
       {codeContent}
     </SyntaxHighlighter>
   );
+}
+
+export function Tags(props: CustomMultiSelectPropertyItemObjectResponse) {
+  const { multi_select } = props;
+  return null;
 }
