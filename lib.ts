@@ -6,7 +6,11 @@ const notion = new Client({
 
 export async function fetchPageProperties(pageId: string) {
   const response = await notion.pages.retrieve({ page_id: pageId });
-  return response;
+  if ("properties" in response) {
+    return response.properties;
+  } else {
+    throw new Error("The response does not contain properties");
+  }
 }
 
 export async function fetchNotionPageContent(pageId: string) {
