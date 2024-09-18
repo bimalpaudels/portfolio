@@ -1,7 +1,7 @@
 import { colorMap } from "@/app/mapping";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import {
-  arta,
+  monoBlue,
   tomorrowNight,
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
@@ -13,6 +13,8 @@ import {
   Heading1BlockObjectResponse,
   ParagraphBlockObjectResponse,
   MultiSelectPropertyItemObjectResponse,
+  TitlePropertyItemObjectResponse,
+  LastEditedTimePropertyItemObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 
 type CustomMultiSelectPropertyItemObjectResponse = Omit<
@@ -38,7 +40,7 @@ export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
 
 export function Heading1({ heading_1 }: Heading1BlockObjectResponse) {
   const { rich_text, color } = heading_1;
-  const headingClassName = `text-3xl font-bold mb-4 ${
+  const headingClassName = `text-2xl font-semibold mb-3 mt-6 ${
     colorMap[color] || colorMap.default
   }`;
   return (
@@ -56,7 +58,7 @@ export function Heading1({ heading_1 }: Heading1BlockObjectResponse) {
 
 export function Heading2({ heading_2 }: Heading2BlockObjectResponse) {
   const { rich_text, color } = heading_2;
-  const headingClassName = `text-2xl font-bold mb-4 ${
+  const headingClassName = `text-xl font-semibold mb-3 mt-6 ${
     colorMap[color] || colorMap.default
   }`;
   return (
@@ -74,7 +76,7 @@ export function Heading2({ heading_2 }: Heading2BlockObjectResponse) {
 
 export function Heading3({ heading_3 }: Heading3BlockObjectResponse) {
   const { rich_text, color } = heading_3;
-  const headingClassName = `text-l font-bold mb-4 ${
+  const headingClassName = `text-l font-semibold mb-3 mt-6 ${
     colorMap[color] || colorMap.default
   }`;
   return (
@@ -92,11 +94,9 @@ export function Heading3({ heading_3 }: Heading3BlockObjectResponse) {
 
 export function Paragraph({ paragraph }: ParagraphBlockObjectResponse) {
   const { rich_text, color } = paragraph;
-  const headingClassName = `text-normal mb-4 ${
-    colorMap[color] || colorMap.default
-  }`;
+  const headingClassName = `text-normal ${colorMap[color] || colorMap.default}`;
   return (
-    <h3 className={headingClassName}>
+    <p className={headingClassName}>
       {rich_text
         .filter(
           (item): item is TextRichTextItemResponse => item.type === "text"
@@ -104,7 +104,7 @@ export function Paragraph({ paragraph }: ParagraphBlockObjectResponse) {
         .map((item, index) => (
           <RichText key={index} item={item} />
         ))}
-    </h3>
+    </p>
   );
 }
 
@@ -115,13 +115,37 @@ export function Code({ code }: CodeBlockObjectResponse) {
     .map((item) => item.text.content)
     .join("\n");
   return (
-    <SyntaxHighlighter language={language} style={tomorrowNight}>
+    <SyntaxHighlighter language={language} style={monoBlue}>
       {codeContent}
     </SyntaxHighlighter>
   );
 }
 
-export function Tags(props: CustomMultiSelectPropertyItemObjectResponse) {
-  const { multi_select } = props;
-  return null;
-}
+export const NotionTags: React.FC<{
+  tags: MultiSelectPropertyItemObjectResponse;
+}> = ({ tags }) => (
+  <div className="flex flex-wrap gap-2 mb-4">
+    <span>Tags:</span>
+    {tags.multi_select.map((tag) => (
+      <span key={tag.id} className={`py-1 rounded-full p-4 text-sm border`}>
+        {tag.name}
+      </span>
+    ))}
+  </div>
+);
+
+export const NotionPageTitle: React.FC<{ title: TextRichTextItemResponse }> = ({
+  title,
+}) => (
+  <h1 className="text-3xl font-semibold mb-3">
+    <RichText item={title} />
+  </h1>
+);
+
+export const LastUpdated: React.FC<{
+  updated: LastEditedTimePropertyItemObjectResponse;
+}> = ({ updated }) => (
+  <span className="text-sm text-gray-500">
+    Last updated: {new Date(updated.last_edited_time).toLocaleDateString()}
+  </span>
+);
