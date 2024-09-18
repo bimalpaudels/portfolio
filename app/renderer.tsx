@@ -4,12 +4,12 @@ import {
   Heading3,
   Paragraph,
   Code,
+  PageDescription,
 } from "@/app/componenets";
 import {
   GetBlockResponse,
-  GetPageResponse,
-  GetDatabaseResponse,
-  MultiSelectPropertyItemObjectResponse,
+  PageObjectResponse,
+  TextRichTextItemResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 
 import Link from "next/link";
@@ -18,15 +18,15 @@ type NotionBlockChildrenRendererProps = {
   blocks: GetBlockResponse[];
 };
 
-type NotionDBPagesRendererProps = {
-  pages: (GetPageResponse | GetDatabaseResponse)[];
+export type NotionDBPagesRendererProps = {
+  pages: PageObjectResponse[];
 };
 
 export default function NotionBlockChildrenRenderer({
   blocks,
 }: NotionBlockChildrenRendererProps) {
   return (
-    <div>
+    <div className="article">
       {blocks.map((block) => {
         if (!("type" in block)) {
           return null;
@@ -55,16 +55,39 @@ export default function NotionBlockChildrenRenderer({
 }
 
 export function NotionDBPagesRenderer({ pages }: NotionDBPagesRendererProps) {
-  // This will contain the gallery view of the pages in the databases
-  return (
-    <>
-      {pages.map((page) => {
-        return (
-          <p key={page.id}>
-            <Link href={`/${page.id}`}>{page.id}</Link>
-          </p>
-        );
-      })}
-    </>
-  );
+  return pages.map((page) => {
+    const { properties } = page;
+    console.log("Props", properties);
+    const title =
+      "title" in properties.Title ? properties.Title.title[0] : null;
+    const description =
+      properties.Description.type === "rich_text"
+        ? properties.Description.rich_text
+        : "";
+    return (
+      <div key={page.id}>
+        <div className="text-gray-800">
+          <Link
+            href={`/${page.id}`}
+            className="text-lg font-bold hover:underline"
+          >
+            {title?.plain_text}
+          </Link>
+        </div>
+        <div className="mt-1">
+          <PageDescription
+            description={description as TextRichTextItemResponse[]}
+          />
+        </div>
+        <div className="text-grey-800 text-base leading-normal mt-2">
+          <a
+            href="#"
+            className="hover:text-black text-sm no-underline hover:underline"
+          >
+            Read article →
+          </a>
+        </div>
+      </div>
+    );
+  });
 }

@@ -1,9 +1,6 @@
 import { colorMap } from "@/app/mapping";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import {
-  monoBlue,
-  tomorrowNight,
-} from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { atomOneLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 import {
   CodeBlockObjectResponse,
@@ -13,14 +10,8 @@ import {
   Heading1BlockObjectResponse,
   ParagraphBlockObjectResponse,
   MultiSelectPropertyItemObjectResponse,
-  TitlePropertyItemObjectResponse,
   LastEditedTimePropertyItemObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
-
-type CustomMultiSelectPropertyItemObjectResponse = Omit<
-  MultiSelectPropertyItemObjectResponse,
-  "object"
->;
 
 export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
   item,
@@ -40,7 +31,7 @@ export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
 
 export function Heading1({ heading_1 }: Heading1BlockObjectResponse) {
   const { rich_text, color } = heading_1;
-  const headingClassName = `text-2xl font-semibold mb-3 mt-6 ${
+  const headingClassName = `text-2xl font-semibold ${
     colorMap[color] || colorMap.default
   }`;
   return (
@@ -58,7 +49,7 @@ export function Heading1({ heading_1 }: Heading1BlockObjectResponse) {
 
 export function Heading2({ heading_2 }: Heading2BlockObjectResponse) {
   const { rich_text, color } = heading_2;
-  const headingClassName = `text-xl font-semibold mb-3 mt-6 ${
+  const headingClassName = `text-xl font-semibold ${
     colorMap[color] || colorMap.default
   }`;
   return (
@@ -76,7 +67,7 @@ export function Heading2({ heading_2 }: Heading2BlockObjectResponse) {
 
 export function Heading3({ heading_3 }: Heading3BlockObjectResponse) {
   const { rich_text, color } = heading_3;
-  const headingClassName = `text-l font-semibold mb-3 mt-6 ${
+  const headingClassName = `text-l font-semibold ${
     colorMap[color] || colorMap.default
   }`;
   return (
@@ -115,7 +106,7 @@ export function Code({ code }: CodeBlockObjectResponse) {
     .map((item) => item.text.content)
     .join("\n");
   return (
-    <SyntaxHighlighter language={language} style={monoBlue}>
+    <SyntaxHighlighter language={language} style={atomOneLight}>
       {codeContent}
     </SyntaxHighlighter>
   );
@@ -137,7 +128,7 @@ export const NotionTags: React.FC<{
 export const NotionPageTitle: React.FC<{ title: TextRichTextItemResponse }> = ({
   title,
 }) => (
-  <h1 className="text-3xl font-semibold mb-3">
+  <h1 className="text-3xl font-bold no-line-height tight-letters mb-8">
     <RichText item={title} />
   </h1>
 );
@@ -148,4 +139,14 @@ export const LastUpdated: React.FC<{
   <span className="text-sm text-gray-500">
     Last updated: {new Date(updated.last_edited_time).toLocaleDateString()}
   </span>
+);
+
+export const PageDescription: React.FC<{
+  description: TextRichTextItemResponse[];
+}> = ({ description }) => (
+  <p className=" text-base mt-1">
+    {description.map((item, index) => (
+      <RichText key={index} item={item} />
+    ))}
+  </p>
 );

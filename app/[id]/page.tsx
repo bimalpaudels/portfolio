@@ -6,7 +6,6 @@ import {
   LastEditedTimePropertyItemObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 import { NotionTags, NotionPageTitle, LastUpdated } from "@/app/componenets";
-import { constants } from "buffer";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const resp = await fetchNotionPageContent(params.id);
@@ -14,7 +13,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const title = "title" in properties.Title ? properties.Title.title[0] : null;
   console.log(properties.Updated);
   return (
-    <div>
+    <div className="mt-12">
       <NotionPageTitle title={title as TextRichTextItemResponse} />
       <NotionBlockChildrenRenderer blocks={resp.results} />
       <LastUpdated
