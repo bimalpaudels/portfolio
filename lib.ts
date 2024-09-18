@@ -1,5 +1,5 @@
 import { Client } from "@notionhq/client";
-
+import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 const notion = new Client({
   auth: process.env.NOTION_KEY,
 });
@@ -23,9 +23,22 @@ export async function fetchNotionDatabase(pageId: string) {
   return response;
 }
 
-export async function fetchDatabaseContent(pageId: string) {
+export async function fetchDatabaseContent(
+  pageId: string
+): Promise<PageObjectResponse[]> {
   const response = await notion.databases.query({
     database_id: pageId,
+    filter: {
+      property: "Status",
+      status: {
+        equals: "Published",
+      },
+    },
   });
-  return response;
+
+  return response.results.filter(
+    (item): item is PageObjectResponse =>
+      "properties" in item && "parent" in item
+  );
+  // return response.results as PageObjectResponse[]
 }
