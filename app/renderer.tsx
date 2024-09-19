@@ -12,7 +12,7 @@ import {
   TextRichTextItemResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 type NotionBlockChildrenRendererProps = {
   blocks: GetBlockResponse[];
@@ -81,7 +81,7 @@ export function NotionDBPagesRenderer({ pages }: NotionDBPagesRendererProps) {
         </div>
         <div className="text-grey-800 text-base leading-normal mt-2">
           <a
-            href="#"
+            href={`/${page.id}`}
             className="hover:text-black text-sm no-underline hover:underline"
           >
             Read article →
