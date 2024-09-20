@@ -1,6 +1,7 @@
 import { colorMap } from "@/app/mapping";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import Link from "next/link";
 
 import {
   CodeBlockObjectResponse,
@@ -25,8 +26,8 @@ export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
     annotations.code ? "font-mono bg-gray-100 rounded px-1" : "",
     colorMap[annotations.color] || colorMap.default,
   ].join(" ");
-
-  return <span className={className}>{text.content}</span>;
+  const content = <span className={className}>{text.content}</span>;
+  return text.link ? <Link href={text.link.url}>{content}</Link> : content;
 };
 
 export function Heading1({ heading_1 }: Heading1BlockObjectResponse) {

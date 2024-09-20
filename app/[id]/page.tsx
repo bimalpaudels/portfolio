@@ -11,7 +11,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   const resp = await fetchNotionPageContent(params.id);
   const properties = await fetchPageProperties(params.id);
   const title = "title" in properties.Title ? properties.Title.title[0] : null;
-  console.log(properties.Updated);
   return (
     <div className="mt-12">
       <NotionPageTitle title={title as TextRichTextItemResponse} />
