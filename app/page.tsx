@@ -6,13 +6,13 @@ export default function Home() {
       <h2 className="font-semibold pt-12">Bimal Paudel</h2>
       <div className="space-y-4 home ">
         <p>
-          I'm a developer, a lifelong student, and a positive thinker; currently
+          I&apos;m a developer, a lifelong student, and a positive thinker; currently
           based in Berlin, originally from Nepal. I have over two years of{" "}
           <Link href="/about">experience</Link> as a full stack developer.
         </p>
 
         <p>
-          I’m always eager to <Link href="/learn">learn</Link> new technologies
+          I&apos;m always eager to <Link href="/learn">learn</Link> new technologies
           to expand <Link href="/stack">my stack</Link>. When I am not writing
           code or studying, you can find me cycling in and around Berlin,
           watching movies and sports, or trying to improve my chess (it is not
