@@ -16,3 +16,35 @@
 pre {
   @apply mb-4;
 }
+
+.home a {
+  @apply text-blue-600;
+}
+
+.home a:hover {
+  @apply text-blue-800;
+  @apply underline;
+}
+
+h1 {
+  @apply text-2xl;
+}
+
+h2 {
+  @apply text-xl;
+}
+
+h3 {
+  @apply text-lg;
+  @apply font-normal;
+}
+
+h4 {
+  @apply text-base;
+  @apply font-semibold;
+}
+
+h1,
+h2 {
+  @apply font-medium;
+}

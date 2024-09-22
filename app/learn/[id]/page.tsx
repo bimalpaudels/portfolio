@@ -7,6 +7,10 @@ import {
 } from "@notionhq/client/build/src/api-endpoints";
 import { NotionTags, NotionPageTitle, LastUpdated } from "@/app/componenets";
 
+export const metadata = {
+  title: "Post",
+};
+
 export default async function Page({ params }: { params: { id: string } }) {
   const resp = await fetchNotionPageContent(params.id);
   const properties = await fetchPageProperties(params.id);

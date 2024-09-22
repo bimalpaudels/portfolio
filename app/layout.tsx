@@ -1,19 +1,21 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import { Analytics } from "@vercel/analytics/react";
 
-const open_sans = Open_Sans({
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-open-sans",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://snippets.bimals.net"),
-  title: "bimals",
+  metadataBase: new URL("https://bimals.net"),
+  title: {
+    default: "Bimal Paudel",
+    template: "%s | Bimal Paudel",
+  },
   description: "Developer, Learner",
 };
 
@@ -26,13 +28,14 @@ export default function RootLayout({
     <ViewTransitions>
       <html
         lang="en"
-        className={` ${open_sans.className} [scrollbar-gutter:stable]`}
+        className={`${inter.className} [scrollbar-gutter:stable]`}
       >
         <body className="antialiased tracking-tight">
           <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8 bg-white text-gray-900">
-            <main className="max-w-2xl mx-auto w-full space-y-6">
+            <main className="max-w-[60ch] mx-auto w-full space-y-4">
               {children}
             </main>
+
             <Analytics />
           </div>
         </body>

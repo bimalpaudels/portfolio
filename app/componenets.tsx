@@ -1,7 +1,7 @@
 import { colorMap } from "@/app/mapping";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 import {
   CodeBlockObjectResponse,
@@ -32,11 +32,9 @@ export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
 
 export function Heading1({ heading_1 }: Heading1BlockObjectResponse) {
   const { rich_text, color } = heading_1;
-  const headingClassName = `text-2xl font-semibold ${
-    colorMap[color] || colorMap.default
-  }`;
+
   return (
-    <h1 className={headingClassName}>
+    <h1 className={colorMap[color] || colorMap.default}>
       {rich_text
         .filter(
           (item): item is TextRichTextItemResponse => item.type === "text"
@@ -50,11 +48,9 @@ export function Heading1({ heading_1 }: Heading1BlockObjectResponse) {
 
 export function Heading2({ heading_2 }: Heading2BlockObjectResponse) {
   const { rich_text, color } = heading_2;
-  const headingClassName = `text-xl font-semibold ${
-    colorMap[color] || colorMap.default
-  }`;
+
   return (
-    <h2 className={headingClassName}>
+    <h2 className={colorMap[color] || colorMap.default}>
       {rich_text
         .filter(
           (item): item is TextRichTextItemResponse => item.type === "text"
@@ -68,11 +64,8 @@ export function Heading2({ heading_2 }: Heading2BlockObjectResponse) {
 
 export function Heading3({ heading_3 }: Heading3BlockObjectResponse) {
   const { rich_text, color } = heading_3;
-  const headingClassName = `text-l font-semibold ${
-    colorMap[color] || colorMap.default
-  }`;
   return (
-    <h3 className={headingClassName}>
+    <h3 className={colorMap[color] || colorMap.default}>
       {rich_text
         .filter(
           (item): item is TextRichTextItemResponse => item.type === "text"
@@ -151,3 +144,13 @@ export const PageDescription: React.FC<{
     ))}
   </p>
 );
+
+export function Header() {
+  return (
+    <Link href="/" className="inline-block group">
+      <h2 className="font-semibold pt-12 transition-transform duration-300 ease-in-out transform group-hover:-translate-y-1 group-hover:rotate-6">
+        bimals.net
+      </h2>
+    </Link>
+  );
+}
