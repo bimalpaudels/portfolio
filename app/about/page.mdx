@@ -1,0 +1,97 @@
+import { Link } from "next-view-transitions";
+import { Header } from "@/app/componenets";
+
+export const metadata = {
+  title: "Work",
+  alternates: {
+    canonical: "/about",
+  },
+};
+
+export function Small({ children }) {
+  return <span className="text-sm text-gray-500 pt-6">{children}</span>;
+}
+
+export function Company({ children }) {
+  return <span className="text-sm font-medium text-gray-950">{children}</span>;
+}
+
+<Header />
+
+## Work
+
+I have over two years of experience, primarily specializing in backend with Python.
+Throughout my career, I have played a key role in
+developing systems that replace manual processes. Here, I have summarized my
+work so far.
+
+#### Software Engineer
+
+<Company>InfoDevelopers Pvt. Ltd., 2022-2023</Company>
+
+I played a key role in transforming a bank’s loan application and approval
+process from a manual system into an efficient online platform. A key part of
+my contrbution was integrating a third-party API from Core Banking system's
+psychometric analysis into the system, which enhanced decision-making by
+evaluating applicants more efficiently.
+
+In addition to the banking project, I contributed to developing a government revenue-sharing system,
+which calculated fiscal equalization grants for local governments based on factors such as population
+and socio-economic status.
+
+During this time, I also managed couple of interns, helping them grow into a valuable team member by involving
+them in hands-on project work and offering guidance throughout their early development.
+
+<Small>
+  **Tech stack:** Python, Django, React, PostgreSQL, Celery, REST API, Docker
+</Small>
+
+#### Junior Software Engineer
+
+<Company>InfoDevelopers Pvt. Ltd., 2021-2022</Company>
+
+After joining the company as a junior, my first contribution was towards the development of a highly customizable content management system
+for Nepal Police, using Django-CMS to tailor the platform to their operational needs.
+
+I was actively involved in client meetings,
+gathering requirements and regularly showcasing progress to ensure alignment with their expectations. Despite frequent changes in requirements and tight deadlines, I consistently helped the team deliver key features on time,
+ensuring the system met evolving needs.
+
+<Small>**Tech stack:** Python, Django-CMS, PostgreSQL, Docker</Small>
+
+#### Freelance
+
+<Company>2021</Company>
+
+Before joining any companies, I worked as a freelancer, taking on smaller tasks in
+projects from college seniors. The tasks included assisting in initial database design
+with normalization and initial models. I also helped develop an E-commerce website
+for a friend's startup with Express.js. However, the website was put on hold and cancelled during
+early development because of the realization that it was going to be much cheaper to simply
+keep running it on Facebook.
+
+---
+
+## Personal Projects
+
+I love starting projects with the purpose of learning a tool or technology by integrating it on something new.
+I’m excited about applying these skills in a professional
+environment where I can contribute to impactful solutions. Below are few recent ones.
+
+FPL Dashboard
+
+I am developing a [web app](https://github.com/bimalpaudels/fpl_backend) that consumes the Fantasy Premier League API to extract and display
+player data on a Next.js front end. FastAPI is used to handle API consumption, while Redis
+optimizes data validation and minimizes database actions. A cron job schedules the API calls,
+and the app is hosted locally using Kubernetes.
+
+Job Scraping & Listing
+
+I am building a job scraping tool that collects job listings from multiple online sources.
+The backend, written in Python using Scrapy, handles scraping and data processing, while the frontend,
+built with React, displays the job details like title, company, and requirements.
+
+Personal Site
+
+This [site](https://github.com/bimalpaudels/personal-site) is built using Next.js and is hosted on Vercel. I have used mdx to render mostly static
+pages and also have integrated my Notion database to render dynamic pages I add there.

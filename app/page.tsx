@@ -1,38 +1,40 @@
-import { fetchDatabaseContent } from "@/lib";
-import { NotionDBPagesRenderer } from "@/app/renderer";
+import { Link } from "next-view-transitions";
 
-export default async function Home() {
-  if (!process.env.NOTION_PAGE_ID) {
-    throw new Error("NOTION_PAGE_ID is not defined in environment variables.");
-  }
-  if (!process.env.NOTION_DB_ID) {
-    throw new Error("NOTION_DB_ID is not defined in environment variables.");
-  }
-  const db_content_response = await fetchDatabaseContent(
-    process.env.NOTION_DB_ID
-  );
+export default function Home() {
   return (
-    <div>
-      <div className="mt-12">
-        <h1 className="text-2xl font-extrabold text-gray-900	mb-3">
-          Writings and Snippets
-        </h1>
-        <div className="text-lg text-gray-800 leading-normal space-y-4">
-          <p>
-            This is the space where I will publish all things I learn and
-            implement, hopefully for a long time.
-          </p>
-          <p>
-            Some articles are descriptive whereas, some are just code snippets
-            and may lack clarity.
-          </p>
-        </div>
+    <>
+      <h2 className="font-semibold pt-12">Bimal Paudel</h2>
+      <div className="space-y-4 home ">
+        <p>
+          I'm a developer, a lifelong student, and a positive thinker; currently
+          based in Berlin, originally from Nepal. I have over two years of{" "}
+          <Link href="/about">experience</Link> as a full stack developer.
+        </p>
+
+        <p>
+          I’m always eager to <Link href="/learn">learn</Link> new technologies
+          to expand <Link href="/stack">my stack</Link>. When I am not writing
+          code or studying, you can find me cycling in and around Berlin,
+          watching movies and sports, or trying to improve my chess (it is not
+          going well).
+        </p>
+
+        <p>
+          Thank you for visiting—feel free to reach out through{" "}
+          <Link
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=ibimalp@gmail.com"
+            target="_blank"
+          >
+            E-mail{" "}
+          </Link>
+          or connect with me on
+          <Link href="https://www.linkedin.com/in/bimalpaudel/" target="_blank">
+            {" "}
+            LinkedIn
+          </Link>{" "}
+          for further details.
+        </p>
       </div>
-      <div className="mt-10 space-y-10">
-        <NotionDBPagesRenderer pages={db_content_response} />
-      </div>
-    </div>
+    </>
   );
 }
-
-export const dynamic = "force-dynamic";
