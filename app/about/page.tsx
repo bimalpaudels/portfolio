@@ -3,17 +3,17 @@ import { fetchNotionPageContent } from "@/lib";
 import { Header } from "@/app/componenets";
 
 export const metadata = {
-  title: "Stack",
+  title: "About",
 };
-const stackPageId = process.env.STACK_PAGE_ID;
+const aboutPageId = process.env.ABOUT_PAGE_ID;
 
 export const revalidate = 3600;
 
 export default async function Stack() {
-  if (!stackPageId) {
-    throw new Error("STACK_ID is not defined in environment variables.");
+  if (!aboutPageId) {
+    throw new Error("ABOUT_PAGE_ID is not defined in environment variables.");
   }
-  const stackPage = await fetchNotionPageContent(stackPageId);
+  const stackPage = await fetchNotionPageContent(aboutPageId);
 
   return (
     <>

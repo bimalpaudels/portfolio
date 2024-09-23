@@ -10,9 +10,6 @@ export const metadata = {
 };
 
 export default async function Home() {
-  if (!process.env.NOTION_PAGE_ID) {
-    throw new Error("NOTION_PAGE_ID is not defined in environment variables.");
-  }
   if (!process.env.NOTION_DB_ID) {
     throw new Error("NOTION_DB_ID is not defined in environment variables.");
   }
