@@ -28,11 +28,14 @@ export async function fetchNotionDatabase(pageId: string) {
   return response;
 }
 
-export async function fetchDatabaseContent(
-  pageId: string
-): Promise<PageObjectResponse[]> {
+export async function fetchDatabaseContent(): Promise<PageObjectResponse[]> {
+  const notionDbId = process.env.NOTION_DB_ID;
+  if (!notionDbId) {
+    throw new Error("NOTION_DB_ID is not defined in environment variables.");
+  }
+
   const response = await notion.databases.query({
-    database_id: pageId,
+    database_id: notionDbId,
     filter: {
       property: "Status",
       status: {
@@ -46,4 +49,23 @@ export async function fetchDatabaseContent(
       "properties" in item && "parent" in item
   );
   // return response.results as PageObjectResponse[]
+}
+
+export async function fetchPageBySlug(
+  slug: string
+): Promise<PageObjectResponse> {
+  const notionDbId = process.env.NOTION_DB_ID;
+  if (!notionDbId) {
+    throw new Error("NOTION_DB_ID is not defined in environment variables.");
+  }
+  const response = await notion.databases.query({
+    database_id: notionDbId,
+    filter: {
+      property: "slug",
+      rich_text: {
+        equals: slug,
+      },
+    },
+  });
+  return response.results[0] as PageObjectResponse;
 }

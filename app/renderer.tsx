@@ -63,11 +63,15 @@ export function NotionDBPagesRenderer({ pages }: NotionDBPagesRendererProps) {
       properties.Description.type === "rich_text"
         ? properties.Description.rich_text
         : "";
+    const slug =
+      properties.slug.type === "rich_text"
+        ? properties.slug.rich_text[0].plain_text
+        : null;
     return (
       <div key={page.id}>
         <div className="text-gray-800">
           <Link
-            href={`/learn/${page.id}`}
+            href={`/learn/${slug}`}
             className="text-lg font-bold hover:underline"
           >
             {title?.plain_text}

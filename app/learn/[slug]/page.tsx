@@ -1,5 +1,9 @@
 import NotionBlockChildrenRenderer from "@/app/renderer";
-import { fetchNotionPageContent, fetchPageProperties } from "@/lib";
+import {
+  fetchNotionPageContent,
+  fetchDatabaseContent,
+  fetchPageBySlug,
+} from "@/lib";
 import {
   MultiSelectPropertyItemObjectResponse,
   TextRichTextItemResponse,
@@ -12,18 +16,31 @@ export const metadata = {
   title: "Post",
 };
 
-export const revalidate = 3600;
+export const revalidate = 60;
+export const dynamicParams = true;
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const resp = await fetchNotionPageContent(params.id);
-  const properties = await fetchPageProperties(params.id);
+export async function generateStaticParams() {
+  const pages = await fetchDatabaseContent();
+  return pages.map((page) => ({
+    slug:
+      page.properties.slug.type === "rich_text"
+        ? page.properties.slug.rich_text[0].plain_text
+        : null,
+  }));
+}
+
+export default async function Page({ params }: { params: { slug: string } }) {
+  const page = await fetchPageBySlug(params.slug);
+  const { properties, id } = page;
+  const postContent = await fetchNotionPageContent(id);
+
   const title = "title" in properties.Title ? properties.Title.title[0] : null;
   return (
     <>
       <Header />
       <NotionPageTitle title={title as TextRichTextItemResponse} />
       <div className="article">
-        <NotionBlockChildrenRenderer blocks={resp} />
+        <NotionBlockChildrenRenderer blocks={postContent} />
       </div>
       <LastUpdated
         updated={properties.Updated as LastEditedTimePropertyItemObjectResponse}

@@ -12,19 +12,15 @@ export const metadata = {
   },
 };
 const learnPageIdd = process.env.LEARN_PAGE_ID;
-const notionDbId = process.env.NOTION_DB_ID;
 
 export const revalidate = 3600;
 
 export default async function Learn() {
-  if (!notionDbId) {
-    throw new Error("NOTION_DB_ID is not defined in environment variables.");
-  }
   if (!learnPageIdd) {
     throw new Error("LEARN_PAGE_ID is not defined in environment variables.");
   }
   const learnPage = await fetchNotionPageContent(learnPageIdd);
-  const db_content_response = await fetchDatabaseContent(notionDbId);
+  const db_content_response = await fetchDatabaseContent();
   return (
     <>
       <Header />
