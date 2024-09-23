@@ -12,6 +12,8 @@ export const metadata = {
   title: "Post",
 };
 
+export const revalidate = 3600;
+
 export default async function Page({ params }: { params: { id: string } }) {
   const resp = await fetchNotionPageContent(params.id);
   const properties = await fetchPageProperties(params.id);
@@ -20,7 +22,9 @@ export default async function Page({ params }: { params: { id: string } }) {
     <>
       <Header />
       <NotionPageTitle title={title as TextRichTextItemResponse} />
-      <NotionBlockChildrenRenderer blocks={resp} />
+      <div className="article">
+        <NotionBlockChildrenRenderer blocks={resp} />
+      </div>
       <LastUpdated
         updated={properties.Updated as LastEditedTimePropertyItemObjectResponse}
       />

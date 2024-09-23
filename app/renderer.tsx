@@ -57,7 +57,6 @@ export default function NotionBlockChildrenRenderer({
 export function NotionDBPagesRenderer({ pages }: NotionDBPagesRendererProps) {
   return pages.map((page) => {
     const { properties } = page;
-    console.log("Props", properties);
     const title =
       "title" in properties.Title ? properties.Title.title[0] : null;
     const description =
