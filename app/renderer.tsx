@@ -71,7 +71,7 @@ export function NotionDBPagesRenderer({ pages }: NotionDBPagesRendererProps) {
       <div key={page.id}>
         <div className="text-gray-800">
           <Link
-            href={`/learn/${slug}`}
+            href={`/posts/${slug}`}
             className="text-lg font-bold hover:underline"
           >
             {title?.plain_text}
@@ -84,7 +84,7 @@ export function NotionDBPagesRenderer({ pages }: NotionDBPagesRendererProps) {
         </div>
         <div className="text-grey-800 text-base leading-normal mt-2">
           <a
-            href={`/learn/${page.id}`}
+            href={`/posts/${slug}`}
             className="hover:text-black text-sm no-underline hover:underline"
           >
             Read article →

@@ -6,14 +6,14 @@ import { Header } from "@/app/componenets";
 import { fetchNotionPageContent } from "@/lib";
 
 export const metadata = {
-  title: "Learn",
+  title: "Posts",
   alternates: {
-    canonical: "/learn",
+    canonical: "/posts",
   },
 };
 const learnPageIdd = process.env.LEARN_PAGE_ID;
 
-export const revalidate = 3600;
+export const revalidate = 300;
 
 export default async function Learn() {
   if (!learnPageIdd) {
