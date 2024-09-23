@@ -1,5 +1,8 @@
 import { Client } from "@notionhq/client";
-import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import {
+  PageObjectResponse,
+  BlockObjectResponse,
+} from "@notionhq/client/build/src/api-endpoints";
 const notion = new Client({
   auth: process.env.NOTION_KEY,
 });
@@ -13,9 +16,11 @@ export async function fetchPageProperties(pageId: string) {
   }
 }
 
-export async function fetchNotionPageContent(pageId: string) {
+export async function fetchNotionPageContent(
+  pageId: string
+): Promise<BlockObjectResponse[]> {
   const response = await notion.blocks.children.list({ block_id: pageId });
-  return response;
+  return response.results as BlockObjectResponse[];
 }
 
 export async function fetchNotionDatabase(pageId: string) {

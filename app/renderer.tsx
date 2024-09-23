@@ -26,7 +26,7 @@ export default function NotionBlockChildrenRenderer({
   blocks,
 }: NotionBlockChildrenRendererProps) {
   return (
-    <div className="article">
+    <>
       {blocks.map((block) => {
         if (!("type" in block)) {
           return null;
@@ -50,7 +50,7 @@ export default function NotionBlockChildrenRenderer({
             return null;
         }
       })}
-    </div>
+    </>
   );
 }
 
