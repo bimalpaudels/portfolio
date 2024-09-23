@@ -16,7 +16,7 @@ export const metadata = {
   title: "Post",
 };
 
-export const revalidate = 60;
+export const revalidate = 300;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
