@@ -1,6 +1,7 @@
 import { colorMap } from "@/app/mapping";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { atomOneLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { monokai } from "react-syntax-highlighter/dist/esm/styles/hljs";
+
 import { Link } from "next-view-transitions";
 
 import {
@@ -31,10 +32,10 @@ export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
 };
 
 export function Heading1({ heading_1 }: Heading1BlockObjectResponse) {
-  const { rich_text, color } = heading_1;
+  const { rich_text } = heading_1;
 
   return (
-    <h1 className={colorMap[color] || colorMap.default}>
+    <h1>
       {rich_text
         .filter(
           (item): item is TextRichTextItemResponse => item.type === "text"
@@ -47,10 +48,10 @@ export function Heading1({ heading_1 }: Heading1BlockObjectResponse) {
 }
 
 export function Heading2({ heading_2 }: Heading2BlockObjectResponse) {
-  const { rich_text, color } = heading_2;
+  const { rich_text } = heading_2;
 
   return (
-    <h2 className={colorMap[color] || colorMap.default}>
+    <h2>
       {rich_text
         .filter(
           (item): item is TextRichTextItemResponse => item.type === "text"
@@ -63,9 +64,9 @@ export function Heading2({ heading_2 }: Heading2BlockObjectResponse) {
 }
 
 export function Heading3({ heading_3 }: Heading3BlockObjectResponse) {
-  const { rich_text, color } = heading_3;
+  const { rich_text } = heading_3;
   return (
-    <h3 className={colorMap[color] || colorMap.default}>
+    <h3>
       {rich_text
         .filter(
           (item): item is TextRichTextItemResponse => item.type === "text"
@@ -79,7 +80,7 @@ export function Heading3({ heading_3 }: Heading3BlockObjectResponse) {
 
 export function Paragraph({ paragraph }: ParagraphBlockObjectResponse) {
   const { rich_text, color } = paragraph;
-  const headingClassName = `text-normal ${colorMap[color] || colorMap.default}`;
+  const headingClassName = `${colorMap[color] || colorMap.default}`;
   return (
     <p className={headingClassName}>
       {rich_text
@@ -100,7 +101,7 @@ export function Code({ code }: CodeBlockObjectResponse) {
     .map((item) => item.text.content)
     .join("\n");
   return (
-    <SyntaxHighlighter language={language} style={atomOneLight}>
+    <SyntaxHighlighter language={language} style={monokai}>
       {codeContent}
     </SyntaxHighlighter>
   );
@@ -122,8 +123,8 @@ export const NotionTags: React.FC<{
 export const NotionPageTitle: React.FC<{ title: TextRichTextItemResponse }> = ({
   title,
 }) => (
-  <h1 className="text-3xl font-bold no-line-height tight-letters mb-8">
-    <RichText item={title} />
+  <h1 className="text-3xl font-semibold no-line-height tight-letters mb-8">
+    {title.plain_text}
   </h1>
 );
 
@@ -138,7 +139,7 @@ export const LastUpdated: React.FC<{
 export const PageDescription: React.FC<{
   description: TextRichTextItemResponse[];
 }> = ({ description }) => (
-  <p className=" text-base mt-1">
+  <p className="text-sm mt-1">
     {description.map((item, index) => (
       <RichText key={index} item={item} />
     ))}
@@ -147,8 +148,11 @@ export const PageDescription: React.FC<{
 
 export function Header() {
   return (
-    <Link href="/" className="inline-block group">
-      <h2 className="font-semibold pt-12 transition-transform duration-300 ease-in-out transform group-hover:-translate-y-1 group-hover:rotate-6">
+    <Link href="/" className="inline-block group hover:no-underline">
+      <h2
+        className="font-semibold text-base pt-12 transition-transform duration-300 ease-in-out 
+      transform group-hover:-translate-y-1 group-hover:rotate-6"
+      >
         bimals.net
       </h2>
     </Link>

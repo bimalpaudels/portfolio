@@ -69,25 +69,19 @@ export function NotionDBPagesRenderer({ pages }: NotionDBPagesRendererProps) {
         : null;
     return (
       <div key={page.id}>
-        <div className="text-gray-800">
-          <Link
-            href={`/posts/${slug}`}
-            className="text-lg font-bold hover:underline"
-          >
+        <div>
+          <Link href={`/posts/${slug}`} className="text-lg font-bold">
             {title?.plain_text}
           </Link>
         </div>
-        <div className="mt-1">
-          <PageDescription
-            description={description as TextRichTextItemResponse[]}
-          />
-        </div>
-        <div className="text-grey-800 text-base leading-normal mt-2">
-          <a
-            href={`/posts/${slug}`}
-            className="hover:text-black text-sm no-underline hover:underline"
-          >
-            Read article →
+
+        <PageDescription
+          description={description as TextRichTextItemResponse[]}
+        />
+
+        <div className="text-grey-800 text-base leading-normal mt-1">
+          <a href={`/posts/${slug}`} className="text-sm text-[#ACADAF]">
+            Read post →
           </a>
         </div>
       </div>

@@ -30,8 +30,8 @@ export default function RootLayout({
         lang="en"
         className={`${inter.className} [scrollbar-gutter:stable]`}
       >
-        <body className="antialiased tracking-tight">
-          <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8 bg-white text-gray-900">
+        <body className="antialiased tracking-tight bg-white dark:bg-darkmode">
+          <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8 text-gray-900 dark:text-custom_dark ">
             <main className="max-w-[60ch] mx-auto w-full space-y-4">
               {children}
             </main>
