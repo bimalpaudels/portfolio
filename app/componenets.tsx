@@ -52,7 +52,6 @@ export function Heading3({ heading_3 }: Heading3BlockObjectResponse) {
 }
 
 export function Paragraph({ paragraph }: ParagraphBlockObjectResponse) {
-  console.log(paragraph.rich_text);
   const { rich_text, color } = paragraph;
   const headingClassName = `${colorMap[color] || colorMap.default}`;
   return (
