@@ -4,7 +4,7 @@
 
 @layer base {
   pre {
-    @apply mb-4;
+    @apply mb-6;
   }
 
   a:hover {
@@ -15,13 +15,7 @@
     display: none;
   }
 
-  h2 {
-    @apply font-semibold;
-    @apply text-xl;
-  }
-
-  .article {
-    @apply space-y-6;
-    @apply pt-6;
+  .article p {
+    @apply mb-5;
   }
 }

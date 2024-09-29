@@ -38,16 +38,20 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <>
       <Header />
-      <NotionPageTitle title={title as TextRichTextItemResponse} />
-      <div className="article">
-        <NotionBlockChildrenRenderer blocks={postContent} />
+      <div>
+        <NotionPageTitle title={title as TextRichTextItemResponse} />
+        <div className="article">
+          <NotionBlockChildrenRenderer blocks={postContent} />
+        </div>
+        <LastUpdated
+          updated={
+            properties.Updated as LastEditedTimePropertyItemObjectResponse
+          }
+        />
+        <NotionTags
+          tags={properties.Tags as MultiSelectPropertyItemObjectResponse}
+        />
       </div>
-      <LastUpdated
-        updated={properties.Updated as LastEditedTimePropertyItemObjectResponse}
-      />
-      <NotionTags
-        tags={properties.Tags as MultiSelectPropertyItemObjectResponse}
-      />
     </>
   );
 }
