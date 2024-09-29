@@ -1,6 +1,7 @@
 import { colorMap } from "@/app/mapping";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { atomOneLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { monokai } from "react-syntax-highlighter/dist/esm/styles/hljs";
+
 import { Link } from "next-view-transitions";
 
 import {
@@ -23,7 +24,9 @@ export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
     annotations.italic ? "italic" : "",
     annotations.strikethrough ? "line-through" : "",
     annotations.underline ? "underline" : "",
-    annotations.code ? "font-mono bg-gray-100 rounded px-1" : "",
+    annotations.code
+      ? "font-mono text-sm text-amber-600	bg-gray-200 rounded px-1 dark:text-amber-600 dark:bg-gray-800"
+      : "",
     colorMap[annotations.color] || colorMap.default,
   ].join(" ");
   const content = <span className={className}>{text.content}</span>;
@@ -31,55 +34,26 @@ export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
 };
 
 export function Heading1({ heading_1 }: Heading1BlockObjectResponse) {
-  const { rich_text, color } = heading_1;
-
-  return (
-    <h1 className={colorMap[color] || colorMap.default}>
-      {rich_text
-        .filter(
-          (item): item is TextRichTextItemResponse => item.type === "text"
-        )
-        .map((item, index) => (
-          <RichText key={index} item={item} />
-        ))}
-    </h1>
-  );
+  const { rich_text } = heading_1;
+  const { plain_text } = rich_text[0];
+  return <h1 className="font-extrabold text-2xl mb-2">{plain_text}</h1>;
 }
 
 export function Heading2({ heading_2 }: Heading2BlockObjectResponse) {
-  const { rich_text, color } = heading_2;
-
-  return (
-    <h2 className={colorMap[color] || colorMap.default}>
-      {rich_text
-        .filter(
-          (item): item is TextRichTextItemResponse => item.type === "text"
-        )
-        .map((item, index) => (
-          <RichText key={index} item={item} />
-        ))}
-    </h2>
-  );
+  const { rich_text } = heading_2;
+  const { plain_text } = rich_text[0];
+  return <h2 className="font-bold text-lg mb-2">{plain_text}</h2>;
 }
 
 export function Heading3({ heading_3 }: Heading3BlockObjectResponse) {
-  const { rich_text, color } = heading_3;
-  return (
-    <h3 className={colorMap[color] || colorMap.default}>
-      {rich_text
-        .filter(
-          (item): item is TextRichTextItemResponse => item.type === "text"
-        )
-        .map((item, index) => (
-          <RichText key={index} item={item} />
-        ))}
-    </h3>
-  );
+  const { rich_text } = heading_3;
+  const { plain_text } = rich_text[0];
+  return <h3 className="font-bold text-base mb-2">{plain_text}</h3>;
 }
 
 export function Paragraph({ paragraph }: ParagraphBlockObjectResponse) {
   const { rich_text, color } = paragraph;
-  const headingClassName = `text-normal ${colorMap[color] || colorMap.default}`;
+  const headingClassName = `${colorMap[color] || colorMap.default}`;
   return (
     <p className={headingClassName}>
       {rich_text
@@ -100,7 +74,7 @@ export function Code({ code }: CodeBlockObjectResponse) {
     .map((item) => item.text.content)
     .join("\n");
   return (
-    <SyntaxHighlighter language={language} style={atomOneLight}>
+    <SyntaxHighlighter language={language} style={monokai}>
       {codeContent}
     </SyntaxHighlighter>
   );
@@ -122,23 +96,25 @@ export const NotionTags: React.FC<{
 export const NotionPageTitle: React.FC<{ title: TextRichTextItemResponse }> = ({
   title,
 }) => (
-  <h1 className="text-3xl font-bold no-line-height tight-letters mb-8">
-    <RichText item={title} />
+  <h1 className="text-3xl font-semibold no-line-height tight-letters mb-6">
+    {title.plain_text}
   </h1>
 );
 
 export const LastUpdated: React.FC<{
   updated: LastEditedTimePropertyItemObjectResponse;
 }> = ({ updated }) => (
-  <span className="text-sm text-gray-500">
-    Last updated: {new Date(updated.last_edited_time).toLocaleDateString()}
-  </span>
+  <div className="mb-2">
+    <span className="text-sm text-gray-500">
+      Last updated: {new Date(updated.last_edited_time).toLocaleDateString()}
+    </span>
+  </div>
 );
 
 export const PageDescription: React.FC<{
   description: TextRichTextItemResponse[];
 }> = ({ description }) => (
-  <p className=" text-base mt-1">
+  <p className="text-sm mt-1">
     {description.map((item, index) => (
       <RichText key={index} item={item} />
     ))}
@@ -147,8 +123,11 @@ export const PageDescription: React.FC<{
 
 export function Header() {
   return (
-    <Link href="/" className="inline-block group">
-      <h2 className="font-semibold pt-12 transition-transform duration-300 ease-in-out transform group-hover:-translate-y-1 group-hover:rotate-6">
+    <Link href="/" className="inline-block group hover:no-underline">
+      <h2
+        className="font-semibold text-base pt-12 transition-transform duration-300 ease-in-out 
+      transform group-hover:-translate-y-1 group-hover:rotate-6"
+      >
         bimals.net
       </h2>
     </Link>

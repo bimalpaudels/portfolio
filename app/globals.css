@@ -2,49 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-.article p {
-  @apply mb-4;
-}
+@layer base {
+  pre {
+    @apply mb-6;
+  }
 
-.article h1,
-.article h2,
-.article h3 {
-  margin-top: 1em;
-  margin-bottom: 0.5em;
-}
+  a:hover {
+    @apply underline;
+  }
 
-pre {
-  @apply mb-4;
-}
+  pre::-webkit-scrollbar {
+    display: none;
+  }
 
-.home a {
-  @apply text-blue-600;
-}
-
-.home a:hover {
-  @apply text-blue-800;
-  @apply underline;
-}
-
-h1 {
-  @apply text-2xl;
-}
-
-h2 {
-  @apply text-xl;
-}
-
-h3 {
-  @apply text-lg;
-  @apply font-normal;
-}
-
-h4 {
-  @apply text-base;
-  @apply font-semibold;
-}
-
-h1,
-h2 {
-  @apply font-medium;
+  .article p {
+    @apply mb-5;
+  }
 }

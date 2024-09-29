@@ -10,6 +10,11 @@ import {
   GetBlockResponse,
   PageObjectResponse,
   TextRichTextItemResponse,
+  Heading1BlockObjectResponse,
+  Heading2BlockObjectResponse,
+  Heading3BlockObjectResponse,
+  ParagraphBlockObjectResponse,
+  CodeBlockObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 
 import { Link } from "next-view-transitions";
@@ -33,19 +38,41 @@ export default function NotionBlockChildrenRenderer({
         }
         switch (block.type) {
           case "heading_1":
-            return <Heading1 key={block.id} {...block} />;
+            return (
+              <Heading1
+                key={block.id}
+                {...(block as Heading1BlockObjectResponse)}
+              />
+            );
 
           case "heading_2":
-            return <Heading2 key={block.id} {...block} />;
+            return (
+              <Heading2
+                key={block.id}
+                {...(block as Heading2BlockObjectResponse)}
+              />
+            );
 
           case "heading_3":
-            return <Heading3 key={block.id} {...block} />;
+            return (
+              <Heading3
+                key={block.id}
+                {...(block as Heading3BlockObjectResponse)}
+              />
+            );
 
           case "paragraph":
-            return <Paragraph key={block.id} {...block} />;
+            return (
+              <Paragraph
+                key={block.id}
+                {...(block as ParagraphBlockObjectResponse)}
+              />
+            );
 
           case "code":
-            return <Code key={block.id} {...block} />;
+            return (
+              <Code key={block.id} {...(block as CodeBlockObjectResponse)} />
+            );
           default:
             return null;
         }
@@ -69,25 +96,19 @@ export function NotionDBPagesRenderer({ pages }: NotionDBPagesRendererProps) {
         : null;
     return (
       <div key={page.id}>
-        <div className="text-gray-800">
-          <Link
-            href={`/posts/${slug}`}
-            className="text-lg font-bold hover:underline"
-          >
+        <div>
+          <Link href={`/posts/${slug}`} className="text-lg font-bold">
             {title?.plain_text}
           </Link>
         </div>
-        <div className="mt-1">
-          <PageDescription
-            description={description as TextRichTextItemResponse[]}
-          />
-        </div>
-        <div className="text-grey-800 text-base leading-normal mt-2">
-          <a
-            href={`/posts/${slug}`}
-            className="hover:text-black text-sm no-underline hover:underline"
-          >
-            Read article →
+
+        <PageDescription
+          description={description as TextRichTextItemResponse[]}
+        />
+
+        <div className="text-grey-800 text-base leading-normal mt-1">
+          <a href={`/posts/${slug}`} className="text-sm text-[#ACADAF]">
+            Read post →
           </a>
         </div>
       </div>

@@ -18,7 +18,9 @@ export default async function Stack() {
   return (
     <>
       <Header />
-      <NotionBlockChildrenRenderer blocks={stackPage} />
+      <div className="article">
+        <NotionBlockChildrenRenderer blocks={stackPage} />
+      </div>
     </>
   );
 }

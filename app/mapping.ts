@@ -1,5 +1,5 @@
 export const colorMap: Record<string, string> = {
-  default: "text-gray-800",
+  default: "text-gray-800 dark:text-custom_dark",
   brown: "text-amber-700",
   green: "text-green-400",
   orange: "text-orange-500",
