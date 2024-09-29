@@ -12,6 +12,9 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://bimals.net"),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: "Bimal Paudel",
     template: "%s | Bimal Paudel",
