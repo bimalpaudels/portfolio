@@ -33,49 +33,20 @@ export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
 
 export function Heading1({ heading_1 }: Heading1BlockObjectResponse) {
   const { rich_text } = heading_1;
-
-  return (
-    <h1>
-      {rich_text
-        .filter(
-          (item): item is TextRichTextItemResponse => item.type === "text"
-        )
-        .map((item, index) => (
-          <RichText key={index} item={item} />
-        ))}
-    </h1>
-  );
+  const { plain_text } = rich_text[0];
+  return <h1>{plain_text}</h1>;
 }
 
 export function Heading2({ heading_2 }: Heading2BlockObjectResponse) {
   const { rich_text } = heading_2;
-
-  return (
-    <h2>
-      {rich_text
-        .filter(
-          (item): item is TextRichTextItemResponse => item.type === "text"
-        )
-        .map((item, index) => (
-          <RichText key={index} item={item} />
-        ))}
-    </h2>
-  );
+  const { plain_text } = rich_text[0];
+  return <h2>{plain_text}</h2>;
 }
 
 export function Heading3({ heading_3 }: Heading3BlockObjectResponse) {
   const { rich_text } = heading_3;
-  return (
-    <h3>
-      {rich_text
-        .filter(
-          (item): item is TextRichTextItemResponse => item.type === "text"
-        )
-        .map((item, index) => (
-          <RichText key={index} item={item} />
-        ))}
-    </h3>
-  );
+  const { plain_text } = rich_text[0];
+  return <h3>{plain_text}</h3>;
 }
 
 export function Paragraph({ paragraph }: ParagraphBlockObjectResponse) {

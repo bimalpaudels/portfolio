@@ -10,6 +10,11 @@ import {
   GetBlockResponse,
   PageObjectResponse,
   TextRichTextItemResponse,
+  Heading1BlockObjectResponse,
+  Heading2BlockObjectResponse,
+  Heading3BlockObjectResponse,
+  ParagraphBlockObjectResponse,
+  CodeBlockObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 
 import { Link } from "next-view-transitions";
@@ -33,19 +38,42 @@ export default function NotionBlockChildrenRenderer({
         }
         switch (block.type) {
           case "heading_1":
-            return <Heading1 key={block.id} {...block} />;
+            console.log(block);
+            return (
+              <Heading1
+                key={block.id}
+                {...(block as Heading1BlockObjectResponse)}
+              />
+            );
 
           case "heading_2":
-            return <Heading2 key={block.id} {...block} />;
+            return (
+              <Heading2
+                key={block.id}
+                {...(block as Heading2BlockObjectResponse)}
+              />
+            );
 
           case "heading_3":
-            return <Heading3 key={block.id} {...block} />;
+            return (
+              <Heading3
+                key={block.id}
+                {...(block as Heading3BlockObjectResponse)}
+              />
+            );
 
           case "paragraph":
-            return <Paragraph key={block.id} {...block} />;
+            return (
+              <Paragraph
+                key={block.id}
+                {...(block as ParagraphBlockObjectResponse)}
+              />
+            );
 
           case "code":
-            return <Code key={block.id} {...block} />;
+            return (
+              <Code key={block.id} {...(block as CodeBlockObjectResponse)} />
+            );
           default:
             return null;
         }
