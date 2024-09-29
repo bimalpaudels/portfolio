@@ -38,7 +38,6 @@ export default function NotionBlockChildrenRenderer({
         }
         switch (block.type) {
           case "heading_1":
-            console.log(block);
             return (
               <Heading1
                 key={block.id}

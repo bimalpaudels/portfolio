@@ -24,7 +24,9 @@ export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
     annotations.italic ? "italic" : "",
     annotations.strikethrough ? "line-through" : "",
     annotations.underline ? "underline" : "",
-    annotations.code ? "font-mono bg-gray-100 rounded px-1" : "",
+    annotations.code
+      ? "font-mono text-sm text-amber-600	bg-gray-200 rounded px-1 dark:text-amber-600 dark:bg-gray-800"
+      : "",
     colorMap[annotations.color] || colorMap.default,
   ].join(" ");
   const content = <span className={className}>{text.content}</span>;
@@ -50,6 +52,7 @@ export function Heading3({ heading_3 }: Heading3BlockObjectResponse) {
 }
 
 export function Paragraph({ paragraph }: ParagraphBlockObjectResponse) {
+  console.log(paragraph.rich_text);
   const { rich_text, color } = paragraph;
   const headingClassName = `${colorMap[color] || colorMap.default}`;
   return (
@@ -102,9 +105,11 @@ export const NotionPageTitle: React.FC<{ title: TextRichTextItemResponse }> = ({
 export const LastUpdated: React.FC<{
   updated: LastEditedTimePropertyItemObjectResponse;
 }> = ({ updated }) => (
-  <span className="text-sm text-gray-500">
-    Last updated: {new Date(updated.last_edited_time).toLocaleDateString()}
-  </span>
+  <div className="mb-2">
+    <span className="text-sm text-gray-500">
+      Last updated: {new Date(updated.last_edited_time).toLocaleDateString()}
+    </span>
+  </div>
 );
 
 export const PageDescription: React.FC<{
