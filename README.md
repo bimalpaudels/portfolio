@@ -48,6 +48,9 @@ export default async function Page() {
 ```
 If everything is setup correctly, [localhost:3000](http://localhost:3000), should have the content from Notion Page.
 
+### Working demo
+I have used this [README.md](https://bimals.net/posts/nextjs-notion-integration) in a Notion post as a working example/demo.
+
 ## Notion Blocks
 
 Following are the blocks from Notion that have components at the moment along with those that are WIP. I plan on continuously adding more as per need.
