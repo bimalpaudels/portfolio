@@ -65,3 +65,4 @@ Following are the blocks from Notion that have components at the moment along wi
 - Lists
 
 ## License
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/bimalpaudels/personal-site/blob/main/LICENSE) file for details.
