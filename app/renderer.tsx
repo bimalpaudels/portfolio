@@ -5,6 +5,7 @@ import {
   Paragraph,
   Code,
   PageDescription,
+  PostImage,
 } from "@/app/componenets";
 import {
   GetBlockResponse,
@@ -15,6 +16,7 @@ import {
   Heading3BlockObjectResponse,
   ParagraphBlockObjectResponse,
   CodeBlockObjectResponse,
+  ImageBlockObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 
 import { Link } from "next-view-transitions";
@@ -72,6 +74,14 @@ export default function NotionBlockChildrenRenderer({
           case "code":
             return (
               <Code key={block.id} {...(block as CodeBlockObjectResponse)} />
+            );
+
+          case "image":
+            return (
+              <PostImage
+                key={block.id}
+                {...(block as ImageBlockObjectResponse)}
+              />
             );
           default:
             return null;

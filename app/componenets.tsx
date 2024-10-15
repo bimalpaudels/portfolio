@@ -3,6 +3,7 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import { monokai } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 import { Link } from "next-view-transitions";
+import Image from "next/image";
 
 import {
   CodeBlockObjectResponse,
@@ -13,6 +14,7 @@ import {
   ParagraphBlockObjectResponse,
   MultiSelectPropertyItemObjectResponse,
   LastEditedTimePropertyItemObjectResponse,
+  ImageBlockObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 
 export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
@@ -65,6 +67,12 @@ export function Paragraph({ paragraph }: ParagraphBlockObjectResponse) {
         ))}
     </p>
   );
+}
+
+export function PostImage({ image }: ImageBlockObjectResponse) {
+  const url = image.type === "file" ? image.file.url : image.external.url;
+  const alt_text = image.caption[0] ? image.caption[0].plain_text : "";
+  return <Image src={url} alt={alt_text} width={605.63} height={300} />;
 }
 
 export function Code({ code }: CodeBlockObjectResponse) {

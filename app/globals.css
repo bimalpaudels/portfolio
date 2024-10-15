@@ -15,7 +15,8 @@
     display: none;
   }
 
-  .article p {
+  .article p,
+  img {
     @apply mb-5;
   }
 }
