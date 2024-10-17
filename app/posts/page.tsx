@@ -27,7 +27,7 @@ export default async function Learn() {
       <div className="article">
         <NotionBlockChildrenRenderer blocks={learnPage} />
       </div>
-      <div className="space-y-8 pt-2">
+      <div className="space-y-8 pt-8">
         <NotionDBPagesRenderer pages={db_content_response} />
       </div>
     </>
