@@ -5,6 +5,7 @@
 @layer base {
   pre {
     @apply mb-6;
+    @apply text-sm;
   }
 
   a:hover {
