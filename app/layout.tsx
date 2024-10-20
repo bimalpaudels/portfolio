@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import { Analytics } from "@vercel/analytics/react";
+import Footer from "@/app/nav";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -38,7 +39,7 @@ export default function RootLayout({
             <main className="max-w-[60ch] mx-auto w-full space-y-4">
               {children}
             </main>
-
+            <Footer />
             <Analytics />
           </div>
         </body>
