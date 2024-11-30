@@ -12,10 +12,6 @@ import {
 import { NotionTags, NotionPageTitle, LastUpdated } from "@/app/componenets";
 import { Header } from "@/app/componenets";
 
-export const metadata = {
-  title: "Post",
-};
-
 export const revalidate = 300;
 export const dynamicParams = true;
 
