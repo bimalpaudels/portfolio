@@ -2,16 +2,21 @@ import { Link } from "next-view-transitions";
 
 export default function Footer() {
   const links = [
-    { name: "Posts", url: "/posts", target: "_self" },
-    { name: "About", url: "/about", target: "_self" },
-    { name: "Stack", url: "/stack", target: "_self" },
     {
-      name: "Github",
+      name: "dotpy",
+      url: "https://dotpy.bimals.net",
+      target: "_blank",
+    },
+    { name: "posts", url: "/posts", target: "_self" },
+    { name: "about", url: "/about", target: "_self" },
+    { name: "stack", url: "/stack", target: "_self" },
+    {
+      name: "github",
       url: "https://github.com/bimalpaudels",
       target: "_blank",
     },
     {
-      name: "LinkedIn",
+      name: "linkedIn",
       url: "https://www.linkedin.com/in/bimalpaudel/",
       target: "_blank",
     },
