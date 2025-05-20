@@ -27,7 +27,7 @@ export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
     annotations.strikethrough ? "line-through" : "",
     annotations.underline ? "underline" : "",
     annotations.code
-      ? "font-mono text-sm bg-gray-200 text-redd-600 dark:bg-gray-800 dark:text-red-400 rounded px-1"
+      ? "font-mono text-sm bg-gray-200 text-redd-600 dark:bg-gray-800 dark:text-red-400 rounded-sm px-1"
       : "",
     colorMap[annotations.color] || colorMap.default,
   ].join(" ");

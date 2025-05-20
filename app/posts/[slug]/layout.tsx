@@ -1,12 +1,15 @@
 import { fetchPageBySlug } from "@/lib";
 import { Metadata } from "next";
 
+type LayoutProps = {
+  params: Promise<{ slug: string }>
+};
+
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const page = await fetchPageBySlug(params.slug);
+}: LayoutProps): Promise<Metadata> {
+  const { slug } = await params;
+  const page = await fetchPageBySlug(slug);
   const { properties } = page;
 
   const title =
