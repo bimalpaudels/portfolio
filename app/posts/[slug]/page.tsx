@@ -25,8 +25,13 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const page = await fetchPageBySlug(params.slug);
+type PageProps = {
+  params: Promise<{ slug: string }>
+};
+
+export default async function Page({ params }: PageProps) {
+  const { slug } = await params;
+  const page = await fetchPageBySlug(slug);
   const { properties, id } = page;
   const postContent = await fetchNotionPageContent(id);
 

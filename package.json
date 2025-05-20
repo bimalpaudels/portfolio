@@ -23,6 +23,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
     "postcss": "^8",
