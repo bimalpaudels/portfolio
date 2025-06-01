@@ -1,7 +1,7 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import { Analytics } from "@vercel/analytics/react";
 import Footer from "@/app/nav";
@@ -9,6 +9,13 @@ import Footer from "@/app/nav";
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-inter",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-fraunces",
 });
 
 export const metadata: Metadata = {
@@ -32,11 +39,11 @@ export default function RootLayout({
     <ViewTransitions>
       <html
         lang="en"
-        className={`${inter.className} [scrollbar-gutter:stable]`}
+        className={`${inter.variable} ${fraunces.variable} [scrollbar-gutter:stable]`}
       >
-        <body className="antialiased tracking-tight bg-white dark:bg-darkmode">
-          <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8 text-gray-900 dark:text-custom_dark ">
-            <main className="max-w-[60ch] mx-auto w-full space-y-4">
+        <body className="antialiased tracking-tight bg-white dark:bg-darkmode font-body">
+          <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8 text-gray-900 dark:text-custom_dark">
+            <main className="max-w-[65ch] mx-auto w-full space-y-6">
               {children}
             </main>
             <Footer />
