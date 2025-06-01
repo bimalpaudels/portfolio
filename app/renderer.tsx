@@ -117,7 +117,10 @@ export function NotionDBPagesRenderer({ pages }: NotionDBPagesRendererProps) {
         />
 
         <div className="text-grey-800 text-base leading-normal mt-1">
-          <a href={`/posts/${slug}`} className="text-sm text-pink-500">
+          <a
+            href={`/posts/${slug}`}
+            className="text-sm text-sky-500 hover:text-sky-600 transition-colors duration-200"
+          >
             Read post →
           </a>
         </div>

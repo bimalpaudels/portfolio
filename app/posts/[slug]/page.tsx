@@ -11,7 +11,7 @@ import {
   PageObjectResponse,
   TextRichTextItemResponse,
 } from "@notionhq/client/build/src/api-endpoints";
-import { NotionTags, NotionPageTitle, LastUpdated } from "@/app/components";
+import { NotionPageTitle, PostMeta } from "@/app/components";
 import { Header } from "@/app/components";
 
 export const revalidate = 300;
@@ -57,12 +57,10 @@ export default async function Page({ params }: PageProps) {
         <div className="article">
           <NotionBlockChildrenRenderer blocks={postContent} />
         </div>
-        <LastUpdated
+        <PostMeta
           updated={
             properties.Updated as LastEditedTimePropertyItemObjectResponse
           }
-        />
-        <NotionTags
           tags={properties.Tags as MultiSelectPropertyItemObjectResponse}
         />
       </div>

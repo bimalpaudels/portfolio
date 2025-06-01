@@ -39,12 +39,14 @@
   --leading-relaxed: 1.625;
   --leading-loose: 2;
   
-  /* Colors */
+  /* Modern Color Palette */
   --color-text-primary: #1a1a1a;
   --color-text-secondary: #6b7280;
   --color-text-muted: #9ca3af;
-  --color-accent: #ec4899;
-  --color-accent-hover: #db2777;
+  --color-accent: #0ea5e9;
+  --color-accent-hover: #0284c7;
+  --color-accent-secondary: #10b981;
+  --color-accent-secondary-hover: #059669;
   
   /* Dark mode colors */
   --color-text-primary-dark: #f5faff;

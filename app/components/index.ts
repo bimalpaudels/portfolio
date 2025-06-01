@@ -7,6 +7,7 @@ export {
   NotionTags,
   NotionPageTitle,
   LastUpdated,
+  PostMeta,
   PageDescription,
   Header,
 } from "./NotionComponents";
