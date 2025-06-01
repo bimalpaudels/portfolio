@@ -22,14 +22,14 @@ export default async function Learn() {
   const learnPage = await fetchNotionPageContent(learnPageIdd);
   const db_content_response = await fetchDatabaseContent();
   return (
-    <>
+    <div className="animate-fade-in">
       <Header />
       <div className="article">
         <NotionBlockChildrenRenderer blocks={learnPage} />
       </div>
-      <div className="space-y-8 pt-8">
+      <div className="space-y-8 pt-8 animate-slide-in">
         <NotionDBPagesRenderer pages={db_content_response} />
       </div>
-    </>
+    </div>
   );
 }
