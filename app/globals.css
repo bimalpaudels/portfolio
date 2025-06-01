@@ -7,6 +7,49 @@
   --color-foreground: var(--foreground);
   --color-darkmode: #0a0e16;
   --color-custom_dark: #f5faff;
+  
+  /* Typography Scale */
+  --font-body: var(--font-inter);
+  --font-heading: var(--font-fraunces);
+  
+  /* Spacing Scale */
+  --space-xs: 0.25rem;    /* 4px */
+  --space-sm: 0.5rem;     /* 8px */
+  --space-md: 1rem;       /* 16px */
+  --space-lg: 1.5rem;     /* 24px */
+  --space-xl: 2rem;       /* 32px */
+  --space-2xl: 3rem;      /* 48px */
+  --space-3xl: 4rem;      /* 64px */
+  
+  /* Typography Scale */
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.25rem;     /* 20px */
+  --text-2xl: 1.5rem;     /* 24px */
+  --text-3xl: 1.875rem;   /* 30px */
+  --text-4xl: 2.25rem;    /* 36px */
+  --text-5xl: 3rem;       /* 48px */
+  
+  /* Line Heights */
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+  
+  /* Colors */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+  --color-accent: #ec4899;
+  --color-accent-hover: #db2777;
+  
+  /* Dark mode colors */
+  --color-text-primary-dark: #f5faff;
+  --color-text-secondary-dark: #d1d5db;
+  --color-text-muted-dark: #9ca3af;
 }
 
 /*
@@ -28,21 +71,201 @@
 }
 
 @layer base {
-  pre {
-    @apply mb-6;
-    @apply text-sm;
+  /* Typography Base Styles */
+  html {
+    font-size: 16px;
+    line-height: var(--leading-normal);
   }
-
+  
+  body {
+    font-family: var(--font-body);
+    color: var(--color-text-primary);
+    line-height: var(--leading-relaxed);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    body {
+      color: var(--color-text-primary-dark);
+    }
+  }
+  
+  /* Heading Styles */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: var(--leading-tight);
+    letter-spacing: -0.025em;
+    margin-bottom: var(--space-md);
+    color: var(--color-text-primary);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--color-text-primary-dark);
+    }
+  }
+  
+  h1 {
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    margin-bottom: var(--space-lg);
+  }
+  
+  h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-lg);
+  }
+  
+  h3 {
+    font-size: var(--text-2xl);
+  }
+  
+  h4 {
+    font-size: var(--text-xl);
+  }
+  
+  h5 {
+    font-size: var(--text-lg);
+  }
+  
+  h6 {
+    font-size: var(--text-base);
+  }
+  
+  /* Paragraph and Text Styles */
+  p {
+    margin-bottom: var(--space-lg);
+    color: var(--color-text-primary);
+    line-height: var(--leading-relaxed);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    p {
+      color: var(--color-text-primary-dark);
+    }
+  }
+  
+  /* Link Styles */
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+  }
+  
   a:hover {
-    @apply underline;
+    color: var(--color-accent-hover);
+    text-decoration: underline;
   }
-
+  
+  /* Focus States - CSS Only Solution */
+  a:focus,
+  button:focus,
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+  }
+  
+  /* Only show focus outline when navigating with keyboard */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
+  /* Remove focus outline on mouse interactions */
+  a:active,
+  button:active {
+    outline: none;
+  }
+  
+  /* Ensure links don't retain focus styling after click */
+  a:not(:focus-visible) {
+    outline: none;
+  }
+  
+  /* Code Styles */
+  pre {
+    margin-bottom: var(--space-xl);
+    font-size: var(--text-sm);
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+  
+  code {
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+    font-size: 0.9em;
+    background-color: #f3f4f6;
+    padding: 0.125rem 0.25rem;
+    border-radius: 3px;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    code {
+      background-color: #374151;
+    }
+  }
+  
+  pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+  
+  /* Hide scrollbars but keep functionality */
   pre::-webkit-scrollbar {
     display: none;
   }
-
+  
+  pre {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  /* Article Content Spacing */
   .article p,
-  img {
-    @apply mb-5;
+  .article img {
+    margin-bottom: var(--space-lg);
+  }
+  
+  .article h1,
+  .article h2,
+  .article h3 {
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-lg);
+  }
+  
+  .article h1:first-child,
+  .article h2:first-child,
+  .article h3:first-child {
+    margin-top: 0;
+  }
+  
+  /* Responsive Typography */
+  @media (max-width: 640px) {
+    html {
+      font-size: 14px;
+    }
+    
+    h1 {
+      font-size: var(--text-3xl);
+    }
+    
+    h2 {
+      font-size: var(--text-2xl);
+    }
+    
+    h3 {
+      font-size: var(--text-xl);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    html {
+      font-size: 18px;
+    }
   }
 }

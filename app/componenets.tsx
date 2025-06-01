@@ -22,15 +22,16 @@ export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
 }) => {
   const { annotations, text } = item;
   const className = [
-    annotations.bold ? "font-bold" : "",
+    annotations.bold ? "font-semibold" : "",
     annotations.italic ? "italic" : "",
     annotations.strikethrough ? "line-through" : "",
     annotations.underline ? "underline" : "",
     annotations.code
-      ? "font-mono text-sm bg-gray-200 text-redd-600 dark:bg-gray-800 dark:text-red-400 rounded-sm px-1"
+      ? "font-mono text-sm bg-gray-100 dark:bg-gray-800 text-pink-600 dark:text-pink-400 rounded px-1 py-0.5"
       : "",
     colorMap[annotations.color] || colorMap.default,
   ].join(" ");
+
   const content = <span className={className}>{text.content}</span>;
   return text.link ? <Link href={text.link.url}>{content}</Link> : content;
 };
@@ -38,26 +39,26 @@ export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
 export function Heading1({ heading_1 }: Heading1BlockObjectResponse) {
   const { rich_text } = heading_1;
   const { plain_text } = rich_text[0];
-  return <h1 className="font-extrabold text-2xl mb-2">{plain_text}</h1>;
+  return <h1>{plain_text}</h1>;
 }
 
 export function Heading2({ heading_2 }: Heading2BlockObjectResponse) {
   const { rich_text } = heading_2;
   const { plain_text } = rich_text[0];
-  return <h2 className="font-semibold text-2xl mb-2">{plain_text}</h2>;
+  return <h2>{plain_text}</h2>;
 }
 
 export function Heading3({ heading_3 }: Heading3BlockObjectResponse) {
   const { rich_text } = heading_3;
   const { plain_text } = rich_text[0];
-  return <h3 className="font-bold text-lg mb-2">{plain_text}</h3>;
+  return <h3>{plain_text}</h3>;
 }
 
 export function Paragraph({ paragraph }: ParagraphBlockObjectResponse) {
   const { rich_text, color } = paragraph;
-  const headingClassName = `${colorMap[color] || colorMap.default}`;
+  const colorClass = colorMap[color] || colorMap.default;
   return (
-    <p className={headingClassName}>
+    <p className={colorClass}>
       {rich_text
         .filter(
           (item): item is TextRichTextItemResponse => item.type === "text"
@@ -72,7 +73,23 @@ export function Paragraph({ paragraph }: ParagraphBlockObjectResponse) {
 export function PostImage({ image }: ImageBlockObjectResponse) {
   const url = image.type === "file" ? image.file.url : image.external.url;
   const alt_text = image.caption[0] ? image.caption[0].plain_text : "";
-  return <Image src={url} alt={alt_text} width={605.63} height={300} />;
+  return (
+    <div className="my-8">
+      <Image
+        src={url}
+        alt={alt_text}
+        width={700}
+        height={400}
+        className="rounded-lg shadow-sm w-full h-auto"
+        priority={false}
+      />
+      {alt_text && (
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 text-center italic">
+          {alt_text}
+        </p>
+      )}
+    </div>
+  );
 }
 
 export function Code({ code }: CodeBlockObjectResponse) {
@@ -82,19 +99,34 @@ export function Code({ code }: CodeBlockObjectResponse) {
     .map((item) => item.text.content)
     .join("\n");
   return (
-    <SyntaxHighlighter language={language} style={monokai}>
-      {codeContent}
-    </SyntaxHighlighter>
+    <div className="my-6">
+      <SyntaxHighlighter
+        language={language}
+        style={monokai}
+        customStyle={{
+          borderRadius: "8px",
+          fontSize: "14px",
+          lineHeight: "1.5",
+        }}
+      >
+        {codeContent}
+      </SyntaxHighlighter>
+    </div>
   );
 }
 
 export const NotionTags: React.FC<{
   tags: MultiSelectPropertyItemObjectResponse;
 }> = ({ tags }) => (
-  <div className="flex flex-wrap gap-2 mb-4">
-    <span>Tags:</span>
+  <div className="flex flex-wrap gap-2 mb-6">
+    <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+      Tags:
+    </span>
     {tags.multi_select.map((tag) => (
-      <span key={tag.id} className={`py-1 rounded-full p-4 text-sm border`}>
+      <span
+        key={tag.id}
+        className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full border border-gray-200 dark:border-gray-700"
+      >
         {tag.name}
       </span>
     ))}
@@ -104,7 +136,7 @@ export const NotionTags: React.FC<{
 export const NotionPageTitle: React.FC<{ title: TextRichTextItemResponse }> = ({
   title,
 }) => (
-  <h1 className="text-3xl font-semibold no-line-height tight-letters mb-6">
+  <h1 className="font-heading font-bold text-4xl md:text-5xl leading-tight mb-8 text-gray-900 dark:text-gray-100">
     {title.plain_text}
   </h1>
 );
@@ -112,9 +144,14 @@ export const NotionPageTitle: React.FC<{ title: TextRichTextItemResponse }> = ({
 export const LastUpdated: React.FC<{
   updated: LastEditedTimePropertyItemObjectResponse;
 }> = ({ updated }) => (
-  <div className="mb-2">
-    <span className="text-sm text-gray-500">
-      Last updated: {new Date(updated.last_edited_time).toLocaleDateString()}
+  <div className="mb-6">
+    <span className="text-sm text-gray-500 dark:text-gray-400">
+      Last updated:{" "}
+      {new Date(updated.last_edited_time).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })}
     </span>
   </div>
 );
@@ -122,7 +159,7 @@ export const LastUpdated: React.FC<{
 export const PageDescription: React.FC<{
   description: TextRichTextItemResponse[];
 }> = ({ description }) => (
-  <p className="text-sm mt-1">
+  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
     {description.map((item, index) => (
       <RichText key={index} item={item} />
     ))}
@@ -132,10 +169,7 @@ export const PageDescription: React.FC<{
 export function Header() {
   return (
     <Link href="/" className="inline-block group hover:no-underline">
-      <h2
-        className="font-semibold text-base pt-12 transition-transform duration-300 ease-in-out 
-      transform group-hover:-translate-y-1 group-hover:rotate-6"
-      >
+      <h2 className="font-heading font-semibold text-xl pt-12 transition-all duration-300 ease-in-out transform group-hover:-translate-y-1 group-hover:rotate-2 text-gray-900 dark:text-gray-100">
         bimals.net
       </h2>
     </Link>
