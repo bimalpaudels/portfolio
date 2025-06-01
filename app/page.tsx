@@ -11,11 +11,11 @@ export default async function Home() {
   }
   const homePage = await fetchNotionPageContent(homePageId);
   return (
-    <>
+    <div className="animate-fade-in">
       <h2 className="font-heading font-semibold pt-12 text-gray-900 dark:text-gray-100">
         Bimal Paudel
       </h2>
       <NotionBlockChildrenRenderer blocks={homePage} />
-    </>
+    </div>
   );
 }

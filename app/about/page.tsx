@@ -16,11 +16,11 @@ export default async function Stack() {
   const stackPage = await fetchNotionPageContent(aboutPageId);
 
   return (
-    <>
+    <div className="animate-fade-in">
       <Header />
       <div className="article">
         <NotionBlockChildrenRenderer blocks={stackPage} />
       </div>
-    </>
+    </div>
   );
 }

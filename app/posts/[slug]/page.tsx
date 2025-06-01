@@ -26,7 +26,7 @@ export async function generateStaticParams() {
 }
 
 type PageProps = {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 };
 
 export default async function Page({ params }: PageProps) {
@@ -37,7 +37,7 @@ export default async function Page({ params }: PageProps) {
 
   const title = "title" in properties.Title ? properties.Title.title[0] : null;
   return (
-    <>
+    <div className="animate-fade-in">
       <Header />
       <div>
         <NotionPageTitle title={title as TextRichTextItemResponse} />
@@ -53,6 +53,6 @@ export default async function Page({ params }: PageProps) {
           tags={properties.Tags as MultiSelectPropertyItemObjectResponse}
         />
       </div>
-    </>
+    </div>
   );
 }
