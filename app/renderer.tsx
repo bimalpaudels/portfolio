@@ -6,7 +6,7 @@ import {
   Code,
   PageDescription,
   PostImage,
-} from "@/app/componenets";
+} from "@/app/components";
 import {
   GetBlockResponse,
   PageObjectResponse,
