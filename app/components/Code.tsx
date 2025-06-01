@@ -7,6 +7,48 @@ import {
   CodeBlockObjectResponse,
   TextRichTextItemResponse,
 } from "@notionhq/client/build/src/api-endpoints";
+import {
+  Copy,
+  Check,
+  FileText,
+  Braces,
+  Terminal,
+  Globe,
+  Palette,
+  Database,
+} from "lucide-react";
+
+// Language icon mapping using Lucide icons
+const getLanguageIcon = (language: string) => {
+  const lang = language?.toLowerCase();
+
+  switch (lang) {
+    case "python":
+      return <FileText className="w-4 h-4 text-blue-400" />;
+    case "javascript":
+    case "js":
+      return <Braces className="w-4 h-4 text-yellow-400" />;
+    case "typescript":
+    case "ts":
+      return <Braces className="w-4 h-4 text-blue-500" />;
+    case "react":
+    case "jsx":
+    case "tsx":
+      return <Braces className="w-4 h-4 text-cyan-400" />;
+    case "html":
+      return <Globe className="w-4 h-4 text-orange-400" />;
+    case "css":
+      return <Palette className="w-4 h-4 text-blue-400" />;
+    case "json":
+      return <Database className="w-4 h-4 text-green-400" />;
+    case "bash":
+    case "shell":
+    case "sh":
+      return <Terminal className="w-4 h-4 text-green-400" />;
+    default:
+      return <FileText className="w-4 h-4 text-gray-400" />;
+  }
+};
 
 export function Code({ code }: CodeBlockObjectResponse) {
   const { rich_text, language } = code;
@@ -28,51 +70,32 @@ export function Code({ code }: CodeBlockObjectResponse) {
   };
 
   return (
-    <div className="my-6 group relative">
-      {/* Header with language and copy button */}
-      <div className="flex items-center justify-between bg-gray-800 dark:bg-gray-900 px-4 py-2 rounded-t-lg border-b border-gray-700">
-        <span className="text-sm font-medium text-gray-300 dark:text-gray-400 uppercase tracking-wide">
-          {language || "code"}
-        </span>
+    <div className="my-8 group relative -mx-4 sm:-mx-8 md:-mx-16 lg:-mx-24">
+      {/* Modern header with language icon and copy button */}
+      <div className="flex items-center justify-between bg-slate-900/95 dark:bg-gray-900/95 backdrop-blur-sm px-4 py-3 rounded-t-xl border border-slate-700/50 dark:border-gray-700/50 mx-4 sm:mx-8 md:mx-16 lg:mx-24">
+        <div className="flex items-center gap-2">
+          {getLanguageIcon(language || "code")}
+          <span className="text-sm font-medium text-slate-300 dark:text-gray-300 capitalize">
+            {language || "code"}
+          </span>
+        </div>
+
         <button
           onClick={handleCopy}
-          className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-300 hover:text-white hover:bg-gray-700 dark:hover:bg-gray-800 rounded transition-all duration-200 opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+          className="flex items-center justify-center w-8 h-8 text-slate-400 hover:text-white hover:bg-slate-700/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-slate-900"
           aria-label="Copy code to clipboard"
+          title={copied ? "Copied!" : "Copy code"}
         >
           {copied ? (
-            <>
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fillRule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              Copied!
-            </>
+            <Check className="w-4 h-4 text-green-400" />
           ) : (
-            <>
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                />
-              </svg>
-              Copy
-            </>
+            <Copy className="w-4 h-4" />
           )}
         </button>
       </div>
 
-      {/* Code content */}
-      <div className="relative overflow-hidden rounded-b-lg">
+      {/* Code content with enhanced styling */}
+      <div className="relative overflow-hidden rounded-b-xl border-x border-b border-slate-700/50 dark:border-gray-700/50 mx-4 sm:mx-8 md:mx-16 lg:mx-24">
         <SyntaxHighlighter
           language={language}
           style={monokai}
@@ -81,24 +104,33 @@ export function Code({ code }: CodeBlockObjectResponse) {
             borderRadius: 0,
             fontSize: "14px",
             lineHeight: "1.6",
-            padding: "1rem",
-            background: "#2d3748",
+            padding: "1.5rem",
+            background: "linear-gradient(135deg, #1e293b 0%, #334155 100%)",
             border: "none",
+            fontFamily:
+              "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace",
           }}
           showLineNumbers={true}
           lineNumberStyle={{
-            color: "#718096",
+            color: "#64748b",
             fontSize: "12px",
-            paddingRight: "1rem",
-            minWidth: "2.5rem",
+            minWidth: "3rem",
             textAlign: "right",
+            borderRight: "1px solid #334155",
+            marginRight: "1rem",
+            paddingRight: "1rem",
           }}
+          wrapLines={true}
+          wrapLongLines={true}
         >
           {codeContent}
         </SyntaxHighlighter>
 
-        {/* Subtle gradient overlay for better visual hierarchy */}
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-transparent to-gray-800/5 dark:to-gray-900/10"></div>
+        {/* Enhanced gradient overlay */}
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5"></div>
+
+        {/* Subtle border glow effect */}
+        <div className="absolute inset-0 pointer-events-none rounded-b-xl ring-1 ring-inset ring-white/10"></div>
       </div>
     </div>
   );
