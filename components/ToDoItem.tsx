@@ -11,7 +11,7 @@ export function ToDoItem({ to_do }: ToDoBlockObjectResponse) {
   const colorClass = colorMap[color] || colorMap.default;
 
   return (
-    <div className={`flex items-start gap-2 ${colorClass}`}>
+    <div className={`flex items-start gap-2 mb-2 ${colorClass}`}>
       <div className="flex-shrink-0 mt-1">
         <div
           className={`w-4 h-4 border-2 rounded-sm flex items-center justify-center transition-colors ${

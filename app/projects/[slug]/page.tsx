@@ -119,33 +119,35 @@ export default async function ProjectPage({
           )}
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap gap-3 mb-6">
-            {githubUrl && (
-              <a
-                href={githubUrl}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github className="w-4 h-4" />
-                View Code
-              </a>
-            )}
-            {demoUrl && (
-              <a
-                href={demoUrl}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ExternalLink className="w-4 h-4" />
-                Live Demo
-              </a>
-            )}
-          </div>
+          {(githubUrl || demoUrl) && (
+            <div className="flex flex-wrap gap-3 mb-6">
+              {githubUrl && (
+                <a
+                  href={githubUrl}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Github className="w-4 h-4" />
+                  View Code
+                </a>
+              )}
+              {demoUrl && (
+                <a
+                  href={demoUrl}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  Live Demo
+                </a>
+              )}
+            </div>
+          )}
 
           {/* Last Updated using LastUpdated component */}
-          <div className="pb-6 border-b border-gray-200 dark:border-gray-800">
+          <div className="pb-6 border-b border-gray-200 dark:border-gray-800 mt-6">
             <LastUpdated
               updated={
                 lastEditedForNotionComponent as LastEditedTimePropertyItemObjectResponse
