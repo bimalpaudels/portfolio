@@ -63,11 +63,6 @@ export default async function ProjectPage({
         ? { multi_select: techStackProp.multi_select }
         : { multi_select: [] };
 
-    const status =
-      project.properties.Status?.type === "status"
-        ? project.properties.Status.status?.name || "Unknown"
-        : "Unknown";
-
     const githubUrl =
       project.properties.GitHub?.type === "url"
         ? project.properties.GitHub.url
@@ -80,16 +75,6 @@ export default async function ProjectPage({
 
     const lastEditedForNotionComponent = {
       last_edited_time: project.last_edited_time,
-    };
-
-    const statusColors = {
-      Live: "bg-emerald-100 text-emerald-800 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-800",
-      "In Progress":
-        "bg-sky-100 text-sky-800 border-sky-200 dark:bg-sky-900/30 dark:text-sky-300 dark:border-sky-800",
-      Completed:
-        "bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-800",
-      Unknown:
-        "bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600",
     };
 
     return (
@@ -119,16 +104,6 @@ export default async function ProjectPage({
                   {description}
                 </p>
               )}
-            </div>
-
-            <div className="flex items-center gap-3">
-              <span
-                className={`px-3 py-1 rounded-full text-sm font-medium border ${
-                  statusColors[status as keyof typeof statusColors]
-                }`}
-              >
-                {status}
-              </span>
             </div>
           </div>
 
