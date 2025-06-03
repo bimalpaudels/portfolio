@@ -18,8 +18,8 @@ The minimal design and having in-line navigations instead of a navbar is heavily
 After forking/cloning the repo:
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ### Notion Integration
@@ -62,6 +62,28 @@ If everything is setup correctly, [localhost:3000](http://localhost:3000), shoul
 ### Working demo
 
 I have used this [README.md](https://bimals.net/posts/nextjs-notion-integration) in a Notion post as a working example/demo.
+
+## Project Structure
+
+```
+/
+├── components/           # React components
+│   ├── NotionRenderers.tsx
+│   ├── NotionComponents.tsx
+│   └── ...
+├── lib/                 # Utility functions and API clients
+│   ├── notion.ts        # Notion API functions
+│   ├── utils.ts         # General utilities
+│   └── index.ts         # Main exports
+├── types/               # TypeScript type definitions
+│   ├── notion.ts        # Notion-related types
+│   └── index.ts         # Type exports
+├── app/                 # Next.js app directory
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── ...
+└── ...
+```
 
 ## Notion Blocks
 

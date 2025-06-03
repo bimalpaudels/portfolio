@@ -20,7 +20,6 @@ export { default as NotionBlockChildrenRenderer } from "./NotionRenderers";
 export {
   NotionDBPagesRenderer,
   NotionProjectsRenderer,
-  type NotionDBPagesRendererProps,
 } from "./NotionRenderers";
 
 // Existing Components

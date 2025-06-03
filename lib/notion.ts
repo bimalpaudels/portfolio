@@ -3,10 +3,13 @@ import {
   PageObjectResponse,
   BlockObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
+
+// Initialize Notion client
 const notion = new Client({
   auth: process.env.NOTION_KEY,
 });
 
+// Basic page and block operations
 export async function fetchPageProperties(pageId: string) {
   const response = await notion.pages.retrieve({ page_id: pageId });
   if ("properties" in response) {
@@ -28,6 +31,7 @@ export async function fetchNotionDatabase(pageId: string) {
   return response;
 }
 
+// Database query operations
 export async function fetchDatabaseContent(): Promise<PageObjectResponse[]> {
   const notionDbId = process.env.NOTION_DB_ID;
   if (!notionDbId) {
@@ -69,6 +73,7 @@ export async function fetchPageBySlug(
   return response.results[0] as PageObjectResponse;
 }
 
+// Projects-specific operations
 export async function fetchProjectsDatabaseContent(): Promise<
   PageObjectResponse[]
 > {
@@ -88,7 +93,7 @@ export async function fetchProjectsDatabaseContent(): Promise<
       },
     },
   });
-  console.log(response);
+
   return response.results.filter(
     (item): item is PageObjectResponse =>
       "properties" in item && "parent" in item

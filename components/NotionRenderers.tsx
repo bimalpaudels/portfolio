@@ -8,8 +8,6 @@ import {
   PostImage,
 } from "@/components";
 import {
-  GetBlockResponse,
-  PageObjectResponse,
   TextRichTextItemResponse,
   Heading1BlockObjectResponse,
   Heading2BlockObjectResponse,
@@ -18,16 +16,11 @@ import {
   CodeBlockObjectResponse,
   ImageBlockObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
-
+import {
+  NotionDBPagesRendererProps,
+  NotionBlockChildrenRendererProps,
+} from "@/types";
 import { Link } from "next-view-transitions";
-
-type NotionBlockChildrenRendererProps = {
-  blocks: GetBlockResponse[];
-};
-
-export type NotionDBPagesRendererProps = {
-  pages: PageObjectResponse[];
-};
 
 function NotionBlockChildrenRenderer({
   blocks,
