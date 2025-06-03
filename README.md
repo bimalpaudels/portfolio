@@ -217,14 +217,20 @@ Following are the blocks from Notion that have components at the moment along wi
 - Heading 1
 - Heading 2
 - Heading 3
-- Paragraph (With with rich text support)
+- Paragraph (With rich text support)
 - Code Block
 - Page Title
+- Bulleted List Items
+- Numbered List Items
+- To-Do List Items (with checkboxes)
 
 ### WIP Components
 
 - Image
-- Lists
+- Callouts
+- Quotes
+- Toggles
+- Tables
 
 ## License
 

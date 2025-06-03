@@ -5,6 +5,9 @@ import {
   Paragraph,
   Code,
   PostImage,
+  BulletedListItem,
+  NumberedListItem,
+  ToDoItem,
 } from "@/components";
 import {
   Heading1BlockObjectResponse,
@@ -13,6 +16,9 @@ import {
   ParagraphBlockObjectResponse,
   CodeBlockObjectResponse,
   ImageBlockObjectResponse,
+  BulletedListItemBlockObjectResponse,
+  NumberedListItemBlockObjectResponse,
+  ToDoBlockObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 import { NotionBlockChildrenRendererProps } from "@/types";
 
@@ -70,6 +76,31 @@ export default function NotionBlockRenderer({
                 {...(block as ImageBlockObjectResponse)}
               />
             );
+
+          case "bulleted_list_item":
+            return (
+              <BulletedListItem
+                key={block.id}
+                {...(block as BulletedListItemBlockObjectResponse)}
+              />
+            );
+
+          case "numbered_list_item":
+            return (
+              <NumberedListItem
+                key={block.id}
+                {...(block as NumberedListItemBlockObjectResponse)}
+              />
+            );
+
+          case "to_do":
+            return (
+              <ToDoItem
+                key={block.id}
+                {...(block as ToDoBlockObjectResponse)}
+              />
+            );
+
           default:
             return null;
         }
