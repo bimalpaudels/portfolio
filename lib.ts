@@ -48,7 +48,6 @@ export async function fetchDatabaseContent(): Promise<PageObjectResponse[]> {
     (item): item is PageObjectResponse =>
       "properties" in item && "parent" in item
   );
-  // return response.results as PageObjectResponse[]
 }
 
 export async function fetchPageBySlug(
@@ -60,6 +59,53 @@ export async function fetchPageBySlug(
   }
   const response = await notion.databases.query({
     database_id: notionDbId,
+    filter: {
+      property: "slug",
+      rich_text: {
+        equals: slug,
+      },
+    },
+  });
+  return response.results[0] as PageObjectResponse;
+}
+
+export async function fetchProjectsDatabaseContent(): Promise<
+  PageObjectResponse[]
+> {
+  const notionProjectsDbId = process.env.NOTION_PROJECTS_DB_ID;
+  if (!notionProjectsDbId) {
+    throw new Error(
+      "NOTION_PROJECTS_DB_ID is not defined in environment variables."
+    );
+  }
+
+  const response = await notion.databases.query({
+    database_id: notionProjectsDbId,
+    filter: {
+      property: "Status",
+      status: {
+        equals: "Published",
+      },
+    },
+  });
+  console.log(response);
+  return response.results.filter(
+    (item): item is PageObjectResponse =>
+      "properties" in item && "parent" in item
+  );
+}
+
+export async function fetchProjectBySlug(
+  slug: string
+): Promise<PageObjectResponse> {
+  const notionProjectsDbId = process.env.NOTION_PROJECTS_DB_ID;
+  if (!notionProjectsDbId) {
+    throw new Error(
+      "NOTION_PROJECTS_DB_ID is not defined in environment variables."
+    );
+  }
+  const response = await notion.databases.query({
+    database_id: notionProjectsDbId,
     filter: {
       property: "slug",
       rich_text: {

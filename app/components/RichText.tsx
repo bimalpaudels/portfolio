@@ -7,8 +7,6 @@ export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
 }) => {
   const { annotations, text } = item;
 
-  // For links, we'll use theme colors and ignore Notion's color
-  // For regular text, we'll use Notion's color choices
   const isLink = !!text.link;
 
   const className = [
@@ -27,6 +25,9 @@ export const RichText: React.FC<{ item: TextRichTextItemResponse }> = ({
 
   const content = <span className={className}>{text.content}</span>;
 
-  // Links will use the theme color from globals.css (--color-accent)
-  return isLink ? <Link href={text.link.url}>{content}</Link> : content;
+  return isLink && text.link ? (
+    <Link href={text.link.url}>{content}</Link>
+  ) : (
+    content
+  );
 };

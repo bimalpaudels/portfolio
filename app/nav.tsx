@@ -8,6 +8,7 @@ export default function Footer() {
       target: "_blank",
     },
     { name: "posts", url: "/posts", target: "_self" },
+    { name: "projects", url: "/projects", target: "_self" },
     { name: "about", url: "/about", target: "_self" },
     { name: "stack", url: "/stack", target: "_self" },
     {
