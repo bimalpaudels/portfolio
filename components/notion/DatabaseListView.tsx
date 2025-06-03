@@ -1,31 +1,53 @@
-import { PageDescription } from "@/components";
+import { PageDescription } from "../NotionComponents";
 import { TextRichTextItemResponse } from "@notionhq/client/build/src/api-endpoints";
 import { NotionDBPagesRendererProps } from "@/types";
 import { Link } from "next-view-transitions";
 
-export default function PostsListRenderer({
+interface DatabaseListViewProps extends NotionDBPagesRendererProps {
+  titleProperty?: string;
+  descriptionProperty?: string;
+  slugProperty?: string;
+  linkPrefix: string;
+  className?: string;
+}
+
+export default function DatabaseListView({
   pages,
-}: NotionDBPagesRendererProps) {
+  titleProperty = "Title",
+  descriptionProperty = "Description",
+  slugProperty = "slug",
+  linkPrefix,
+  className = "space-y-8",
+}: DatabaseListViewProps) {
   return (
-    <div className="space-y-8">
+    <div className={className}>
       {pages.map((page) => {
         const { properties } = page;
+
+        // Extract title
+        const titleProp = properties[titleProperty];
         const title =
-          "title" in properties.Title ? properties.Title.title[0] : null;
+          titleProp && "title" in titleProp ? titleProp.title[0] : null;
+
+        // Extract description
+        const descriptionProp = properties[descriptionProperty];
         const description =
-          properties.Description.type === "rich_text"
-            ? properties.Description.rich_text
+          descriptionProp?.type === "rich_text"
+            ? descriptionProp.rich_text
             : "";
+
+        // Extract slug
+        const slugProp = properties[slugProperty];
         const slug =
-          properties.slug.type === "rich_text"
-            ? properties.slug.rich_text[0].plain_text
+          slugProp?.type === "rich_text"
+            ? slugProp.rich_text[0]?.plain_text
             : null;
 
         return (
           <div key={page.id} className="space-y-3">
             <div>
               <Link
-                href={`/posts/${slug}`}
+                href={`${linkPrefix}/${slug}`}
                 className="font-heading text-lg font-semibold text-gray-900 dark:text-gray-100 hover:text-sky-600 dark:hover:text-sky-400 transition-colors duration-200"
               >
                 {title?.plain_text}
@@ -40,10 +62,10 @@ export default function PostsListRenderer({
 
             <div className="text-grey-800 text-base leading-normal mt-1">
               <Link
-                href={`/posts/${slug}`}
+                href={`${linkPrefix}/${slug}`}
                 className="font-body text-sm text-sky-500 dark:text-sky-400 hover:text-sky-600 dark:hover:text-sky-300 transition-colors duration-200"
               >
-                Read post →
+                Read more →
               </Link>
             </div>
           </div>

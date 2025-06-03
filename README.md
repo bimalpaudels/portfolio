@@ -34,6 +34,8 @@ Environment variables (.env.local):
 NOTION_KEY=secret_GLafldkjfdk4hkjaf922dflkfaasdNyq7axYz
 
 NOTION_PAGE_ID=gggab7askjh8adfaa8asd01
+NOTION_DB_ID=your_posts_database_id
+NOTION_PROJECTS_DB_ID=your_projects_database_id
 ```
 
 In the root page.tsx:
@@ -69,10 +71,10 @@ I have used this [README.md](https://bimals.net/posts/nextjs-notion-integration)
 /
 ├── components/           # React components
 │   ├── notion/          # Notion-specific renderers
-│   │   ├── BlockRenderer.tsx        # Page content blocks
-│   │   ├── PostsListRenderer.tsx    # Posts list view
-│   │   ├── ProjectsListRenderer.tsx # Projects list view
-│   │   └── index.ts                 # Exports
+│   │   ├── BlockRenderer.tsx           # Page content blocks
+│   │   ├── DatabaseListView.tsx        # Generic list view
+│   │   ├── DatabaseGalleryView.tsx     # Generic gallery view
+│   │   └── index.ts                    # Exports
 │   ├── NotionComponents.tsx
 │   ├── index.ts
 │   └── ...
@@ -98,21 +100,112 @@ I have used this [README.md](https://bimals.net/posts/nextjs-notion-integration)
 The project uses specialized components for different Notion content types:
 
 - **`NotionBlockRenderer`** - Renders page content blocks (headings, paragraphs, code, etc.)
-- **`PostsListRenderer`** - Renders a list of blog posts
-- **`ProjectsListRenderer`** - Renders a list of projects with status and tech stack
+- **`DatabaseListView`** - Generic list view for any database
+- **`DatabaseGalleryView`** - Generic gallery/card view for any database
 
 ```javascript
 // For page content
 import { NotionBlockRenderer } from "@/components";
 <NotionBlockRenderer blocks={pageBlocks} />;
 
-// For posts list
-import { PostsListRenderer } from "@/components";
-<PostsListRenderer pages={posts} />;
+// For posts list (using generic list view)
+import { DatabaseListView } from "@/components";
+<DatabaseListView
+  pages={posts}
+  titleProperty="Title"
+  descriptionProperty="Description"
+  slugProperty="slug"
+  linkPrefix="/posts"
+/>;
 
-// For projects list
-import { ProjectsListRenderer } from "@/components";
-<ProjectsListRenderer pages={projects} />;
+// For projects gallery (using generic gallery view)
+import { DatabaseGalleryView } from "@/components";
+<DatabaseGalleryView
+  pages={projects}
+  titleProperty="Name"
+  descriptionProperty="Description"
+  slugProperty="slug"
+  statusProperty="Status"
+  tagsProperty="TechStack"
+  linkPrefix="/projects"
+  showImage={true}
+/>;
+
+// For custom database views
+import { DatabaseListView, DatabaseGalleryView } from "@/components";
+
+// Custom list view
+<DatabaseListView
+  pages={pages}
+  titleProperty="Title"
+  descriptionProperty="Description"
+  slugProperty="slug"
+  linkPrefix="/custom"
+/>
+
+// Custom gallery view
+<DatabaseGalleryView
+  pages={pages}
+  titleProperty="Name"
+  statusProperty="Status"
+  tagsProperty="Tags"
+  linkPrefix="/items"
+  showImage={false}
+/>
+```
+
+### Database Fetching
+
+The project provides flexible database fetching functions:
+
+```javascript
+import {
+  fetchDatabasePages, // Generic function
+  fetchDatabaseContent, // Posts database
+  fetchProjectsDatabaseContent, // Projects database
+} from "@/lib";
+
+// Generic usage with any database ID
+const pages = await fetchDatabasePages("your_database_id", "Published");
+
+// Specific databases using environment variables
+const posts = await fetchDatabaseContent();
+const projects = await fetchProjectsDatabaseContent();
+```
+
+### Example: Custom Books Database
+
+Here's how you could create a books page using the generic components:
+
+```javascript
+// app/books/page.tsx
+import { fetchDatabasePages } from "@/lib";
+import { DatabaseGalleryView } from "@/components";
+
+export default async function Books() {
+  const books = await fetchDatabasePages(process.env.BOOKS_DB_ID!);
+
+  return (
+    <div>
+      <h1>My Book Collection</h1>
+      <DatabaseGalleryView
+        pages={books}
+        titleProperty="Title"
+        descriptionProperty="Summary"
+        slugProperty="slug"
+        statusProperty="ReadingStatus"
+        tagsProperty="Genres"
+        linkPrefix="/books"
+        showImage={false}
+        statusColors={{
+          "Read": "bg-green-100 text-green-800 border-green-200",
+          "Reading": "bg-blue-100 text-blue-800 border-blue-200",
+          "Want to Read": "bg-yellow-100 text-yellow-800 border-yellow-200"
+        }}
+      />
+    </div>
+  );
+}
 ```
 
 ## Notion Blocks

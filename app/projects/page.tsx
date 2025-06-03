@@ -1,6 +1,6 @@
 import { Header } from "@/components";
 import { fetchProjectsDatabaseContent } from "@/lib";
-import { ProjectsListRenderer } from "@/components";
+import { DatabaseGalleryView } from "@/components";
 
 export const metadata = {
   title: "Projects",
@@ -28,7 +28,16 @@ export default async function Projects() {
         </p>
       </div>
 
-      <ProjectsListRenderer pages={projects} />
+      <DatabaseGalleryView
+        pages={projects}
+        titleProperty="Name"
+        descriptionProperty="Description"
+        slugProperty="slug"
+        statusProperty="Status"
+        tagsProperty="TechStack"
+        linkPrefix="/projects"
+        showImage={true}
+      />
     </div>
   );
 }

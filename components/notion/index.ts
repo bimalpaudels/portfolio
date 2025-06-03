@@ -1,6 +1,6 @@
-// Notion Renderers
+// Core Notion Renderers
 export { default as NotionBlockRenderer } from "./BlockRenderer";
-export { default as PostsListRenderer } from "./PostsListRenderer";
-export { default as ProjectsListRenderer } from "./ProjectsListRenderer";
 
-
+// Generic Database Views
+export { default as DatabaseListView } from "./DatabaseListView";
+export { default as DatabaseGalleryView } from "./DatabaseGalleryView";

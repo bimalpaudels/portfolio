@@ -1,5 +1,5 @@
 import { fetchDatabaseContent } from "@/lib";
-import { PostsListRenderer } from "@/components";
+import { DatabaseListView } from "@/components";
 import { Header } from "@/components";
 
 export const metadata = {
@@ -17,7 +17,13 @@ export default async function Learn() {
     <div className="animate-fade-in">
       <Header />
       <div className="space-y-8 pt-8 animate-slide-in">
-        <PostsListRenderer pages={db_content_response} />
+        <DatabaseListView
+          pages={db_content_response}
+          titleProperty="Title"
+          descriptionProperty="Description"
+          slugProperty="slug"
+          linkPrefix="/posts"
+        />
       </div>
     </div>
   );

@@ -15,8 +15,8 @@ export { Code } from "./Code";
 
 export {
   NotionBlockRenderer,
-  PostsListRenderer,
-  ProjectsListRenderer,
+  DatabaseListView,
+  DatabaseGalleryView,
 } from "./notion";
 
 export { default as Navigation } from "./Navigation";
