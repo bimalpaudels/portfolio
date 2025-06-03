@@ -45,7 +45,6 @@ export async function fetchDatabasePages(
       },
     },
   });
-
   return response.results.filter(
     (item): item is PageObjectResponse =>
       "properties" in item && "parent" in item

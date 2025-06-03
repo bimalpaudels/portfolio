@@ -1,8 +1,10 @@
 import { fetchProjectBySlug, fetchNotionPageContent } from "@/lib";
 import { NotionBlockRenderer, NotionTags, LastUpdated } from "@/components";
 import { Header } from "@/components";
-import { ExternalLink, Github, ArrowLeft } from "lucide-react";
+import { ExternalLink, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { SiGithub } from "@icons-pack/react-simple-icons";
 import {
   MultiSelectPropertyItemObjectResponse,
   LastEditedTimePropertyItemObjectResponse,
@@ -77,6 +79,15 @@ export default async function ProjectPage({
       last_edited_time: project.last_edited_time,
     };
 
+    // Extract cover image from project object
+    const cover = project.cover;
+    const coverUrl =
+      cover?.type === "file"
+        ? cover.file.url
+        : cover?.type === "external"
+        ? cover.external.url
+        : null;
+
     return (
       <div className="animate-fade-in">
         <Header />
@@ -85,7 +96,7 @@ export default async function ProjectPage({
         <div className="mb-6">
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Projects
@@ -99,6 +110,7 @@ export default async function ProjectPage({
               <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3">
                 {title}
               </h1>
+
               {description && (
                 <p className="text-lg text-gray-600 dark:text-gray-300">
                   {description}
@@ -106,6 +118,20 @@ export default async function ProjectPage({
               )}
             </div>
           </div>
+
+          {/* Cover Image Banner */}
+          {coverUrl && (
+            <div className="relative w-full h-64 md:h-80 mb-6 rounded-xl overflow-hidden">
+              <Image
+                src={coverUrl}
+                alt={title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+                priority
+              />
+            </div>
+          )}
 
           {/* Tech Stack using NotionTags component */}
           {techStackForNotionComponent.multi_select.length > 0 && (
@@ -118,34 +144,38 @@ export default async function ProjectPage({
             </div>
           )}
 
-          {/* Action Buttons */}
-          <div className="flex flex-wrap gap-3 mb-6">
-            {githubUrl && (
-              <a
-                href={githubUrl}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github className="w-4 h-4" />
-                View Code
-              </a>
-            )}
-            {demoUrl && (
-              <a
-                href={demoUrl}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ExternalLink className="w-4 h-4" />
-                Live Demo
-              </a>
-            )}
-          </div>
+          {/* Links Section */}
+          {(githubUrl || demoUrl) && (
+            <div className="mb-6">
+              <div className="flex items-center gap-4">
+                {githubUrl && (
+                  <a
+                    href={githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
+                  >
+                    <SiGithub className="w-4 h-4" />
+                    <span className="text-sm">View Code</span>
+                  </a>
+                )}
+                {demoUrl && (
+                  <a
+                    href={demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-gray-600 hover:text-sky-600 dark:text-gray-400 dark:hover:text-sky-400 transition-colors"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span className="text-sm">Live Demo</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* Last Updated using LastUpdated component */}
-          <div className="pb-6 border-b border-gray-200 dark:border-gray-800">
+          <div className="pb-6 border-b border-gray-200 dark:border-gray-800 mt-6">
             <LastUpdated
               updated={
                 lastEditedForNotionComponent as LastEditedTimePropertyItemObjectResponse

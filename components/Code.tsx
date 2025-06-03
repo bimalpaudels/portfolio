@@ -1,58 +1,144 @@
 "use client";
 
-import { useState } from "react";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { monokai } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { useState, useEffect } from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import {
+  oneLight,
+  oneDark,
+} from "react-syntax-highlighter/dist/esm/styles/prism";
 import {
   CodeBlockObjectResponse,
   TextRichTextItemResponse,
 } from "@notionhq/client/build/src/api-endpoints";
-import {
-  Copy,
-  Check,
-  FileText,
-  Braces,
-  Terminal,
-  Globe,
-  Palette,
-  Database,
-} from "lucide-react";
+import { Copy, Check } from "lucide-react";
 
-// Language icon mapping using Lucide icons
-const getLanguageIcon = (language: string) => {
+// Language extension mapping
+const getLanguageExtension = (language: string) => {
   const lang = language?.toLowerCase();
 
   switch (lang) {
     case "python":
-      return <FileText className="w-4 h-4 text-blue-400" />;
+    case "py":
+      return ".py";
     case "javascript":
     case "js":
-      return <Braces className="w-4 h-4 text-yellow-400" />;
+      return ".js";
     case "typescript":
     case "ts":
-      return <Braces className="w-4 h-4 text-blue-500" />;
+      return ".ts";
     case "react":
     case "jsx":
+      return ".jsx";
     case "tsx":
-      return <Braces className="w-4 h-4 text-cyan-400" />;
+      return ".tsx";
     case "html":
-      return <Globe className="w-4 h-4 text-orange-400" />;
+      return ".html";
     case "css":
-      return <Palette className="w-4 h-4 text-blue-400" />;
+      return ".css";
+    case "scss":
+      return ".scss";
+    case "sass":
+      return ".sass";
     case "json":
-      return <Database className="w-4 h-4 text-green-400" />;
+      return ".json";
     case "bash":
     case "shell":
     case "sh":
-      return <Terminal className="w-4 h-4 text-green-400" />;
+    case "zsh":
+      return "Shell";
+    case "rust":
+    case "rs":
+      return ".rs";
+    case "go":
+    case "golang":
+      return ".go";
+    case "php":
+      return ".php";
+    case "ruby":
+    case "rb":
+      return ".rb";
+    case "swift":
+      return ".swift";
+    case "kotlin":
+    case "kt":
+      return ".kt";
+    case "java":
+      return ".java";
+    case "cpp":
+    case "c++":
+      return ".cpp";
+    case "cxx":
+      return ".cxx";
+    case "c":
+      return ".c";
+    case "csharp":
+    case "c#":
+    case "cs":
+      return ".cs";
+    case "sql":
+    case "mysql":
+    case "postgresql":
+      return ".sql";
+    case "yaml":
+    case "yml":
+      return ".yml";
+    case "markdown":
+    case "md":
+      return ".md";
+    case "dockerfile":
+    case "docker":
+      return "Dockerfile";
+    case "nginx":
+    case "apache":
+      return ".conf";
+    case "xml":
+      return ".xml";
+    case "toml":
+      return ".toml";
+    case "ini":
+      return ".ini";
+    case "env":
+      return ".env";
     default:
-      return <FileText className="w-4 h-4 text-gray-400" />;
+      return "zsh";
   }
 };
 
 export function Code({ code }: CodeBlockObjectResponse) {
   const { rich_text, language } = code;
   const [copied, setCopied] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+
+  // Check for dark mode
+  useEffect(() => {
+    const checkDarkMode = () => {
+      if (typeof window !== "undefined") {
+        const isDarkMode =
+          document.documentElement.classList.contains("dark") ||
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        setIsDark(isDarkMode);
+      }
+    };
+
+    checkDarkMode();
+
+    // Listen for theme changes
+    if (typeof window !== "undefined") {
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const observer = new MutationObserver(checkDarkMode);
+
+      mediaQuery.addEventListener("change", checkDarkMode);
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+
+      return () => {
+        mediaQuery.removeEventListener("change", checkDarkMode);
+        observer.disconnect();
+      };
+    }
+  }, []);
 
   const codeContent = rich_text
     .filter((item): item is TextRichTextItemResponse => item.type === "text")
@@ -61,7 +147,21 @@ export function Code({ code }: CodeBlockObjectResponse) {
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(codeContent);
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(codeContent);
+      } else {
+        // Fallback for older browsers or non-secure contexts
+        const textArea = document.createElement("textarea");
+        textArea.value = codeContent;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand("copy");
+        textArea.remove();
+      }
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -71,69 +171,51 @@ export function Code({ code }: CodeBlockObjectResponse) {
 
   return (
     <div className="my-8 group relative">
-      {/* Modern header with language icon and copy button */}
-      <div className="flex items-center justify-between bg-slate-900/95 dark:bg-gray-900/95 backdrop-blur-sm px-3 sm:px-4 py-2.5 sm:py-3 rounded-t-xl border border-slate-700/50 dark:border-gray-700/50">
+      {/* Header with language extension and copy button */}
+      <div className="flex items-center justify-between bg-gray-100 dark:bg-gray-800 px-4 py-3 rounded-t-xl border border-gray-200 dark:border-gray-700">
         <div className="flex items-center gap-2">
-          {getLanguageIcon(language || "code")}
-          <span className="text-xs sm:text-sm font-medium text-slate-300 dark:text-gray-300 capitalize">
-            {language || "code"}
+          <span className="text-xs font-mono text-gray-600 dark:text-gray-400 bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">
+            {getLanguageExtension(language || "")}
           </span>
         </div>
 
         <button
           onClick={handleCopy}
-          className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 text-slate-400 hover:text-white hover:bg-slate-700/50 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-200 opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-slate-900"
+          className="flex items-center justify-center w-8 h-8 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
           aria-label="Copy code to clipboard"
           title={copied ? "Copied!" : "Copy code"}
         >
           {copied ? (
-            <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-400" />
+            <Check className="w-4 h-4 text-green-500" />
           ) : (
-            <Copy className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <Copy className="w-4 h-4" />
           )}
         </button>
       </div>
 
-      {/* Code content with enhanced styling */}
-      <div className="relative overflow-hidden rounded-b-xl border-x border-b border-slate-700/50 dark:border-gray-700/50">
+      {/* Code content with proper syntax highlighting */}
+      <div className="relative overflow-hidden rounded-b-xl border-x border-b border-gray-200 dark:border-gray-700">
         <div className="overflow-x-auto">
           <SyntaxHighlighter
-            language={language}
-            style={monokai}
+            language={language || "bash"}
+            style={isDark ? oneDark : oneLight}
             customStyle={{
               margin: 0,
               borderRadius: 0,
-              fontSize: "13px",
-              lineHeight: "1.5",
+              fontSize: "14px",
+              lineHeight: "1.6",
               padding: "1rem",
-              background: "linear-gradient(135deg, #1e293b 0%, #334155 100%)",
-              border: "none",
               fontFamily:
                 "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace",
               minWidth: "100%",
             }}
-            showLineNumbers={true}
-            lineNumberStyle={{
-              color: "#64748b",
-              fontSize: "11px",
-              minWidth: "2rem",
-              textAlign: "right",
-              borderRight: "1px solid #334155",
-              marginRight: "0.75rem",
-              paddingRight: "0.5rem",
-            }}
+            showLineNumbers={false}
             wrapLines={false}
             wrapLongLines={false}
           >
             {codeContent}
           </SyntaxHighlighter>
         </div>
-
-        {/* Enhanced gradient overlay */}
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5"></div>
-
-        {/* Subtle border glow effect */}
-        <div className="absolute inset-0 pointer-events-none rounded-b-xl ring-1 ring-inset ring-white/10"></div>
       </div>
     </div>
   );
