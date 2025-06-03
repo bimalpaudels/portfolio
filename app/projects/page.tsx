@@ -23,8 +23,8 @@ export default async function Projects() {
           Projects
         </h1>
         <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-          A collection of projects I&apos;ve built, ranging from web
-          applications to open-source tools.
+          A collection of projects I am working on / have worked on, ranging
+          from web applications to open-source packages.
         </p>
       </div>
 
@@ -33,7 +33,6 @@ export default async function Projects() {
         titleProperty="Name"
         descriptionProperty="Description"
         slugProperty="slug"
-        statusProperty="Status"
         tagsProperty="TechStack"
         linkPrefix="/projects"
         showImage={true}
