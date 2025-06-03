@@ -66,7 +66,7 @@ export default function Navigation() {
                   href={link.href}
                   className={`text-lg font-medium transition-colors duration-200 ${
                     pathname === link.href
-                      ? "text-pink-500"
+                      ? "text-sky-500"
                       : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
                   }`}
                 >

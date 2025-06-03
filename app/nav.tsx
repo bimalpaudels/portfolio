@@ -8,6 +8,7 @@ export default function Footer() {
       target: "_blank",
     },
     { name: "posts", url: "/posts", target: "_self" },
+    { name: "projects", url: "/projects", target: "_self" },
     { name: "about", url: "/about", target: "_self" },
     { name: "stack", url: "/stack", target: "_self" },
     {
@@ -29,7 +30,7 @@ export default function Footer() {
             key={link.name}
             href={link.url}
             target={link.target}
-            className="text-gray-400 hover:text-pink-500 transition-colors duration-200"
+            className="text-gray-400 hover:text-sky-500 transition-colors duration-200"
           >
             {link.name}
           </Link>

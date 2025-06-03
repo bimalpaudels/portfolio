@@ -29,7 +29,7 @@ export default function Footer() {
             key={link.name}
             href={link.url}
             target={link.target}
-            className="text-gray-400 hover:text-pink-500 transition-colors duration-200"
+            className="text-gray-400 hover:text-sky-500 transition-colors duration-200"
           >
             {link.name}
           </Link>

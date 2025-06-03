@@ -39,12 +39,14 @@
   --leading-relaxed: 1.625;
   --leading-loose: 2;
   
-  /* Colors */
+  /* Modern Color Palette */
   --color-text-primary: #1a1a1a;
   --color-text-secondary: #6b7280;
   --color-text-muted: #9ca3af;
-  --color-accent: #ec4899;
-  --color-accent-hover: #db2777;
+  --color-accent: #0ea5e9;
+  --color-accent-hover: #0284c7;
+  --color-accent-secondary: #10b981;
+  --color-accent-secondary-hover: #059669;
   
   /* Dark mode colors */
   --color-text-primary-dark: #f5faff;
@@ -106,30 +108,32 @@
   }
   
   h1 {
-    font-size: var(--text-2xl);
-    font-weight: 600;
+    font-size: var(--text-4xl);
+    font-weight: 700;
     margin-bottom: var(--space-lg);
   }
   
   h2 {
-    font-size: var(--text-xl);
-    margin-bottom: var(--space-md);
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    margin-bottom: var(--space-lg);
   }
   
   h3 {
-    font-size: var(--text-lg);
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-md);
   }
   
   h4 {
-    font-size: var(--text-base);
+    font-size: var(--text-xl);
   }
   
   h5 {
-    font-size: var(--text-sm);
+    font-size: var(--text-lg);
   }
   
   h6 {
-    font-size: var(--text-xs);
+    font-size: var(--text-base);
   }
   
   /* Paragraph and Text Styles */
@@ -251,21 +255,29 @@
     }
     
     h1 {
-      font-size: var(--text-xl);
+      font-size: var(--text-3xl);
     }
     
     h2 {
-      font-size: var(--text-lg);
+      font-size: var(--text-2xl);
     }
     
     h3 {
-      font-size: var(--text-base);
+      font-size: var(--text-xl);
+    }
+    
+    h4 {
+      font-size: var(--text-lg);
     }
   }
   
   @media (min-width: 1024px) {
     html {
       font-size: 16px;
+    }
+    
+    h1 {
+      font-size: var(--text-5xl);
     }
   }
   
