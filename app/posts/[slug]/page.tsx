@@ -3,7 +3,7 @@ import {
   fetchDatabaseContent,
   fetchPageBySlug,
 } from "@/lib";
-import NotionBlockChildrenRenderer from "@/app/renderer";
+import NotionBlockChildrenRenderer from "@/components/NotionRenderers";
 import { notFound } from "next/navigation";
 import {
   MultiSelectPropertyItemObjectResponse,
@@ -11,8 +11,8 @@ import {
   PageObjectResponse,
   TextRichTextItemResponse,
 } from "@notionhq/client/build/src/api-endpoints";
-import { NotionPageTitle, PostMeta } from "@/app/components";
-import { Header } from "@/app/components";
+import { NotionPageTitle, PostMeta } from "@/components";
+import { Header } from "@/components";
 
 export const revalidate = 300;
 export const dynamicParams = true;

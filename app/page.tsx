@@ -1,5 +1,5 @@
 import { fetchNotionPageContent } from "@/lib";
-import NotionBlockChildrenRenderer from "@/app/renderer";
+import NotionBlockChildrenRenderer from "@/components/NotionRenderers";
 
 const homePageId = process.env.HOME_PAGE_ID;
 

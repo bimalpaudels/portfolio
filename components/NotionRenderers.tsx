@@ -6,7 +6,7 @@ import {
   Code,
   PageDescription,
   PostImage,
-} from "@/app/components";
+} from "@/components";
 import {
   GetBlockResponse,
   PageObjectResponse,
@@ -29,7 +29,7 @@ export type NotionDBPagesRendererProps = {
   pages: PageObjectResponse[];
 };
 
-export default function NotionBlockChildrenRenderer({
+function NotionBlockChildrenRenderer({
   blocks,
 }: NotionBlockChildrenRendererProps) {
   return (
@@ -90,6 +90,10 @@ export default function NotionBlockChildrenRenderer({
     </>
   );
 }
+
+// Export both as default and named export
+export default NotionBlockChildrenRenderer;
+export { NotionBlockChildrenRenderer };
 
 export function NotionDBPagesRenderer({ pages }: NotionDBPagesRendererProps) {
   return pages.map((page) => {

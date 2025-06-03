@@ -15,6 +15,14 @@ export {
 // Client Components
 export { Code } from "./Code";
 
+// Notion Renderers
+export { default as NotionBlockChildrenRenderer } from "./NotionRenderers";
+export {
+  NotionDBPagesRenderer,
+  NotionProjectsRenderer,
+  type NotionDBPagesRendererProps,
+} from "./NotionRenderers";
+
 // Existing Components
 export { default as Navigation } from "./Navigation";
 export { default as Footer } from "./Footer";

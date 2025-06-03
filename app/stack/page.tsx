@@ -1,6 +1,6 @@
-import NotionBlockChildrenRenderer from "@/app/renderer";
+import NotionBlockChildrenRenderer from "@/components/NotionRenderers";
 import { fetchNotionPageContent } from "@/lib";
-import { Header } from "@/app/components";
+import { Header } from "@/components";
 
 export const metadata = {
   title: "Stack",

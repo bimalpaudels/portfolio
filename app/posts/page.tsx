@@ -1,9 +1,9 @@
-import { fetchDatabaseContent } from "@/lib";
-import NotionBlockChildrenRenderer, {
+import { fetchDatabaseContent, fetchNotionPageContent } from "@/lib";
+import {
   NotionDBPagesRenderer,
-} from "@/app/renderer";
-import { fetchNotionPageContent } from "@/lib";
-import { Header } from "@/app/components";
+  NotionBlockChildrenRenderer,
+} from "@/components/NotionRenderers";
+import { Header } from "@/components";
 
 export const metadata = {
   title: "Posts",

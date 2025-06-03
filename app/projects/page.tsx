@@ -1,6 +1,6 @@
-import { Header } from "@/app/components";
+import { Header } from "@/components";
 import { fetchProjectsDatabaseContent } from "@/lib";
-import { NotionProjectsRenderer } from "@/app/renderer";
+import { NotionProjectsRenderer } from "@/components/NotionRenderers";
 
 export const metadata = {
   title: "Projects",
@@ -12,7 +12,6 @@ export const metadata = {
 export const revalidate = 300;
 
 export default async function Projects() {
-
   const projects = await fetchProjectsDatabaseContent();
 
   return (

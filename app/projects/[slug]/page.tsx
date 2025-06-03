@@ -1,6 +1,6 @@
 import { fetchProjectBySlug, fetchNotionPageContent } from "@/lib";
-import NotionBlockChildrenRenderer from "@/app/renderer";
-import { Header } from "@/app/components";
+import NotionBlockChildrenRenderer from "@/components/NotionRenderers";
+import { Header } from "@/components";
 import { ExternalLink, Github, Calendar, Tag, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
