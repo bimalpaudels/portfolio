@@ -1,5 +1,5 @@
 import { fetchNotionPageContent } from "@/lib";
-import NotionBlockChildrenRenderer from "@/app/renderer";
+import { NotionBlockRenderer } from "@/components";
 
 const homePageId = process.env.HOME_PAGE_ID;
 
@@ -15,7 +15,7 @@ export default async function Home() {
       <h2 className="font-heading font-semibold pt-12 text-gray-900 dark:text-gray-100">
         Bimal Paudel
       </h2>
-      <NotionBlockChildrenRenderer blocks={homePage} />
+      <NotionBlockRenderer blocks={homePage} />
     </div>
   );
 }

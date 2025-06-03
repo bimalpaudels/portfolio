@@ -1,6 +1,6 @@
-import { Header } from "@/app/components";
+import { Header } from "@/components";
 import { fetchProjectsDatabaseContent } from "@/lib";
-import { NotionProjectsRenderer } from "@/app/renderer";
+import { DatabaseGalleryView } from "@/components";
 
 export const metadata = {
   title: "Projects",
@@ -12,7 +12,6 @@ export const metadata = {
 export const revalidate = 300;
 
 export default async function Projects() {
-
   const projects = await fetchProjectsDatabaseContent();
 
   return (
@@ -29,7 +28,16 @@ export default async function Projects() {
         </p>
       </div>
 
-      <NotionProjectsRenderer pages={projects} />
+      <DatabaseGalleryView
+        pages={projects}
+        titleProperty="Name"
+        descriptionProperty="Description"
+        slugProperty="slug"
+        statusProperty="Status"
+        tagsProperty="TechStack"
+        linkPrefix="/projects"
+        showImage={true}
+      />
     </div>
   );
 }

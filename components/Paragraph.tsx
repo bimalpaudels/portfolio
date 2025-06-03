@@ -1,4 +1,4 @@
-import { colorMap } from "@/app/mapping";
+import { colorMap } from "@/lib";
 import { RichText } from "./RichText";
 import {
   ParagraphBlockObjectResponse,

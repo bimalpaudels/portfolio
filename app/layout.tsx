@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Inter, Fraunces } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import { Analytics } from "@vercel/analytics/react";
-import Footer from "@/app/components/Footer";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],

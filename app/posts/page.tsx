@@ -1,9 +1,6 @@
 import { fetchDatabaseContent } from "@/lib";
-import NotionBlockChildrenRenderer, {
-  NotionDBPagesRenderer,
-} from "@/app/renderer";
-import { fetchNotionPageContent } from "@/lib";
-import { Header } from "@/app/components";
+import { DatabaseListView } from "@/components";
+import { Header } from "@/components";
 
 export const metadata = {
   title: "Posts",
@@ -11,24 +8,22 @@ export const metadata = {
     canonical: "/posts",
   },
 };
-const learnPageIdd = process.env.LEARN_PAGE_ID;
 
 export const revalidate = 300;
 
 export default async function Learn() {
-  if (!learnPageIdd) {
-    throw new Error("LEARN_PAGE_ID is not defined in environment variables.");
-  }
-  const learnPage = await fetchNotionPageContent(learnPageIdd);
   const db_content_response = await fetchDatabaseContent();
   return (
     <div className="animate-fade-in">
       <Header />
-      <div className="article">
-        <NotionBlockChildrenRenderer blocks={learnPage} />
-      </div>
       <div className="space-y-8 pt-8 animate-slide-in">
-        <NotionDBPagesRenderer pages={db_content_response} />
+        <DatabaseListView
+          pages={db_content_response}
+          titleProperty="Title"
+          descriptionProperty="Description"
+          slugProperty="slug"
+          linkPrefix="/posts"
+        />
       </div>
     </div>
   );

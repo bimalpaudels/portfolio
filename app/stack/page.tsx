@@ -1,6 +1,6 @@
-import NotionBlockChildrenRenderer from "@/app/renderer";
+import { NotionBlockRenderer } from "@/components";
 import { fetchNotionPageContent } from "@/lib";
-import { Header } from "@/app/components";
+import { Header } from "@/components";
 
 export const metadata = {
   title: "Stack",
@@ -19,7 +19,7 @@ export default async function Stack() {
     <div className="animate-fade-in">
       <Header />
       <div className="article">
-        <NotionBlockChildrenRenderer blocks={stackPage} />
+        <NotionBlockRenderer blocks={stackPage} />
       </div>
     </div>
   );
