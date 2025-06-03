@@ -1,6 +1,6 @@
 import { Header } from "@/components";
 import { fetchProjectsDatabaseContent } from "@/lib";
-import { NotionProjectsRenderer } from "@/components/NotionRenderers";
+import { ProjectsListRenderer } from "@/components";
 
 export const metadata = {
   title: "Projects",
@@ -28,7 +28,7 @@ export default async function Projects() {
         </p>
       </div>
 
-      <NotionProjectsRenderer pages={projects} />
+      <ProjectsListRenderer pages={projects} />
     </div>
   );
 }

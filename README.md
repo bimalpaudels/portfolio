@@ -40,7 +40,7 @@ In the root page.tsx:
 
 ```javascript
 import { fetchNotionPageContent } from "@/lib";
-import NotionBlockChildrenRenderer from "@/components/NotionRenderers";
+import { NotionBlockRenderer } from "@/components";
 
 const pageId = process.env.NOTION_PAGE_ID;
 
@@ -51,7 +51,7 @@ export default async function Page() {
   const page = await fetchNotionPageContent(pageId);
   return (
     <>
-      <NotionBlockChildrenRenderer blocks={page} />
+      <NotionBlockRenderer blocks={page} />
     </>
   );
 }
@@ -68,12 +68,18 @@ I have used this [README.md](https://bimals.net/posts/nextjs-notion-integration)
 ```
 /
 ├── components/           # React components
-│   ├── NotionRenderers.tsx
+│   ├── notion/          # Notion-specific renderers
+│   │   ├── BlockRenderer.tsx        # Page content blocks
+│   │   ├── PostsListRenderer.tsx    # Posts list view
+│   │   ├── ProjectsListRenderer.tsx # Projects list view
+│   │   └── index.ts                 # Exports
 │   ├── NotionComponents.tsx
+│   ├── index.ts
 │   └── ...
 ├── lib/                 # Utility functions and API clients
 │   ├── notion.ts        # Notion API functions
 │   ├── utils.ts         # General utilities
+│   ├── mappings.ts      # Color and style mappings
 │   └── index.ts         # Main exports
 ├── types/               # TypeScript type definitions
 │   ├── notion.ts        # Notion-related types
@@ -83,6 +89,30 @@ I have used this [README.md](https://bimals.net/posts/nextjs-notion-integration)
 │   ├── page.tsx
 │   └── ...
 └── ...
+```
+
+## Component Usage
+
+### Notion Renderers
+
+The project uses specialized components for different Notion content types:
+
+- **`NotionBlockRenderer`** - Renders page content blocks (headings, paragraphs, code, etc.)
+- **`PostsListRenderer`** - Renders a list of blog posts
+- **`ProjectsListRenderer`** - Renders a list of projects with status and tech stack
+
+```javascript
+// For page content
+import { NotionBlockRenderer } from "@/components";
+<NotionBlockRenderer blocks={pageBlocks} />;
+
+// For posts list
+import { PostsListRenderer } from "@/components";
+<PostsListRenderer pages={posts} />;
+
+// For projects list
+import { ProjectsListRenderer } from "@/components";
+<ProjectsListRenderer pages={projects} />;
 ```
 
 ## Notion Blocks

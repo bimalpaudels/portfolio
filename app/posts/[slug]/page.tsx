@@ -3,7 +3,6 @@ import {
   fetchDatabaseContent,
   fetchPageBySlug,
 } from "@/lib";
-import NotionBlockChildrenRenderer from "@/components/NotionRenderers";
 import { notFound } from "next/navigation";
 import {
   MultiSelectPropertyItemObjectResponse,
@@ -13,6 +12,7 @@ import {
 } from "@notionhq/client/build/src/api-endpoints";
 import { NotionPageTitle, PostMeta } from "@/components";
 import { Header } from "@/components";
+import { NotionBlockRenderer } from "@/components";
 
 export const revalidate = 300;
 export const dynamicParams = true;
@@ -55,7 +55,7 @@ export default async function Page({ params }: PageProps) {
       <div>
         <NotionPageTitle title={title} />
         <div className="article">
-          <NotionBlockChildrenRenderer blocks={postContent} />
+          <NotionBlockRenderer blocks={postContent} />
         </div>
         <PostMeta
           updated={

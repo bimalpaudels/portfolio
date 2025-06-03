@@ -1,5 +1,5 @@
 import { fetchProjectBySlug, fetchNotionPageContent } from "@/lib";
-import NotionBlockChildrenRenderer from "@/components/NotionRenderers";
+import { NotionBlockRenderer } from "@/components";
 import { Header } from "@/components";
 import { ExternalLink, Github, Calendar, Tag, ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -177,7 +177,7 @@ export default async function ProjectPage({
 
         {/* Project Content */}
         <div className="article">
-          <NotionBlockChildrenRenderer blocks={content} />
+          <NotionBlockRenderer blocks={content} />
         </div>
       </div>
     );

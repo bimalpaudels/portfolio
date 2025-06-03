@@ -1,4 +1,4 @@
-import { colorMap } from "@/app/mapping";
+import { colorMap } from "@/lib";
 import { Link } from "next-view-transitions";
 import { TextRichTextItemResponse } from "@notionhq/client/build/src/api-endpoints";
 

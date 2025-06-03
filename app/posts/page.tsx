@@ -1,8 +1,5 @@
 import { fetchDatabaseContent, fetchNotionPageContent } from "@/lib";
-import {
-  NotionDBPagesRenderer,
-  NotionBlockChildrenRenderer,
-} from "@/components/NotionRenderers";
+import { PostsListRenderer, NotionBlockRenderer } from "@/components";
 import { Header } from "@/components";
 
 export const metadata = {
@@ -25,10 +22,10 @@ export default async function Learn() {
     <div className="animate-fade-in">
       <Header />
       <div className="article">
-        <NotionBlockChildrenRenderer blocks={learnPage} />
+        <NotionBlockRenderer blocks={learnPage} />
       </div>
       <div className="space-y-8 pt-8 animate-slide-in">
-        <NotionDBPagesRenderer pages={db_content_response} />
+        <PostsListRenderer pages={db_content_response} />
       </div>
     </div>
   );
