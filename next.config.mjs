@@ -9,6 +9,16 @@ const nextConfig = {
         hostname: "**.amazonaws.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "**.notion.so",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "notion.so",
+        port: "",
+      },
     ],
   },
 };

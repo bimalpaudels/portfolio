@@ -4,32 +4,25 @@ import {
   Heading3,
   Paragraph,
   Code,
-  PageDescription,
   PostImage,
-} from "@/app/componenets";
+  BulletedListItem,
+  NumberedListItem,
+  ToDoItem,
+} from "@/components";
 import {
-  GetBlockResponse,
-  PageObjectResponse,
-  TextRichTextItemResponse,
   Heading1BlockObjectResponse,
   Heading2BlockObjectResponse,
   Heading3BlockObjectResponse,
   ParagraphBlockObjectResponse,
   CodeBlockObjectResponse,
   ImageBlockObjectResponse,
+  BulletedListItemBlockObjectResponse,
+  NumberedListItemBlockObjectResponse,
+  ToDoBlockObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
+import { NotionBlockChildrenRendererProps } from "@/types";
 
-import { Link } from "next-view-transitions";
-
-type NotionBlockChildrenRendererProps = {
-  blocks: GetBlockResponse[];
-};
-
-export type NotionDBPagesRendererProps = {
-  pages: PageObjectResponse[];
-};
-
-export default function NotionBlockChildrenRenderer({
+export default function NotionBlockRenderer({
   blocks,
 }: NotionBlockChildrenRendererProps) {
   return (
@@ -83,45 +76,35 @@ export default function NotionBlockChildrenRenderer({
                 {...(block as ImageBlockObjectResponse)}
               />
             );
+
+          case "bulleted_list_item":
+            return (
+              <BulletedListItem
+                key={block.id}
+                {...(block as BulletedListItemBlockObjectResponse)}
+              />
+            );
+
+          case "numbered_list_item":
+            return (
+              <NumberedListItem
+                key={block.id}
+                {...(block as NumberedListItemBlockObjectResponse)}
+              />
+            );
+
+          case "to_do":
+            return (
+              <ToDoItem
+                key={block.id}
+                {...(block as ToDoBlockObjectResponse)}
+              />
+            );
+
           default:
             return null;
         }
       })}
     </>
   );
-}
-
-export function NotionDBPagesRenderer({ pages }: NotionDBPagesRendererProps) {
-  return pages.map((page) => {
-    const { properties } = page;
-    const title =
-      "title" in properties.Title ? properties.Title.title[0] : null;
-    const description =
-      properties.Description.type === "rich_text"
-        ? properties.Description.rich_text
-        : "";
-    const slug =
-      properties.slug.type === "rich_text"
-        ? properties.slug.rich_text[0].plain_text
-        : null;
-    return (
-      <div key={page.id}>
-        <div>
-          <Link href={`/posts/${slug}`} className="text-lg font-bold">
-            {title?.plain_text}
-          </Link>
-        </div>
-
-        <PageDescription
-          description={description as TextRichTextItemResponse[]}
-        />
-
-        <div className="text-grey-800 text-base leading-normal mt-1">
-          <a href={`/posts/${slug}`} className="text-sm text-pink-500">
-            Read post →
-          </a>
-        </div>
-      </div>
-    );
-  });
 }

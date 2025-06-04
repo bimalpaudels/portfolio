@@ -7,6 +7,51 @@
   --color-foreground: var(--foreground);
   --color-darkmode: #0a0e16;
   --color-custom_dark: #f5faff;
+  
+  /* Typography Scale */
+  --font-body: var(--font-inter);
+  --font-heading: var(--font-fraunces);
+  
+  /* Spacing Scale */
+  --space-xs: 0.25rem;    /* 4px */
+  --space-sm: 0.5rem;     /* 8px */
+  --space-md: 1rem;       /* 16px */
+  --space-lg: 1.5rem;     /* 24px */
+  --space-xl: 2rem;       /* 32px */
+  --space-2xl: 3rem;      /* 48px */
+  --space-3xl: 4rem;      /* 64px */
+  
+  /* Typography Scale */
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.25rem;     /* 20px */
+  --text-2xl: 1.5rem;     /* 24px */
+  --text-3xl: 1.875rem;   /* 30px */
+  --text-4xl: 2.25rem;    /* 36px */
+  --text-5xl: 3rem;       /* 48px */
+  
+  /* Line Heights */
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+  
+  /* Modern Color Palette */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+  --color-accent: #0ea5e9;
+  --color-accent-hover: #0284c7;
+  --color-accent-secondary: #10b981;
+  --color-accent-secondary-hover: #059669;
+  
+  /* Dark mode colors */
+  --color-text-primary-dark: #f5faff;
+  --color-text-secondary-dark: #d1d5db;
+  --color-text-muted-dark: #9ca3af;
 }
 
 /*
@@ -28,21 +73,333 @@
 }
 
 @layer base {
-  pre {
-    @apply mb-6;
-    @apply text-sm;
+  /* Typography Base Styles */
+  html {
+    font-size: 15px;
+    line-height: var(--leading-normal);
   }
-
+  
+  body {
+    font-family: var(--font-body);
+    color: var(--color-text-primary);
+    line-height: var(--leading-relaxed);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    body {
+      color: var(--color-text-primary-dark);
+    }
+  }
+  
+  /* Heading Styles */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: var(--leading-tight);
+    letter-spacing: -0.025em;
+    margin-bottom: var(--space-md);
+    color: var(--color-text-primary);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--color-text-primary-dark);
+    }
+  }
+  
+  h1 {
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    margin-bottom: var(--space-lg);
+  }
+  
+  h2 {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    margin-bottom: var(--space-lg);
+  }
+  
+  h3 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-md);
+  }
+  
+  h4 {
+    font-size: var(--text-xl);
+  }
+  
+  h5 {
+    font-size: var(--text-lg);
+  }
+  
+  h6 {
+    font-size: var(--text-base);
+  }
+  
+  /* Paragraph and Text Styles */
+  p {
+    margin-bottom: var(--space-lg);
+    color: var(--color-text-primary);
+    line-height: var(--leading-relaxed);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    p {
+      color: var(--color-text-primary-dark);
+    }
+  }
+  
+  /* Link Styles */
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+  }
+  
   a:hover {
-    @apply underline;
+    color: var(--color-accent-hover);
+    text-decoration: underline;
   }
-
+  
+  /* Focus States - CSS Only Solution */
+  a:focus,
+  button:focus,
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+  }
+  
+  /* Only show focus outline when navigating with keyboard */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
+  /* Remove focus outline on mouse interactions */
+  a:active,
+  button:active {
+    outline: none;
+  }
+  
+  /* Ensure links don't retain focus styling after click */
+  a:not(:focus-visible) {
+    outline: none;
+  }
+  
+  /* Code Styles */
+  pre {
+    margin-bottom: var(--space-xl);
+    font-size: var(--text-sm);
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+  
+  code {
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+    font-size: 0.9em;
+    background-color: #f3f4f6;
+    padding: 0.125rem 0.25rem;
+    border-radius: 3px;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    code {
+      background-color: #374151;
+    }
+  }
+  
+  pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+  
+  /* Hide scrollbars but keep functionality */
   pre::-webkit-scrollbar {
     display: none;
   }
-
+  
+  pre {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  /* Article Content Spacing */
   .article p,
-  img {
-    @apply mb-5;
+  .article img {
+    margin-bottom: var(--space-lg);
+  }
+  
+  .article h1,
+  .article h2,
+  .article h3 {
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-lg);
+  }
+  
+  .article h1:first-child,
+  .article h2:first-child,
+  .article h3:first-child {
+    margin-top: 0;
+  }
+  
+  /* Responsive Typography */
+  @media (max-width: 640px) {
+    html {
+      font-size: 14px;
+    }
+    
+    h1 {
+      font-size: var(--text-3xl);
+    }
+    
+    h2 {
+      font-size: var(--text-2xl);
+    }
+    
+    h3 {
+      font-size: var(--text-xl);
+    }
+    
+    h4 {
+      font-size: var(--text-lg);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    html {
+      font-size: 16px;
+    }
+    
+    h1 {
+      font-size: var(--text-5xl);
+    }
+  }
+  
+  /* Smooth Page Transitions */
+  * {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+  
+  /* Micro-animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  
+  /* Animation classes */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+  
+  .animate-slide-in {
+    animation: slideIn 0.5s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out;
+  }
+  
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  /* Hover effects */
+  .hover-lift {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Page transition effects */
+  .page-transition {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Loading states */
+  .skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .skeleton {
+      background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+      background-size: 200% 100%;
+    }
+  }
+  
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  
+  /* Backdrop blur support */
+  .backdrop-blur-md {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  
+  /* Enhanced focus states with animations */
+  a:focus-visible,
+  button:focus-visible {
+    animation: scaleIn 0.2s ease-out;
   }
 }
