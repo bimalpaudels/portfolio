@@ -47,7 +47,7 @@ export default function RootLayout({
             <main className="max-w-[65ch] mx-auto w-full space-y-6 page-transition">
               {children}
             </main>
-            <ConditionalFooter />
+
             <Analytics />
           </div>
         </body>

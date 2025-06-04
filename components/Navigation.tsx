@@ -28,26 +28,25 @@ export default function Navigation() {
 
   return (
     <>
-      {/* Mobile Menu Button - Bottom Right */}
       <button
         onClick={toggleMenu}
-        className="fixed bottom-6 right-6 z-50 md:hidden w-12 h-12 rounded-full bg-white dark:bg-gray-900 flex items-center justify-center shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-200"
+        className="fixed bottom-6 right-6 md:top-6 md:right-8 md:bottom-auto z-50 w-12 h-12 rounded-full bg-white dark:bg-gray-900 flex items-center justify-center border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer"
         aria-label="Toggle menu"
       >
         <Image
           src="/favicon.ico"
           alt="Logo"
-          width={24}
-          height={24}
+          width={36}
+          height={36}
           className="rounded-sm"
         />
       </button>
 
-      {/* Mobile Menu Overlay */}
+      {/* Menu Overlay */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-40 md:hidden">
+        <div className="fixed inset-0 z-40">
           <div className="fixed inset-0 bg-black/10" onClick={toggleMenu} />
-          <nav className="fixed bottom-20 right-6 w-48 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-xl border border-gray-200 dark:border-gray-700 p-4 shadow-lg">
+          <nav className="fixed bottom-20 right-6 md:top-20 md:right-8 md:bottom-auto w-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-xl border border-gray-200 dark:border-gray-700 p-4 shadow-lg">
             <div className="flex flex-col space-y-3">
               {navLinks.map((link) => (
                 <Link
