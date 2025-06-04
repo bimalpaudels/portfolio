@@ -11,5 +11,10 @@ export default function ConditionalFooter() {
     return null;
   }
 
-  return <Footer />;
+  // On other pages, only show footer on desktop (md and up)
+  return (
+    <div className="hidden md:block">
+      <Footer />
+    </div>
+  );
 }
