@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Inter, Fraunces } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import { Analytics } from "@vercel/analytics/react";
-import { ConditionalFooter, Navigation } from "@/components";
+import { Navigation } from "@/components";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -47,7 +47,6 @@ export default function RootLayout({
             <main className="max-w-[65ch] mx-auto w-full space-y-6 page-transition">
               {children}
             </main>
-
             <Analytics />
           </div>
         </body>
