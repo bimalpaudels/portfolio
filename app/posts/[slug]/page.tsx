@@ -151,46 +151,6 @@ export default async function Page({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Structured Data for Article */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "BlogPosting",
-              headline: title.plain_text,
-              description:
-                properties.Description?.type === "rich_text" &&
-                properties.Description.rich_text[0]
-                  ? properties.Description.rich_text[0].plain_text
-                  : `Read ${title.plain_text} by Bimal Paudel`,
-              author: {
-                "@type": "Person",
-                name: "Bimal Paudel",
-                url: "https://bimals.net",
-              },
-              publisher: {
-                "@type": "Person",
-                name: "Bimal Paudel",
-                url: "https://bimals.net",
-              },
-              datePublished: page.created_time,
-              dateModified: page.last_edited_time,
-              url: `https://bimals.net/posts/${slug}`,
-              mainEntityOfPage: {
-                "@type": "WebPage",
-                "@id": `https://bimals.net/posts/${slug}`,
-              },
-              keywords:
-                properties.Tags?.type === "multi_select"
-                  ? properties.Tags.multi_select
-                      .map((tag) => tag.name)
-                      .join(", ")
-                  : "",
-            }),
-          }}
-        />
-
         {/* Post Content */}
         <div className="article">
           <NotionBlockRenderer blocks={postContent} />

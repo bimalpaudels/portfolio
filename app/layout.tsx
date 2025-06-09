@@ -65,33 +65,7 @@ export default function RootLayout({
         lang="en"
         className={`${inter.variable} ${fraunces.variable} [scrollbar-gutter:stable]`}
       >
-        <head>
-          {/* Structured Data */}
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Person",
-                name: "Bimal Paudel",
-                url: "https://bimals.net",
-                jobTitle: "Full Stack Developer",
-                description:
-                  "Full-stack developer passionate about building modern web applications",
-                sameAs: ["https://bimals.net"],
-                knowsAbout: [
-                  "Web Development",
-                  "JavaScript",
-                  "TypeScript",
-                  "React",
-                  "Next.js",
-                  "Node.js",
-                  "Full Stack Development",
-                ],
-              }),
-            }}
-          />
-        </head>
+        <head></head>
         <body className="antialiased tracking-tight bg-white dark:bg-darkmode font-body">
           <Navigation />
           <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8 text-gray-900 dark:text-custom_dark">
