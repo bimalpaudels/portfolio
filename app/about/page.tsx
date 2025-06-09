@@ -3,7 +3,20 @@ import { fetchNotionPageContent } from "@/lib";
 import { Header } from "@/components";
 
 export const metadata = {
-  title: "About",
+  title: "About Bimal Paudel",
+  description:
+    "Learn more about Bimal Paudel - a full-stack developer passionate about building modern web applications and sharing knowledge about technology and development.",
+  keywords: [
+    "Bimal Paudel",
+    "About",
+    "Developer",
+    "Full Stack",
+    "Biography",
+    "Experience",
+  ],
+  alternates: {
+    canonical: "/about",
+  },
 };
 const aboutPageId = process.env.ABOUT_PAGE_ID;
 

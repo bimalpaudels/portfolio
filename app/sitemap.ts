@@ -25,30 +25,42 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch all blog posts
   const posts = await getAllPosts();
 
-  // Define static pages
+  // Define static pages with priorities and change frequencies
   const staticPages = [
     {
       url: baseUrl,
       lastModified: new Date().toISOString(),
+      changeFrequency: "weekly" as const,
+      priority: 1.0,
     },
     {
       url: `${baseUrl}/about`,
       lastModified: new Date().toISOString(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/stack`,
       lastModified: new Date().toISOString(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/posts`,
       lastModified: new Date().toISOString(),
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
     },
   ];
 
-  const postEntries = posts.map((post) => ({
-    url: `${baseUrl}/posts/${post.slug}`,
-    lastModified: new Date(post.last_updated).toISOString(),
-  }));
+  const postEntries = posts
+    .filter((post) => post.slug) // Filter out posts without slugs
+    .map((post) => ({
+      url: `${baseUrl}/posts/${post.slug}`,
+      lastModified: new Date(post.last_updated).toISOString(),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }));
 
   return [...staticPages, ...postEntries];
 }
