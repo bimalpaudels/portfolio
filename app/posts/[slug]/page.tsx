@@ -37,13 +37,36 @@ export async function generateMetadata({
   try {
     const { slug } = await params;
     const page = await fetchPageBySlug(slug);
-    const titleItem =
-      page && "title" in page.properties.Title
-        ? page.properties.Title.title[0]?.plain_text || "Post"
+
+    if (!page) {
+      return {
+        title: "Post Not Found",
+        description: "The requested post could not be found.",
+      };
+    }
+
+    const { properties } = page;
+    const title =
+      "title" in properties.Title
+        ? properties.Title.title[0]?.plain_text || "Post"
         : "Post";
 
+    const description =
+      properties.Description?.type === "rich_text" &&
+      properties.Description.rich_text[0]
+        ? properties.Description.rich_text[0].plain_text
+        : `Read ${title} by Bimal Paudel - insights on development, technology, and continuous learning.`;
+
+    const tags =
+      properties.Tags?.type === "multi_select"
+        ? properties.Tags.multi_select.map((tag) => tag.name)
+        : [];
+
     return {
-      title: titleItem,
+      title,
+      description,
+      keywords: [...tags, "Bimal Paudel", "Blog", "Development", "Technology"],
+      authors: [{ name: "Bimal Paudel", url: "https://bimals.net" }],
       alternates: {
         canonical: `/posts/${slug}`,
       },
@@ -51,6 +74,7 @@ export async function generateMetadata({
   } catch {
     return {
       title: "Post Not Found",
+      description: "The requested post could not be found.",
     };
   }
 }

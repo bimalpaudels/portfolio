@@ -1,4 +1,8 @@
-import { fetchProjectBySlug, fetchNotionPageContent } from "@/lib";
+import {
+  fetchProjectBySlug,
+  fetchNotionPageContent,
+  fetchProjectsDatabaseContent,
+} from "@/lib";
 import { NotionBlockRenderer, NotionTags, LastUpdated } from "@/components";
 import { Header } from "@/components";
 import { ExternalLink, ArrowLeft } from "lucide-react";
@@ -8,9 +12,23 @@ import { SiGithub } from "@icons-pack/react-simple-icons";
 import {
   MultiSelectPropertyItemObjectResponse,
   LastEditedTimePropertyItemObjectResponse,
+  PageObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 
 export const revalidate = 300;
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const projects = await fetchProjectsDatabaseContent();
+  return projects
+    .map((project: PageObjectResponse) => ({
+      slug:
+        project.properties.slug?.type === "rich_text"
+          ? project.properties.slug.rich_text[0]?.plain_text
+          : null,
+    }))
+    .filter((param) => param.slug !== null);
+}
 
 export async function generateMetadata({
   params,

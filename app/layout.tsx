@@ -20,14 +20,38 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://bimals.net"),
+  title: {
+    default: "Bimal Paudel - Developer & Learner",
+    template: "%s | Bimal Paudel",
+  },
+  description:
+    "Full-stack developer passionate about building modern web applications. Sharing insights on development, technology, and continuous learning.",
+  keywords: [
+    "Bimal Paudel",
+    "Developer",
+    "Full Stack",
+    "Web Development",
+    "Technology",
+    "Programming",
+    "Software Engineer",
+  ],
+  authors: [{ name: "Bimal Paudel", url: "https://bimals.net" }],
+  creator: "Bimal Paudel",
+  publisher: "Bimal Paudel",
   alternates: {
     canonical: "/",
   },
-  title: {
-    default: "Bimal Paudel",
-    template: "%s | Bimal Paudel",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
-  description: "Developer, Learner",
 };
 
 export default function RootLayout({
@@ -41,6 +65,7 @@ export default function RootLayout({
         lang="en"
         className={`${inter.variable} ${fraunces.variable} [scrollbar-gutter:stable]`}
       >
+        <head></head>
         <body className="antialiased tracking-tight bg-white dark:bg-darkmode font-body">
           <Navigation />
           <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8 text-gray-900 dark:text-custom_dark">
