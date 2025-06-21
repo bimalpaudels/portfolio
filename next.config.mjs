@@ -11,13 +11,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "**.notion.so",
-        port: "",
-      },
-      {
-        protocol: "https",
-        hostname: "notion.so",
-        port: "",
+        hostname: "res.cloudinary.com",
       },
     ],
   },
