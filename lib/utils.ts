@@ -45,3 +45,20 @@ export function getEnvVar(name: string): string {
   }
   return value;
 }
+
+// Cloudinary utility to transform image url
+export function transformImageUrl(
+  fullUrl: string,
+  { width, crop = false }: { width?: number; crop?: boolean }
+): string {
+  const transforms = [
+    "f_auto",
+    "q_auto",
+    ...(width ? [`w_${width}`] : []),
+    ...(crop ? ["c_thumb", "g_auto"] : []),
+  ].join(",");
+  const cloudinaryUrl = "https://res.cloudinary.com";
+  const url = new URL(fullUrl);
+  const path = url.pathname.replace("/upload/", `/upload/${transforms}/`);
+  return cloudinaryUrl + path;
+}
