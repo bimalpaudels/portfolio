@@ -5,6 +5,7 @@ import { MultiSelectPropertyItemObjectResponse } from "@notionhq/client/build/sr
 import { ExternalLink } from "lucide-react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import Image from "next/image";
+import { transformImageUrl } from "@/lib/utils";
 
 interface DatabaseGalleryViewProps extends NotionDBPagesRendererProps {
   titleProperty?: string;
@@ -57,13 +58,13 @@ export default function DatabaseGalleryView({
             ? { multi_select: tagsProp.multi_select }
             : { multi_select: [] };
 
-        // Extract cover image from page object (not from properties)
-        const cover = page.cover;
-        const coverUrl =
-          cover?.type === "file"
-            ? cover.file.url
-            : cover?.type === "external"
-            ? cover.external.url
+        // Extract cover image from page object as thumbnail
+        const thumbnail = page.cover;
+        const thumbnailUrl =
+          thumbnail?.type === "file"
+            ? thumbnail.file.url
+            : thumbnail?.type === "external"
+            ? thumbnail.external.url
             : null;
 
         // Extract GitHub and Demo URLs
@@ -86,17 +87,20 @@ export default function DatabaseGalleryView({
               {/* Image Section - Left side on desktop, top on mobile */}
               {showImage && (
                 <div className="relative w-full sm:w-48 h-32 sm:h-full overflow-hidden flex-shrink-0">
-                  {coverUrl ? (
-                    // Show cover image if available
+                  {thumbnailUrl ? (
+                    // Show thumbnail image if available
                     <Image
-                      src={coverUrl}
+                      src={transformImageUrl(thumbnailUrl, {
+                        width: 400,
+                        crop: true,
+                      })}
                       alt={title?.plain_text || "Project thumbnail"}
                       fill
                       className="object-cover"
                       sizes="(max-width: 640px) 100vw, 192px"
                     />
                   ) : (
-                    // Fall back to gradient background if no cover
+                    // Fall back to gradient background if no thumbnail
                     <div className="w-full h-full bg-gradient-to-br from-sky-50 to-emerald-50 dark:from-sky-950/30 dark:to-emerald-950/30" />
                   )}
                 </div>
