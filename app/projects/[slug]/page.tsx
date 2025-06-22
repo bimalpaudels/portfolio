@@ -2,6 +2,7 @@ import {
   fetchProjectBySlug,
   fetchNotionPageContent,
   fetchProjectsDatabaseContent,
+  transformImageUrl,
 } from "@/lib";
 import { NotionBlockRenderer, NotionTags, LastUpdated } from "@/components";
 import { Header } from "@/components";
@@ -141,10 +142,11 @@ export default async function ProjectPage({
           {coverUrl && (
             <div className="relative w-full h-64 md:h-80 mb-6 rounded-xl overflow-hidden">
               <Image
-                src={coverUrl}
+                unoptimized
+                src={transformImageUrl(coverUrl, {})}
                 alt={title}
                 fill
-                className="object-cover"
+                className="object-contain"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
                 priority
               />
