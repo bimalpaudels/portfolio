@@ -101,11 +101,12 @@ export async function POST(request: NextRequest) {
   try {
     const webhook = await request.json();
 
-    console.log("Received webhook:", {
+    console.log("Received webhook for debug:", {
       type: webhook.type,
       pageId: webhook.entity?.id,
       timestamp: webhook.timestamp,
       parent: webhook.data?.parent,
+      full_object: webhook,
     });
 
     if (webhook.type === "page.content_updated") {
@@ -120,7 +121,7 @@ export async function POST(request: NextRequest) {
       let routeToRevalidate: string | null = null;
 
       // Check if parent is a database
-      if (parentData?.type === "database_id") {
+      if (parentData?.type === "database") {
         const databaseId = parentData.id;
         console.log(`Page ${pageId} belongs to database ${databaseId}`);
 
