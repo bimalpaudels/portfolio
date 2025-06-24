@@ -6,21 +6,12 @@ export const metadata = {
   title: "About Bimal Paudel",
   description:
     "Learn more about Bimal Paudel - a full-stack developer passionate about building modern web applications and sharing knowledge about technology and development.",
-  keywords: [
-    "Bimal Paudel",
-    "About",
-    "Developer",
-    "Full Stack",
-    "Biography",
-    "Experience",
-  ],
+  keywords: ["Bimal Paudel", "About", "Developer", "Full Stack"],
   alternates: {
     canonical: "/about",
   },
 };
 const aboutPageId = process.env.ABOUT_PAGE_ID;
-
-export const revalidate = 3600;
 
 export default async function Stack() {
   if (!aboutPageId) {

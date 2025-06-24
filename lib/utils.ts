@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { getSlugByPageId } from "./notion";
 
 // Utility function for merging Tailwind classes
 export function cn(...inputs: ClassValue[]) {
@@ -61,4 +62,64 @@ export function transformImageUrl(
   const url = new URL(fullUrl);
   const path = url.pathname.replace("/upload/", `/upload/${transforms}/`);
   return cloudinaryUrl + path;
+}
+
+/**
+ * Normalizes Notion ID by removing hyphens for comparison
+ */
+export function normalizeNotionId(id: string): string {
+  return id.replace(/-/g, "");
+}
+
+// Standalone pages mapping
+const STANDALONE_PAGES = {
+  [process.env.HOME_PAGE_ID!]: "/",
+  [process.env.ABOUT_PAGE_ID!]: "/about",
+  [process.env.STACK_PAGE_ID!]: "/stack",
+} as const;
+
+// Database mappings
+const DATABASE_ROUTES = {
+  [process.env.NOTION_DB_ID!]: "/posts",
+  [process.env.NOTION_PROJECTS_DB_ID!]: "/projects",
+} as const;
+
+/**
+ * Gets route for standalone pages by page ID
+ */
+export function getStandaloneRoute(pageId: string): string | null {
+  const normalizedPageId = normalizeNotionId(pageId);
+
+  for (const [envPageId, route] of Object.entries(STANDALONE_PAGES)) {
+    if (normalizeNotionId(envPageId) === normalizedPageId) {
+      return route;
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Determines which route to revalidate based on parent database and page ID
+ */
+export async function getRouteByDatabaseAndPageId(
+  databaseId: string,
+  pageId: string
+): Promise<string | null> {
+  const normalizedDatabaseId = normalizeNotionId(databaseId);
+
+  // Check if this database matches existing databases via env variables
+  for (const [envDatabaseId, routePrefix] of Object.entries(DATABASE_ROUTES)) {
+    if (normalizeNotionId(envDatabaseId) === normalizedDatabaseId) {
+      // Get the slug for this page
+      const slug = await getSlugByPageId(pageId);
+      if (slug) {
+        return `${routePrefix}/${slug}`;
+      }
+      // No slug found for this page, return null
+      return null;
+    }
+  }
+
+  return null;
 }
