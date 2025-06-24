@@ -63,13 +63,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/posts`,
       lastModified: new Date().toISOString(),
       changeFrequency: "weekly" as const,
-      priority: 0.9,
+      priority: 0.6,
     },
     {
       url: `${baseUrl}/projects`,
       lastModified: new Date().toISOString(),
       changeFrequency: "weekly" as const,
-      priority: 0.9,
+      priority: 0.6,
     },
   ];
 
@@ -79,7 +79,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/posts/${post.slug}`,
       lastModified: new Date(post.last_updated).toISOString(),
       changeFrequency: "monthly" as const,
-      priority: 0.8,
+      priority: 0.9,
     }));
 
   const projectEntries = projects
@@ -88,7 +88,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/projects/${project.slug}`,
       lastModified: new Date(project.last_updated).toISOString(),
       changeFrequency: "monthly" as const,
-      priority: 0.6,
+      priority: 0.7,
     }));
 
   return [...staticPages, ...postEntries, ...projectEntries];
