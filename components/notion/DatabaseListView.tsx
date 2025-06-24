@@ -44,29 +44,20 @@ export default function DatabaseListView({
             : null;
 
         return (
-          <div key={page.id} className="space-y-3">
+          <div key={page.id} className="space-y-3 mb-12">
             <div>
               <Link
                 href={`${linkPrefix}/${slug}`}
-                className="font-heading text-lg font-semibold text-gray-900 dark:text-gray-100 hover:text-sky-600 dark:hover:text-sky-400 transition-colors duration-200"
+                className="font-heading text-xl font-semibold text-gray-900 dark:text-gray-100 hover:text-sky-600 dark:hover:text-sky-400 transition-colors duration-200"
               >
                 {title?.plain_text}
               </Link>
             </div>
 
-            <div className="font-body text-gray-600 dark:text-gray-300 leading-relaxed">
+            <div className="font-body text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               <PageDescription
                 description={description as TextRichTextItemResponse[]}
               />
-            </div>
-
-            <div className="text-grey-800 text-base leading-normal mt-1">
-              <Link
-                href={`${linkPrefix}/${slug}`}
-                className="font-body text-sm text-sky-500 dark:text-sky-400 hover:text-sky-600 dark:hover:text-sky-300 transition-colors duration-200"
-              >
-                Read more →
-              </Link>
             </div>
           </div>
         );

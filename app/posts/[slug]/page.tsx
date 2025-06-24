@@ -55,7 +55,7 @@ export async function generateMetadata({
       properties.Description?.type === "rich_text" &&
       properties.Description.rich_text[0]
         ? properties.Description.rich_text[0].plain_text
-        : `Read ${title} by Bimal Paudel - insights on development, technology, and continuous learning.`;
+        : `Read ${title} by Bimal Paudel - insights on software development.`;
 
     const tags =
       properties.Tags?.type === "multi_select"
@@ -65,7 +65,7 @@ export async function generateMetadata({
     return {
       title,
       description,
-      keywords: [...tags, "Bimal Paudel", "Blog", "Development", "Technology"],
+      keywords: [...tags, "Bimal Paudel", "Blog", "Development"],
       authors: [{ name: "Bimal Paudel", url: "https://bimals.net" }],
       alternates: {
         canonical: `/posts/${slug}`,

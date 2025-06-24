@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { fetchDatabaseContent } from "@/lib";
+import { fetchDatabaseContent, fetchProjectsDatabaseContent } from "@/lib";
 
 export const revalidate = 3600;
 
@@ -19,11 +19,25 @@ async function getAllPosts() {
   }));
 }
 
+// Function to fetch all projects from Notion
+async function getAllProjects() {
+  const response = await fetchProjectsDatabaseContent();
+
+  return response.map((page) => ({
+    slug:
+      page.properties.slug.type === "rich_text"
+        ? page.properties.slug.rich_text[0].plain_text
+        : null,
+    last_updated: page.last_edited_time,
+  }));
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://bimals.net";
 
-  // Fetch all blog posts
+  // Fetch all posts and projects
   const posts = await getAllPosts();
+  const projects = await getAllProjects();
 
   // Define static pages with priorities and change frequencies
   const staticPages = [
@@ -49,7 +63,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/posts`,
       lastModified: new Date().toISOString(),
       changeFrequency: "weekly" as const,
-      priority: 0.9,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/projects`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
     },
   ];
 
@@ -59,8 +79,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/posts/${post.slug}`,
       lastModified: new Date(post.last_updated).toISOString(),
       changeFrequency: "monthly" as const,
-      priority: 0.6,
+      priority: 0.9,
     }));
 
-  return [...staticPages, ...postEntries];
+  const projectEntries = projects
+    .filter((project) => project.slug) // Filter out projects without slugs
+    .map((project) => ({
+      url: `${baseUrl}/projects/${project.slug}`,
+      lastModified: new Date(project.last_updated).toISOString(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }));
+
+  return [...staticPages, ...postEntries, ...projectEntries];
 }
