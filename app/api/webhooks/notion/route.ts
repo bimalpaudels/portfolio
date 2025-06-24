@@ -105,6 +105,7 @@ export async function POST(request: NextRequest) {
       type: webhook.type,
       pageId: webhook.entity?.id,
       timestamp: webhook.timestamp,
+      parent: webhook.data?.parent,
     });
 
     if (webhook.type === "page.content_updated") {
