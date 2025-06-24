@@ -21,8 +21,6 @@ export const metadata = {
   },
 };
 
-export const revalidate = 300;
-
 export default async function Learn() {
   const db_content_response = await fetchDatabaseContent();
   return (
