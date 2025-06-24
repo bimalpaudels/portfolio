@@ -1,11 +1,46 @@
 import { revalidatePath } from "next/cache";
 import { NextRequest } from "next/server";
-import { getStandaloneRoute, getRouteByDatabaseAndPageId } from "@/lib";
-
+import {
+  getStandaloneRoute,
+  getRouteByDatabaseAndPageId,
+  validateWebhookSignature,
+} from "@/lib";
 
 export async function POST(request: NextRequest) {
   try {
-    const webhook = await request.json();
+    // Get the raw body for signature validation
+    const body = await request.text();
+    const signature = request.headers.get("X-Notion-Signature");
+
+    // Get the verification token from environment variables
+    const verificationToken = process.env.NOTION_WEBHOOK_SECRET;
+
+    if (!verificationToken) {
+      console.error(
+        "NOTION_WEBHOOK_SECRET is not defined in environment variables"
+      );
+      return new Response("Webhook secret not configured", { status: 500 });
+    }
+
+    if (!signature) {
+      console.error("Missing X-Notion-Signature header");
+      return new Response("Missing signature header", { status: 400 });
+    }
+
+    // Validate the webhook signature
+    const isValidSignature = validateWebhookSignature(
+      body,
+      signature,
+      verificationToken
+    );
+
+    if (!isValidSignature) {
+      console.error("Invalid webhook signature");
+      return new Response("Invalid signature", { status: 401 });
+    }
+
+    // Parse the webhook payload
+    const webhook = JSON.parse(body);
 
     console.log("Received webhook for debug:", {
       type: webhook.type,

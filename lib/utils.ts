@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { createHmac, timingSafeEqual } from "crypto";
 import { getSlugByPageId } from "./notion";
 
 // Utility function for merging Tailwind classes
@@ -62,6 +63,29 @@ export function transformImageUrl(
   const url = new URL(fullUrl);
   const path = url.pathname.replace("/upload/", `/upload/${transforms}/`);
   return cloudinaryUrl + path;
+}
+
+/**
+ * Validates the webhook signature to ensure the request is from Notion
+ */
+export function validateWebhookSignature(
+  body: string,
+  signature: string,
+  secret: string
+): boolean {
+  try {
+    const calculatedSignature = `sha256=${createHmac("sha256", secret)
+      .update(body)
+      .digest("hex")}`;
+
+    return timingSafeEqual(
+      Buffer.from(calculatedSignature),
+      Buffer.from(signature)
+    );
+  } catch (error) {
+    console.error("Error validating webhook signature:", error);
+    return false;
+  }
 }
 
 /**
