@@ -10,6 +10,16 @@ export async function POST(request: NextRequest) {
   try {
     // Get the raw body for signature validation
     const body = await request.text();
+
+    // Parse the webhook payload
+    const webhook = JSON.parse(body);
+
+    // Handle initial verification request first
+    if (webhook.verification_token) {
+      console.log(webhook);
+      console.log("Received verification token:", webhook.verification_token);
+      return new Response("OK", { status: 200 });
+    }
     const signature = request.headers.get("X-Notion-Signature");
 
     // Get the verification token from environment variables
@@ -38,9 +48,6 @@ export async function POST(request: NextRequest) {
       console.error("Invalid webhook signature");
       return new Response("Invalid signature", { status: 401 });
     }
-
-    // Parse the webhook payload
-    const webhook = JSON.parse(body);
 
     console.log("Received webhook for debug:", {
       type: webhook.type,
