@@ -16,7 +16,6 @@ import { NotionBlockRenderer } from "@/components";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
-export const revalidate = 300;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {

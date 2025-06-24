@@ -16,7 +16,6 @@ import {
   PageObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 
-export const revalidate = 300;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {

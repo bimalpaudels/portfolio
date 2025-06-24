@@ -107,3 +107,31 @@ export async function fetchProjectBySlug(
   }
   return fetchPageBySlug(slug, notionProjectsDbId);
 }
+
+/**
+ * Gets the slug from a Notion page by querying its properties
+ */
+export async function getSlugByPageId(pageId: string): Promise<string | null> {
+  try {
+    // Fetch the page to get its properties
+    const page = await notion.pages.retrieve({ page_id: pageId });
+
+    if (!("properties" in page)) {
+      return null;
+    }
+
+    // Extract slug from properties
+    const slugProperty = page.properties.slug;
+    if (
+      slugProperty?.type === "rich_text" &&
+      slugProperty.rich_text.length > 0
+    ) {
+      return slugProperty.rich_text[0].plain_text;
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Error fetching page slug:", error);
+    return null;
+  }
+}

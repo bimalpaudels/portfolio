@@ -7,8 +7,6 @@ export const metadata = {
 };
 const stackPageId = process.env.STACK_PAGE_ID;
 
-export const revalidate = 3600;
-
 export default async function Stack() {
   if (!stackPageId) {
     throw new Error("STACK_ID is not defined in environment variables.");

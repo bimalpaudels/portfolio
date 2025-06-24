@@ -3,8 +3,6 @@ import { NotionBlockRenderer, HomeNavigation } from "@/components";
 
 const homePageId = process.env.HOME_PAGE_ID;
 
-export const revalidate = 3600;
-
 export default async function Home() {
   if (!homePageId) {
     throw new Error("HOME_PAGE_ID is not defined in environment variables.");
