@@ -9,8 +9,6 @@ export const metadata = {
   },
 };
 
-export const revalidate = 300;
-
 export default async function Projects() {
   const projects = await fetchProjectsDatabaseContent();
 

@@ -120,6 +120,15 @@ export async function getSlugByPageId(pageId: string): Promise<string | null> {
       return null;
     }
 
+    // If the page Status is not Published, return null
+    const statusProperty = page.properties.Status;
+    if (
+      statusProperty?.type === "status" &&
+      statusProperty.status?.name !== "Published"
+    ) {
+      return null;
+    }
+
     // Extract slug from properties
     const slugProperty = page.properties.slug;
     if (
