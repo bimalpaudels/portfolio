@@ -124,6 +124,22 @@ export function getStandaloneRoute(pageId: string): string | null {
 }
 
 /**
+ * Gets the listing page route for a given database ID
+ */
+export function getListingPageByDatabaseId(databaseId: string): string | null {
+  const normalizedDatabaseId = normalizeNotionId(databaseId);
+
+  // Check if this database matches existing databases via env variables
+  for (const [envDatabaseId, routePrefix] of Object.entries(DATABASE_ROUTES)) {
+    if (normalizeNotionId(envDatabaseId) === normalizedDatabaseId) {
+      return routePrefix;
+    }
+  }
+
+  return null;
+}
+
+/**
  * Determines which route to revalidate based on parent database and page ID
  */
 export async function getRouteByDatabaseAndPageId(

@@ -4,6 +4,7 @@ import {
   getStandaloneRoute,
   getRouteByDatabaseAndPageId,
   validateWebhookSignature,
+  getListingPageByDatabaseId,
 } from "@/lib";
 
 export async function POST(request: NextRequest) {
@@ -57,7 +58,10 @@ export async function POST(request: NextRequest) {
       full_object: webhook,
     });
 
-    if (webhook.type === "page.content_updated") {
+    if (
+      webhook.type === "page.content_updated" ||
+      webhook.type === "page.properties_updated"
+    ) {
       const pageId = webhook.entity?.id;
       const parentData = webhook.data?.parent;
 
@@ -67,6 +71,7 @@ export async function POST(request: NextRequest) {
       }
 
       let routeToRevalidate: string | null = null;
+      let listPageToRevalidate: string | null = null;
 
       // Check if parent is a database
       if (parentData?.type === "database") {
@@ -78,6 +83,11 @@ export async function POST(request: NextRequest) {
           databaseId,
           pageId
         );
+
+        // For properties_updated, keep track of the listing page to revalidate
+        if (webhook.type === "page.properties_updated") {
+          listPageToRevalidate = getListingPageByDatabaseId(databaseId);
+        }
       } else {
         console.log(
           `Page ${pageId} is not in a database, checking standalone pages`
@@ -91,6 +101,15 @@ export async function POST(request: NextRequest) {
         try {
           revalidatePath(routeToRevalidate);
           console.log(`Revalidated route: ${routeToRevalidate}`);
+
+          // For properties_updated, also revalidate the listing page
+          if (
+            webhook.type === "page.properties_updated" &&
+            listPageToRevalidate
+          ) {
+            revalidatePath(listPageToRevalidate);
+            console.log(`Revalidated listing page: ${listPageToRevalidate}`);
+          }
         } catch (error) {
           console.error(
             `Failed to revalidate route ${routeToRevalidate}:`,
