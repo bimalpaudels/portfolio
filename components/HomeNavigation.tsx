@@ -6,7 +6,7 @@ import {
   FolderOpen,
   Github,
   Linkedin,
-  ExternalLink,
+  FileUser,
   Mail,
 } from "lucide-react";
 
@@ -49,10 +49,10 @@ export default function HomeNavigation() {
       icon: <Linkedin className="w-4 h-4" />,
     },
     {
-      name: "dotpy",
-      href: "https://dotpy.bimals.net",
+      name: "Resume",
+      href: "/resume.pdf",
       external: true,
-      icon: <ExternalLink className="w-4 h-4" />,
+      icon: <FileUser className="w-4 h-4" />,
     },
   ];
 
