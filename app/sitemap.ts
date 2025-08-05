@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { fetchDatabaseContent, fetchProjectsDatabaseContent } from "@/lib";
 
-export const revalidate = 3600;
+export const revalidate = 43200; // 12 hours
 
 // Function to fetch all blog posts from Notion
 async function getAllPosts() {
