@@ -8,6 +8,7 @@ import {
   Linkedin,
   FileUser,
   Mail,
+  ExternalLink,
 } from "lucide-react";
 
 interface NavigationLink {
@@ -56,6 +57,21 @@ export default function HomeNavigation() {
     },
   ];
 
+  const links: NavigationLink[] = [
+    {
+      name: "dotpy",
+      href: "https://dotpy.bimals.net",
+      external: true,
+      icon: <ExternalLink className="w-4 h-4" />,
+    },
+    {
+      name: "lebenslauf",
+      href: "https://cvmd.vercel.app",
+      external: true,
+      icon: <ExternalLink className="w-4 h-4" />,
+    },
+  ];
+
   return (
     <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
       <div className="flex flex-row gap-8 sm:gap-20">
@@ -90,6 +106,23 @@ export default function HomeNavigation() {
                 href={link.href}
                 target={link.external ? "_blank" : "_self"}
                 rel={link.external ? "noopener noreferrer" : undefined}
+                className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors text-sm"
+              >
+                {link.icon}
+                {link.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h3 className="text-gray-500 dark:text-gray-400 text-base font-medium mb-4">
+            URLs
+          </h3>
+          <div className="space-y-2">
+            {links.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
                 className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors text-sm"
               >
                 {link.icon}
