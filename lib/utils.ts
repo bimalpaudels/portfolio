@@ -97,7 +97,6 @@ export function normalizeNotionId(id: string): string {
 
 // Standalone pages mapping
 const STANDALONE_PAGES = {
-  [process.env.ABOUT_PAGE_ID!]: "/about",
   [process.env.STACK_PAGE_ID!]: "/stack",
 } as const;
 
