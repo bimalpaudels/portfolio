@@ -53,9 +53,11 @@ export async function fetchDatabasePages(
 
 // Convenience functions using environment variables
 export async function fetchDatabaseContent(): Promise<PageObjectResponse[]> {
-  const notionDbId = process.env.NOTION_DB_ID;
+  const notionDbId = process.env.NOTION_POSTS_DB_ID;
   if (!notionDbId) {
-    throw new Error("NOTION_DB_ID is not defined in environment variables.");
+    throw new Error(
+      "NOTION_POSTS_DB_ID is not defined in environment variables."
+    );
   }
   return fetchDatabasePages(notionDbId);
 }
@@ -77,10 +79,10 @@ export async function fetchPageBySlug(
   slug: string,
   databaseId?: string
 ): Promise<PageObjectResponse> {
-  const dbId = databaseId || process.env.NOTION_DB_ID;
+  const dbId = databaseId || process.env.NOTION_POSTS_DB_ID;
   if (!dbId) {
     throw new Error(
-      "Database ID is not provided or NOTION_DB_ID is not defined in environment variables."
+      "Database ID is not provided or NOTION_POSTS_DB_ID is not defined in environment variables."
     );
   }
 
