@@ -11,8 +11,4 @@ export * from "./mappings";
 export type {
   NotionDBPagesRendererProps,
   NotionBlockChildrenRendererProps,
-  RichTextItem,
-  Block,
-  HeadingBlock,
-  CodeBlock,
 } from "../types";

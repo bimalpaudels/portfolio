@@ -95,33 +95,11 @@ export function normalizeNotionId(id: string): string {
   return id.replace(/-/g, "");
 }
 
-// Standalone pages mapping
-const STANDALONE_PAGES = {
-  [process.env.HOME_PAGE_ID!]: "/",
-  [process.env.ABOUT_PAGE_ID!]: "/about",
-  [process.env.STACK_PAGE_ID!]: "/stack",
-} as const;
-
 // Database mappings
 const DATABASE_ROUTES = {
-  [process.env.NOTION_DB_ID!]: "/posts",
+  [process.env.NOTION_POSTS_DB_ID!]: "/posts",
   [process.env.NOTION_PROJECTS_DB_ID!]: "/projects",
 } as const;
-
-/**
- * Gets route for standalone pages by page ID
- */
-export function getStandaloneRoute(pageId: string): string | null {
-  const normalizedPageId = normalizeNotionId(pageId);
-
-  for (const [envPageId, route] of Object.entries(STANDALONE_PAGES)) {
-    if (normalizeNotionId(envPageId) === normalizedPageId) {
-      return route;
-    }
-  }
-
-  return null;
-}
 
 /**
  * Gets the listing page route for a given database ID

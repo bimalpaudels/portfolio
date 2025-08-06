@@ -1,7 +1,6 @@
 import { revalidatePath } from "next/cache";
 import { NextRequest } from "next/server";
 import {
-  getStandaloneRoute,
   getRouteByDatabaseAndPageId,
   validateWebhookSignature,
   getListingPageByDatabaseId,
@@ -90,11 +89,9 @@ export async function POST(request: NextRequest) {
         }
       } else {
         console.log(
-          `Page ${pageId} is not in a database, checking standalone pages`
+          `Page ${pageId} is not in a database, ignoring standalone pages`
         );
-
-        // Check if it's a standalone page
-        routeToRevalidate = getStandaloneRoute(pageId);
+        // No standalone pages exist anymore, so we ignore these
       }
 
       if (routeToRevalidate) {

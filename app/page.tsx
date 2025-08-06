@@ -1,20 +1,19 @@
-import { fetchNotionPageContent } from "@/lib";
-import { NotionBlockRenderer, HomeNavigation } from "@/components";
+import { HomeNavigation } from "@/components";
 
-const homePageId = process.env.HOME_PAGE_ID;
-
-export default async function Home() {
-  if (!homePageId) {
-    throw new Error("HOME_PAGE_ID is not defined in environment variables.");
-  }
-  const homePage = await fetchNotionPageContent(homePageId);
+export default function Home() {
   return (
     <div className="animate-fade-in">
       <h2 className="font-heading font-semibold pt-12 text-gray-900 dark:text-gray-100">
         Bimal Paudel
       </h2>
 
-      <NotionBlockRenderer blocks={homePage} />
+      <div className="article">
+        <p className="text-gray-900 dark:text-gray-100">
+          I&apos;m a full-stack developer with over three years of experience
+          building scalable web applications—based in Berlin, originally from
+          Nepal.
+        </p>
+      </div>
 
       {/* Horizontal Navigation and Social Links Sections */}
       <HomeNavigation />
