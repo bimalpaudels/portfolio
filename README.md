@@ -13,7 +13,7 @@ A minimalist personal website built with Next.js and Notion as a headless CMS. F
 - **Framework**: Next.js 15 with TypeScript
 - **Styling**: Tailwind CSS
 - **CMS**: Notion API for dynamic content
-- **Deployment**: Vercel with ISR (Incremental Static Regeneration)
+- **Deployment**: Vercel
 - **Analytics**: Vercel Analytics
 
 ## License

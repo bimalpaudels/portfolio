@@ -114,7 +114,7 @@ export default async function Page({ params }: PageProps) {
         <div className="mb-6">
           <Link
             href="/posts"
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+            className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Posts
