@@ -52,6 +52,21 @@
   --color-text-primary-dark: #f5faff;
   --color-text-secondary-dark: #d1d5db;
   --color-text-muted-dark: #9ca3af;
+  
+  /* 2025 Modern Background System */
+  --bg-primary-light: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  --bg-secondary-light: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+  --bg-accent-light: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+  --bg-mesh-light: radial-gradient(circle at 25% 25%, #ffeaa7 0%, transparent 50%), 
+                   radial-gradient(circle at 75% 75%, #74b9ff 0%, transparent 50%),
+                   radial-gradient(circle at 50% 50%, #fd79a8 0%, transparent 50%);
+  
+  --bg-primary-dark: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+  --bg-secondary-dark: linear-gradient(120deg, #2d3748 0%, #1a202c 100%);
+  --bg-accent-dark: linear-gradient(45deg, #4a5568 0%, #2d3748 100%);
+  --bg-mesh-dark: radial-gradient(circle at 25% 25%, #3182ce 0%, transparent 70%), 
+                  radial-gradient(circle at 75% 75%, #805ad5 0%, transparent 70%),
+                  radial-gradient(circle at 50% 10%, #38b2ac 0%, transparent 80%);
 }
 
 /*
@@ -363,6 +378,53 @@
     scroll-behavior: smooth;
   }
   
+  /* Themed scrollbars */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
+  
+  /* Firefox scrollbar theming */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) rgba(255, 255, 255, 0.1);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    html {
+      scrollbar-color: rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0.2);
+    }
+  }
+  
   /* Page transition effects */
   .page-transition {
     animation: fadeIn 0.3s ease-in-out;
@@ -401,5 +463,102 @@
   a:focus-visible,
   button:focus-visible {
     animation: scaleIn 0.2s ease-out;
+  }
+  
+  /* 2025 Modern Background Effects */
+  body {
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -2;
+    background: var(--bg-primary-light);
+    opacity: 0.1;
+    mix-blend-mode: multiply;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    body::before {
+      background: var(--bg-primary-dark);
+      opacity: 0.4;
+      mix-blend-mode: screen;
+    }
+  }
+  
+  body::after {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    z-index: -1;
+    background: var(--bg-mesh-light);
+    opacity: 0.15;
+    animation: float 20s ease-in-out infinite;
+    filter: blur(2px);
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    body::after {
+      background: var(--bg-mesh-dark);
+      opacity: 0.25;
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) translateX(0px) scale(1);
+    }
+    33% {
+      transform: translateY(-30px) translateX(20px) scale(1.05);
+    }
+    66% {
+      transform: translateY(20px) translateX(-15px) scale(0.95);
+    }
+  }
+  
+  /* Glass morphism effect for main content */
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .glass-morphism {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    }
+  }
+  
+  /* Subtle texture overlay */
+  .texture-overlay {
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0);
+    background-size: 20px 20px;
+    opacity: 0.02;
+    pointer-events: none;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .texture-overlay {
+      background-image: 
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0);
+      opacity: 0.03;
+    }
   }
 }
