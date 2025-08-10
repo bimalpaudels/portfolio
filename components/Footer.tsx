@@ -150,14 +150,8 @@ export default function Footer() {
 
         {/* Bottom section */}
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-200/60 dark:border-gray-800/60">
-          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-4 md:mb-0">
-            <span>Made with</span>
-            <Heart className="w-4 h-4 text-red-500 fill-current animate-pulse" />
-            <span>in Berlin</span>
-          </div>
-          
-          <div className="text-sm text-gray-500 dark:text-gray-500">
-            © {currentYear} Bimal Paudel. All rights reserved.
+          <div className="text-xs text-gray-500 dark:text-gray-500">
+            Thank you for checking out this personal website.
           </div>
         </div>
       </div>
