@@ -23,3 +23,4 @@ export {
 
 export { default as Navigation } from "./Navigation";
 export { default as HomeNavigation } from "./HomeNavigation";
+export { default as Footer } from "./Footer";

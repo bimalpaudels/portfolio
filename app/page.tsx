@@ -1,5 +1,3 @@
-import { HomeNavigation } from "@/components";
-
 export default function Home() {
   return (
     <div className="animate-fade-in">
@@ -14,9 +12,6 @@ export default function Home() {
           Nepal.
         </p>
       </div>
-
-      {/* Horizontal Navigation and Social Links Sections */}
-      <HomeNavigation />
     </div>
   );
 }
