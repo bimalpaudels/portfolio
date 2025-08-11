@@ -98,7 +98,6 @@ export function normalizeNotionId(id: string): string {
 // Database mappings
 const DATABASE_ROUTES = {
   [process.env.NOTION_POSTS_DB_ID!]: "/posts",
-  [process.env.NOTION_PROJECTS_DB_ID!]: "/projects",
 } as const;
 
 /**

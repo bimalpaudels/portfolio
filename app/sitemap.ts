@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { fetchDatabaseContent, fetchProjectsDatabaseContent } from "@/lib";
+import { fetchDatabaseContent } from "@/lib";
 
 export const revalidate = 43200; // 12 hours
 
@@ -19,25 +19,11 @@ async function getAllPosts() {
   }));
 }
 
-// Function to fetch all projects from Notion
-async function getAllProjects() {
-  const response = await fetchProjectsDatabaseContent();
-
-  return response.map((page) => ({
-    slug:
-      page.properties.slug.type === "rich_text"
-        ? page.properties.slug.rich_text[0].plain_text
-        : null,
-    last_updated: page.last_edited_time,
-  }));
-}
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://bimals.net";
 
-  // Fetch all posts and projects
+  // Fetch all posts
   const posts = await getAllPosts();
-  const projects = await getAllProjects();
 
   // Define static pages with priorities and change frequencies
   const staticPages = [
@@ -65,12 +51,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly" as const,
       priority: 0.6,
     },
-    {
-      url: `${baseUrl}/projects`,
-      lastModified: new Date().toISOString(),
-      changeFrequency: "weekly" as const,
-      priority: 0.6,
-    },
   ];
 
   const postEntries = posts
@@ -82,14 +62,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     }));
 
-  const projectEntries = projects
-    .filter((project) => project.slug) // Filter out projects without slugs
-    .map((project) => ({
-      url: `${baseUrl}/projects/${project.slug}`,
-      lastModified: new Date(project.last_updated).toISOString(),
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    }));
-
-  return [...staticPages, ...postEntries, ...projectEntries];
+  return [...staticPages, ...postEntries];
 }

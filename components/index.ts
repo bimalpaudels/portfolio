@@ -22,4 +22,3 @@ export {
 } from "./notion";
 
 export { default as Navigation } from "./Navigation";
-export { default as HomeNavigation } from "./HomeNavigation";
