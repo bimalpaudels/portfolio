@@ -16,6 +16,8 @@ import {
   siDocker,
   siKubernetes,
   siRedis,
+  siGo,
+  siN8n,
 } from "simple-icons";
 
 export const stackCategories = [
@@ -23,7 +25,7 @@ export const stackCategories = [
     key: "ai",
     title: "AI & Machine Learning",
     description:
-      "I work on deep learning models with PyTorch and work extensively with the Hugging Face Transformers ecosystem for NLP tasks and projects. I use Cursor as my LLM powered IDE to mainly take advantage of its Tab feature but also with designing frontend components, debugging and few other things. Before Cursor, I had integrated v0 to my workflow and I thought that was the best approach. Now I can't even imagine moving back and forth from browser to IDE.",
+      "I use Cursor as my LLM powered IDE to mainly take advantage of its Tab feature but also with designing frontend components, debugging and few other things. Before Cursor, I had integrated v0 to my workflow and I thought that was the best approach. Now I can't even imagine moving back and forth from browser to IDE.\n\n I work on deep learning models with PyTorch and work extensively with the Hugging Face Transformers ecosystem for NLP tasks and projects. \n\n ",
     technologies: [
       { name: "PyTorch", icon: siPytorch },
       { name: "Hugging Face", icon: siHuggingface },
@@ -69,7 +71,7 @@ export const stackCategories = [
     key: "data",
     title: "Data & Infrastructure",
     description:
-      "I primarily use PostgreSQL for relational data, though I have extensive MySQL experience. Supabase has become my default choice for new projects—its real-time capabilities and especially integrated auth have streamlined my development workflow significantly. Redis is the obvious choice for caching layer. My deployment strategy revolves around Docker for containerization and that's something I have experience with professionally, where I have used it with multiple full-stack applications alongside Compose. I've also learnt and used Kubernetes for orchestration for my personal projects hosted locally.",
+      "I primarily use PostgreSQL for relational data, though I have extensive MySQL experience. Supabase has become my default choice for new projects—its real-time capabilities and especially integrated auth have streamlined my development workflow significantly. Redis is the obvious choice for caching layer. \n\n My deployment strategy revolves around Docker for containerization and that's something I have experience with professionally, where I have used it with multiple full-stack applications alongside Compose. I've also learnt and used Kubernetes for orchestration for my personal projects hosted locally.",
     technologies: [
       { name: "PostgreSQL", icon: siPostgresql },
       { name: "Supabase", icon: siSupabase },
@@ -93,12 +95,10 @@ export const stackCategories = [
     key: "exploring",
     title: "Currently Exploring",
     description:
-      "Always learning, always growing. Here's what's capturing my attention and expanding my skillset:",
+      "Recently I've been having a lot of fun working with Go, and I'm learning n8n as well.",
     technologies: [
-      { name: "Rust", icon: "Systems programming and WebAssembly" },
-      { name: "Three.js", icon: "3D web experiences and WebGL" },
-      { name: "AI Integration", icon: "LLMs and AI-powered applications" },
-      { name: "Edge Computing", icon: "Distributed systems and performance" },
+      { name: "Go", icon: siGo },
+      { name: "n8n", icon: siN8n },
     ],
     isSpecial: true,
   },

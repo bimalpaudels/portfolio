@@ -24,27 +24,16 @@ export function CategorySection({
 }: CategorySectionProps) {
   const renderTechItems = () => {
     if (isSpecialSection) {
-      // Special rendering for "Currently Exploring" section
+      // Use the same TechItem renderer so Simple Icons render properly
       return (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-          {technologies.map((item, index) => (
-            <div
+          {technologies.map((tech, index) => (
+            <TechItem
               key={index}
-              className="group relative overflow-hidden rounded-xl border border-transparent bg-transparent transition-all duration-300 hover:bg-white/20 dark:hover:bg-gray-800/30 hover:border-gray-200/50 dark:hover:border-gray-700/50 hover:shadow-md hover:backdrop-blur-sm"
-            >
-              <div className="p-3">
-                <div className="flex items-start">
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-xs text-gray-900 dark:text-custom_dark leading-tight">
-                      {item.name}
-                    </h4>
-                    <p className="text-[11px] text-gray-600 dark:text-gray-400 mt-1">
-                      {item.icon}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+              name={tech.name}
+              icon={tech.icon}
+              index={index}
+            />
           ))}
         </div>
       );
@@ -93,7 +82,9 @@ export function CategorySection({
           <div className="pt-4">
             {/* Category Description */}
             <div className="space-y-3 text-sm mb-6">
-              <p className="text-gray-700 dark:text-gray-300">{description}</p>
+              <p className="text-gray-700 dark:text-gray-300 whitespace-pre-line">
+                {description}
+              </p>
             </div>
 
             {/* Technology Cards */}
