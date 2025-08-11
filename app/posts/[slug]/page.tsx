@@ -10,11 +10,10 @@ import {
   PageObjectResponse,
   TextRichTextItemResponse,
 } from "@notionhq/client/build/src/api-endpoints";
-import { NotionTags, LastUpdated } from "@/components";
-import { Header } from "@/components";
+import { NotionTags, LastUpdated, PageHeader } from "@/components";
 import { NotionBlockRenderer } from "@/components";
 import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 export const dynamicParams = true;
 
@@ -108,7 +107,7 @@ export default async function Page({ params }: PageProps) {
 
     return (
       <div className="animate-fade-in">
-        <Header />
+        <PageHeader currentPage="posts" />
 
         {/* Back Navigation */}
         <div className="mb-6">
@@ -159,7 +158,7 @@ export default async function Page({ params }: PageProps) {
   } catch {
     return (
       <div className="animate-fade-in">
-        <Header />
+        <PageHeader currentPage="posts" />
         <div className="article">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             Post Not Found

@@ -2,6 +2,7 @@ import { Link } from "next-view-transitions";
 import { FileUser, Linkedin } from "lucide-react";
 import { siGmail, siGithub } from "simple-icons";
 import { personalProjects, learnMoreSections } from "@/data/projectsData";
+import { Projects, LearnMore } from "@/components";
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
         Bimal Paudel
       </h4>
 
-      <div className="mb-2">
+      <div className="mb-3">
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
           I&apos;m a full-stack developer with over three years of experience
           building scalable web applications—based in Berlin, originally from
@@ -66,28 +67,7 @@ export default function Home() {
           Personal Projects
         </h3>
 
-        <div className="space-y-4">
-          {personalProjects.map((project, index) => (
-            <div
-              key={index}
-              className="flex flex-col sm:flex-row sm:items-start gap-6"
-            >
-              <div className="sm:w-1/3">
-                <h4 className="font-medium text-sm text-gray-900 dark:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500">
-                  {project.title}
-                </h4>
-              </div>
-              <div className="sm:w-2/3">
-                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                  {project.description}
-                </p>
-                <span className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 block">
-                  {project.period}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
+        <Projects projects={personalProjects} />
       </div>
 
       <div className="mt-24">
@@ -95,30 +75,12 @@ export default function Home() {
           Learn More
         </h3>
 
-        <div className="space-y-4">
-          {learnMoreSections.map((section, index) => (
-            <div
-              key={index}
-              className="flex flex-col sm:flex-row sm:items-start gap-6"
-            >
-              <div className="sm:w-1/3">
-                <h4 className="font-medium text-sm text-gray-900 dark:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500">
-                  {section.title}
-                </h4>
-              </div>
-              <div className="sm:w-2/3">
-                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                  {section.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <LearnMore sections={learnMoreSections} />
       </div>
 
-      <div className="mt-20 mb-44">
+      <div className="mt-28 mb-44">
         <p className="text-xs text-gray-500 dark:text-gray-500 text-center">
-          Thank you for visiting.
+          Thank you for visiting my website.
         </p>
       </div>
     </div>

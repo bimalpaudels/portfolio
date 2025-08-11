@@ -2,6 +2,7 @@
 
 import { CategorySection } from "@/components/CategorySection";
 import { stackCategories, tldrItems } from "@/data/stackData";
+import { PageHeader } from "@/components";
 
 import { useState } from "react";
 
@@ -16,9 +17,9 @@ export default function Stack() {
     );
   };
 
-
   return (
     <div className="container max-w-[65ch] mx-auto px-4 py-16">
+      <PageHeader currentPage="stack" />
       {/* Code Philosophy */}
       <div className="mb-8">
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
@@ -30,7 +31,7 @@ export default function Stack() {
         </p>
       </div>
 
-      {/* TLDR Section - Comma-separated, blends into body text */}
+      {/* TLDR Section */}
       <div className="mb-8">
         <h3 className="font-heading font-medium text-base text-gray-900 dark:text-custom_dark mb-2">
           TLDR:

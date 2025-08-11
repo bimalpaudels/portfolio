@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
+import { PageHeader } from "@/components";
 import {
   ArrowLeft,
   MapPin,
@@ -27,6 +28,7 @@ export default function About() {
 
   return (
     <div className="container max-w-[65ch] mx-auto px-4 py-16">
+      <PageHeader currentPage="about" />
         {/* Hero Section with Blended Image */}
         <div className="mb-8">
           <div className="flex flex-col md:flex-row md:items-start gap-3 mb-6">

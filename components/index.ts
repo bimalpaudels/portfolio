@@ -24,3 +24,6 @@ export {
 export { default as Navigation } from "./Navigation";
 export { default as ExperienceCard } from "./ExperienceCard";
 export { default as HobbiesCard } from "./HobbiesCard";
+export { default as Projects } from "./Projects";
+export { default as LearnMore } from "./LearnMore";
+export { default as PageHeader } from "./PageHeader";
