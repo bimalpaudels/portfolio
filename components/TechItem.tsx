@@ -71,7 +71,7 @@ export function TechItem({ name, icon, index }: TechItemProps) {
     >
       <div className="p-3">
         <div className="flex flex-col items-center text-center gap-2">
-          <div className="icon-container w-10 h-10 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 border border-transparent bg-transparent shadow-sm group-hover:scale-110 transition-all duration-300 group-hover:bg-white/50 group-hover:backdrop-blur-sm dark:bg-gray-800/20 dark:group-hover:bg-gray-800/40">
+          <div className="icon-container w-10 h-10 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 border border-transparent bg-transparent group-hover:scale-110 transition-all duration-300 group-hover:bg-white/50 group-hover:backdrop-blur-sm group-hover:shadow-sm dark:group-hover:bg-gray-800/40">
             {renderIcon()}
           </div>
           <h4 className="font-semibold text-xs text-gray-900 dark:text-custom_dark group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors leading-tight">
@@ -86,8 +86,8 @@ export function TechItem({ name, icon, index }: TechItemProps) {
 // Helper function to get dark mode colors
 function getDarkModeColor(hex: string): string {
   const colorMap: Record<string, string> = {
-    '000000': '#9CA3AF', // Express
-    '000': '#E5E7EB', // Next.js
+    '000000': '#FFFFFF', // Express - white in dark mode
+    '000': '#FFFFFF', // Next.js - white in dark mode  
     '092E20': '#FFFFFF', // Django - white in dark mode
   };
   
