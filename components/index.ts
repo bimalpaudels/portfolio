@@ -12,7 +12,6 @@ export {
   LastUpdated,
   PostMeta,
   PageDescription,
-  Header,
 } from "./NotionComponents";
 
 export {
@@ -22,4 +21,9 @@ export {
 } from "./notion";
 
 export { default as Navigation } from "./Navigation";
-export { default as HomeNavigation } from "./HomeNavigation";
+export { default as ExperienceCard } from "./ExperienceCard";
+export { default as HobbiesCard } from "./HobbiesCard";
+export { default as Projects } from "./Projects";
+export { default as LearnMore } from "./LearnMore";
+export { default as PageHeader } from "./PageHeader";
+export { default as ConditionalPageHeader } from "./ConditionalPageHeader";

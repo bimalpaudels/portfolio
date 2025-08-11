@@ -1,10 +1,10 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Inter, Fraunces } from "next/font/google";
+import { Inter, Fraunces, Source_Serif_4 } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import { Analytics } from "@vercel/analytics/react";
-import { Navigation } from "@/components";
+import { Navigation, ConditionalPageHeader } from "@/components";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,6 +16,12 @@ const fraunces = Fraunces({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-fraunces",
+});
+
+const sourceSerif = Source_Serif_4({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-substack",
 });
 
 export const metadata: Metadata = {
@@ -63,15 +69,20 @@ export default function RootLayout({
     <ViewTransitions>
       <html
         lang="en"
-        className={`${inter.variable} ${fraunces.variable} [scrollbar-gutter:stable]`}
+        className={`${inter.variable} ${fraunces.variable} ${sourceSerif.variable} [scrollbar-gutter:stable]`}
       >
         <head></head>
-        <body className="antialiased tracking-tight bg-white dark:bg-darkmode font-body">
+        <body
+          className="antialiased tracking-tight bg-white dark:bg-darkmode font-body"
+          suppressHydrationWarning
+        >
           <Navigation />
-          <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8 text-gray-900 dark:text-custom_dark">
-            <main className="max-w-[65ch] mx-auto w-full space-y-6 page-transition">
+          <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 text-gray-900 dark:text-custom_dark">
+            <main className="max-w-[65ch] mx-auto w-full space-y-8 page-transition px-6 pb-32">
+              <ConditionalPageHeader />
               {children}
             </main>
+
             <Analytics />
           </div>
         </body>

@@ -1,84 +1,63 @@
-import { Header } from "@/components";
+"use client";
 
-export const metadata = {
-  title: "Stack",
-};
+import { CategorySection } from "@/components/CategorySection";
+import { stackCategories, tldrItems } from "@/data/stackData";
+
+import { useState } from "react";
 
 export default function Stack() {
+  const [expandedSections, setExpandedSections] = useState<string[]>(["ai"]);
+
+  const toggleSection = (section: string) => {
+    setExpandedSections((prev) =>
+      prev.includes(section)
+        ? prev.filter((s) => s !== section)
+        : [...prev, section]
+    );
+  };
+
   return (
-    <div className="animate-fade-in">
-      <Header />
-      <div className="article">
-        <h2>Stack</h2>
+    <div className="animate-fade-in px-1">
+      {/* Code Philosophy */}
+      <div className="mb-8">
+        <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+          I mostly build with Python — it&apos;s my go-to for backends, AI work,
+          and data-heavy tasks. I also write a fair amount of TypeScript/JS on
+          the frontend. My approach centers on building scalable systems by
+          keeping the codebase clean, maintainable and performant. I try to
+          anyway.
+        </p>
+      </div>
 
-        <h2>TLDR</h2>
-        <p className="text-gray-900 dark:text-gray-100">
-          Python, Django, FastAPI, Next.js, TypeScript, Tailwind, PostgreSQL,
-          Supabase, Docker, Kubernetes, PyTorch, AWS, Cursor, OpenAI API, RAG
-        </p>
-
-        <h2>Core Languages & Architecture Philosophy</h2>
-        <p className="text-gray-900 dark:text-gray-100">
-          I architect solutions primarily in Python, leveraging its versatility
-          across backend development, AI research, and data analytics. I also
-          have experience working with Typescript/Javascript. My approach
-          centers on building scalable systems that can evolve—I try to
-          prioritize clean, maintainable code that performs well technically.
-        </p>
-
-        <h2>AI & Machine Learning</h2>
-        <p className="text-gray-900 dark:text-gray-100">
-          I work on deep learning models with PyTorch and work extensively with
-          the Hugging Face Transformers ecosystem for NLP tasks and projects.
-        </p>
-        <p className="text-gray-900 dark:text-gray-100">
-          I use Cursor as my LLM powered IDE to mainly take advantage of its Tab
-          feature but also with designing frontend components, debugging and few
-          other things. Before Cursor, I had integrated v0 to my workflow and I
-          thought that was the best approach. Now I can&apos;t even imagine
-          moving back and forth from browser to IDE.
-        </p>
-
-        <h2>Backend & APIs</h2>
-        <p className="text-gray-900 dark:text-gray-100">
-          I primarily build backend systems with Django and FastAPI, choosing
-          between them based on project complexity and performance requirements.
-          For Node.js ecosystems, I work with Express.js when a particular
-          project requires it.
-        </p>
-
-        <h2>Frontend Development</h2>
-        <p className="text-gray-900 dark:text-gray-100">
-          My go-to stack is Next.js with TypeScript and Tailwind CSS. I&apos;ve
-          shipped everything from complex dashboards to simple web applications
-          such as this portfolio using this combination.
-        </p>
-
-        <h2>Data & Infrastructure</h2>
-        <p className="text-gray-900 dark:text-gray-100">
-          I primarily use PostgreSQL for relational data, though I have
-          extensive MySQL experience. Supabase has become my default choice for
-          new projects—its real-time capabilities and especially integrated auth
-          have streamlined my development workflow significantly. Redis is the
-          obvious choice for caching layer.
-        </p>
-        <p className="text-gray-900 dark:text-gray-100">
-          My deployment strategy revolves around Docker for containerization and
-          that&apos;s something I have experience with professionally, where I
-          have used it with multiple full-stack applications alongside Compose.
-          I&apos;ve also learnt and used Kubernetes for orchestration for my
-          personal projects hosted locally.
-        </p>
-
-        <h2>Current Learning & Evolution</h2>
-        <p className="text-gray-900 dark:text-gray-100">
-          I&apos;m constantly trying to evolve my stack based on real-world
-          challenges and changing technical landscapes. For example, I am
-          integrating the power of LLMs on multiple personal projects to improve
-          and keep up with the change. My goal is always finding the right tool
-          for each specific problem rather than forcing every solution into
-          familiar patterns.
-        </p>
+      {/* TLDR Section */}
+      <div className="mb-8">
+        <h3 className="font-heading font-medium text-base text-gray-900 dark:text-custom_dark mb-2">
+          TLDR:
+        </h3>
+        <div className="flex flex-wrap gap-2">
+          {tldrItems.map((item) => (
+            <span
+              key={item}
+              className="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 border border-gray-200 dark:border-gray-700"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+      {/* Technology Stack - All categories including Currently Exploring */}
+      <div className="space-y-4">
+        {stackCategories.map((category) => (
+          <CategorySection
+            key={category.key}
+            title={category.title}
+            description={category.description}
+            technologies={category.technologies}
+            isExpanded={expandedSections.includes(category.key)}
+            onToggle={() => toggleSection(category.key)}
+            isSpecialSection={category.isSpecial || false}
+          />
+        ))}
       </div>
     </div>
   );

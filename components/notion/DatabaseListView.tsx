@@ -17,10 +17,9 @@ export default function DatabaseListView({
   descriptionProperty = "Description",
   slugProperty = "slug",
   linkPrefix,
-  className = "space-y-8",
 }: DatabaseListViewProps) {
   return (
-    <div className={className}>
+    <div>
       {pages.map((page) => {
         const { properties } = page;
 
@@ -44,17 +43,17 @@ export default function DatabaseListView({
             : null;
 
         return (
-          <div key={page.id} className="space-y-3 mb-12">
+          <div key={page.id} className="space-y-2 mb-10">
             <div>
               <Link
                 href={`${linkPrefix}/${slug}`}
-                className="font-heading text-xl font-semibold text-gray-900 dark:text-gray-100 hover:text-sky-600 dark:hover:text-sky-400 transition-colors duration-200"
+                className="font-heading font-semibold text-lg text-gray-900 dark:text-gray-100 transition-colors duration-200"
               >
                 {title?.plain_text}
               </Link>
             </div>
 
-            <div className="font-body text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+            <div className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
               <PageDescription
                 description={description as TextRichTextItemResponse[]}
               />

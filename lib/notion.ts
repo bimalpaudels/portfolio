@@ -62,18 +62,6 @@ export async function fetchDatabaseContent(): Promise<PageObjectResponse[]> {
   return fetchDatabasePages(notionDbId);
 }
 
-export async function fetchProjectsDatabaseContent(): Promise<
-  PageObjectResponse[]
-> {
-  const notionProjectsDbId = process.env.NOTION_PROJECTS_DB_ID;
-  if (!notionProjectsDbId) {
-    throw new Error(
-      "NOTION_PROJECTS_DB_ID is not defined in environment variables."
-    );
-  }
-  return fetchDatabasePages(notionProjectsDbId);
-}
-
 // Generic page by slug function
 export async function fetchPageBySlug(
   slug: string,
@@ -96,18 +84,6 @@ export async function fetchPageBySlug(
     },
   });
   return response.results[0] as PageObjectResponse;
-}
-
-export async function fetchProjectBySlug(
-  slug: string
-): Promise<PageObjectResponse> {
-  const notionProjectsDbId = process.env.NOTION_PROJECTS_DB_ID;
-  if (!notionProjectsDbId) {
-    throw new Error(
-      "NOTION_PROJECTS_DB_ID is not defined in environment variables."
-    );
-  }
-  return fetchPageBySlug(slug, notionProjectsDbId);
 }
 
 /**

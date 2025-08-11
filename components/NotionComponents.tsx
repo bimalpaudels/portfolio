@@ -1,5 +1,4 @@
 import { RichText } from "./RichText";
-import { Link } from "next-view-transitions";
 import {
   MultiSelectPropertyItemObjectResponse,
   LastEditedTimePropertyItemObjectResponse,
@@ -13,7 +12,7 @@ export const NotionTags: React.FC<{
   <div className="flex flex-wrap items-center gap-3">
     <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
       <Tag className="w-4 h-4" />
-      <span className="text-sm font-medium">Stack</span>
+      <span className="text-sm font-medium">Tags</span>
     </div>
     <div className="flex flex-wrap gap-2">
       {tags.multi_select.map((tag) => (
@@ -72,13 +71,3 @@ export const PageDescription: React.FC<{
     ))}
   </p>
 );
-
-export function Header() {
-  return (
-    <Link href="/" className="inline-block group hover:no-underline">
-      <h2 className="font-heading font-semibold text-xl pt-12 transition-all duration-300 ease-in-out transform group-hover:-translate-y-1 group-hover:rotate-2 text-gray-900 dark:text-gray-100">
-        bimals.net
-      </h2>
-    </Link>
-  );
-}
