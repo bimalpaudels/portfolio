@@ -200,6 +200,12 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <div className="mt-16 pt-8 border-t border-gray-200/60 dark:border-gray-800/60">
+        <p className="text-xs text-gray-500 dark:text-gray-500 text-center">
+          Thank you for checking out this personal website.
+        </p>
+      </div>
     </div>
   );
 }
