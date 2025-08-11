@@ -22,3 +22,5 @@ export {
 } from "./notion";
 
 export { default as Navigation } from "./Navigation";
+export { default as ExperienceCard } from "./ExperienceCard";
+export { default as HobbiesCard } from "./HobbiesCard";

@@ -7,19 +7,13 @@ import {
   ChevronDown,
   ChevronRight,
   Mail,
-  Calendar,
-  FileUser,
-  Globe,
 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { ExperienceCard, HobbiesCard } from "@/components";
 
 export default function About() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [expandedSections, setExpandedSections] = useState<string[]>([
-    "experience",
-    "hobbies",
-    "languages",
-  ]);
+  const [expandedSections, setExpandedSections] = useState<string[]>([]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -81,7 +75,7 @@ export default function About() {
 
   const education = [
     {
-      degree: "Bachelor of Computer Science",
+      title: "Bachelor of Computer Science",
       institution: "Tribhuvan University",
       location: "Kathmandu, Nepal",
       period: "2018 - 2021",
@@ -173,106 +167,22 @@ export default function About() {
         {/* CV Sections */}
         <div className="space-y-6">
           {/* Experience Section */}
-          <div
-            className={`rounded-lg overflow-hidden transition-all duration-200 border border-transparent ${
-              expandedSections.includes("experience")
-                ? "border-gray-200 dark:border-gray-700"
-                : "hover:border-gray-200 dark:hover:border-gray-700"
-            }`}
-          >
-            <button
-              onClick={() => toggleSection("experience")}
-              className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-t-lg"
-            >
-              <h2 className="text-lg font-medium font-heading text-gray-900 dark:text-custom_dark">
-                Experience
-              </h2>
-              {expandedSections.includes("experience") ? (
-                <ChevronDown className="h-5 w-5 text-gray-600 dark:text-gray-400" />
-              ) : (
-                <ChevronRight className="h-5 w-5 text-gray-600 dark:text-gray-400" />
-              )}
-            </button>
-            {expandedSections.includes("experience") && (
-              <div className="px-4 pb-4 space-y-6 border-t border-gray-200 dark:border-gray-700">
-                {experience.map((job, index) => (
-                  <div
-                    key={index}
-                    className="border-l-2 border-gray-300 dark:border-gray-600 pl-4 pt-4"
-                  >
-                    <h3 className="font-semibold text-base text-gray-900 dark:text-custom_dark mb-1">
-                      {job.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm font-semibold mb-1">
-                      {job.company} • {job.location}
-                    </p>
-                    <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2">
-                      {job.period}
-                    </p>
-                    <p className="text-gray-700 dark:text-gray-300 mb-3 text-sm">
-                      {job.description}
-                    </p>
-                    <ul className="space-y-1">
-                      {job.achievements.map((achievement, i) => (
-                        <li
-                          key={i}
-                          className="text-xs text-gray-600 dark:text-gray-400"
-                        >
-                          • {achievement}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <ExperienceCard
+            title="Experience"
+            items={experience}
+            sectionKey="experience"
+            expandedSections={expandedSections}
+            toggleSection={toggleSection}
+          />
 
           {/* Education Section */}
-          <div
-            className={`rounded-lg overflow-hidden transition-all duration-200 border border-transparent ${
-              expandedSections.includes("education")
-                ? "border-gray-200 dark:border-gray-700"
-                : "hover:border-gray-200 dark:hover:border-gray-700"
-            }`}
-          >
-            <button
-              onClick={() => toggleSection("education")}
-              className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-t-lg"
-            >
-              <h2 className="text-lg font-medium font-heading text-gray-900 dark:text-custom_dark">
-                Education
-              </h2>
-              {expandedSections.includes("education") ? (
-                <ChevronDown className="h-5 w-5 text-gray-600 dark:text-gray-400" />
-              ) : (
-                <ChevronRight className="h-5 w-5 text-gray-600 dark:text-gray-400" />
-              )}
-            </button>
-            {expandedSections.includes("education") && (
-              <div className="px-4 pb-4 border-t border-gray-200 dark:border-gray-700">
-                {education.map((edu, index) => (
-                  <div
-                    key={index}
-                    className="border-l-2 border-gray-300 dark:border-gray-600 pl-4 pt-4"
-                  >
-                    <h3 className="font-semibold text-lg font-heading text-gray-900 dark:text-custom_dark">
-                      {edu.degree}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      {edu.institution} • {edu.location}
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                      {edu.period}
-                    </p>
-                    <p className="text-gray-700 dark:text-gray-300">
-                      {edu.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <ExperienceCard
+            title="Education"
+            items={education}
+            sectionKey="education"
+            expandedSections={expandedSections}
+            toggleSection={toggleSection}
+          />
 
           {/* Languages */}
           <div
@@ -375,73 +285,11 @@ export default function About() {
           </div>
 
           {/* Hobbies */}
-          <div
-            className={`rounded-lg overflow-hidden transition-all duration-200 border border-transparent ${
-              expandedSections.includes("hobbies")
-                ? "border-gray-200 dark:border-gray-700"
-                : "hover:border-gray-200 dark:hover:border-gray-700"
-            }`}
-          >
-            <button
-              onClick={() => toggleSection("hobbies")}
-              className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-t-lg"
-            >
-              <h3 className="font-medium text-base font-heading text-gray-900 dark:text-custom_dark">
-                Hobbies
-              </h3>
-              {expandedSections.includes("hobbies") ? (
-                <ChevronDown className="h-5 w-5 text-gray-600 dark:text-gray-400" />
-              ) : (
-                <ChevronRight className="h-5 w-5 text-gray-600 dark:text-gray-400" />
-              )}
-            </button>
-            {expandedSections.includes("hobbies") && (
-              <div className="px-4 pb-4 space-y-3 border-t border-gray-200 dark:border-gray-700">
-                <div className="space-y-3 text-sm pt-4">
-                  <div className="flex justify-between">
-                    <span className="text-gray-700 dark:text-gray-300">
-                      Open Source
-                    </span>
-                    <span className="text-gray-500 dark:text-gray-400">
-                      Contributing to projects
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-700 dark:text-gray-300">
-                      Reading
-                    </span>
-                    <span className="text-gray-500 dark:text-gray-400">
-                      Tech & Fiction
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-700 dark:text-gray-300">
-                      Hiking
-                    </span>
-                    <span className="text-gray-500 dark:text-gray-400">
-                      Nature trails
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-700 dark:text-gray-300">
-                      Photography
-                    </span>
-                    <span className="text-gray-500 dark:text-gray-400">
-                      Street & Nature
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-700 dark:text-gray-300">
-                      Cooking
-                    </span>
-                    <span className="text-gray-500 dark:text-gray-400">
-                      International cuisine
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+          <HobbiesCard
+            sectionKey="hobbies"
+            expandedSections={expandedSections}
+            toggleSection={toggleSection}
+          />
         </div>
       </div>
     </div>
