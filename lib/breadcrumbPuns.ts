@@ -11,6 +11,10 @@ export const breadcrumbPuns = [
   "yeast-or-west",
   "completely-accurate-breadcrumbs",
   "<-this-part-works",
+  "completely-random-breadcrumbs",
+  "some-ai-generated-breadcrumbs",
+  "some-written-by-me",
+  "Math.random()-*-breadcrumbPuns.length",
 ];
 
 export function getRandomBreadcrumbPun(): string {

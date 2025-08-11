@@ -34,10 +34,9 @@ export default function PageHeader({ currentPage }: PageHeaderProps) {
         setIsAnimating(true);
         timeoutId = setTimeout(() => {
           setPreviousText(breadcrumbText);
-          setPunIndex((prev) => {
-            const nextIndex = (prev + 1) % breadcrumbPuns.length;
-            const nextText = breadcrumbPuns[nextIndex];
-            setBreadcrumbText(nextText);
+          setPunIndex(() => {
+            const nextIndex = Math.floor(Math.random() * breadcrumbPuns.length);
+            setBreadcrumbText(breadcrumbPuns[nextIndex]);
             return nextIndex;
           });
           // End animation flag shortly after to clean up
