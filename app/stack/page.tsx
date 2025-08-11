@@ -2,26 +2,33 @@
 
 import Link from "next/link";
 import {
+  SiDjango,
+  SiDocker,
+  SiExpress,
+  SiFastapi,
+  SiHuggingface,
+  SiKubernetes,
+  SiNextdotjs,
+  SiOpenai,
+  SiPostgresql,
+  SiPytorch,
+  SiPython,
+  SiReact,
+  SiRedis,
+  SiSupabase,
+  SiTailwindcss,
+  SiTypescript,
+} from "@icons-pack/react-simple-icons";
+import {
   ArrowLeft,
   ChevronDown,
   ChevronRight,
-  Code,
   Brain,
   Server,
   Database,
   Sparkles,
-  Globe,
-  Layers,
-  Zap,
-  Box,
-  Cloud,
-  Settings,
-  Palette,
   Terminal,
   Monitor,
-  Cpu,
-  FileText,
-  Workflow,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -69,11 +76,19 @@ export default function Stack() {
       technologies: [
         {
           name: "PyTorch",
-          icon: <Brain className="h-5 w-5" />,
+          icon: (
+            <SiPytorch title="PyTorch" className="h-5 w-5" color="default" />
+          ),
         },
         {
           name: "Hugging Face",
-          icon: <Cpu className="h-5 w-5" />,
+          icon: (
+            <SiHuggingface
+              title="Hugging Face"
+              className="h-5 w-5"
+              color="default"
+            />
+          ),
         },
         {
           name: "Cursor",
@@ -81,7 +96,7 @@ export default function Stack() {
         },
         {
           name: "OpenAI API",
-          icon: <Sparkles className="h-5 w-5" />,
+          icon: <SiOpenai title="OpenAI" className="h-5 w-5" color="default" />,
         },
       ],
     },
@@ -102,19 +117,23 @@ export default function Stack() {
       technologies: [
         {
           name: "Python",
-          icon: <Terminal className="h-5 w-5" />,
+          icon: <SiPython title="Python" className="h-5 w-5" color="default" />,
         },
         {
           name: "Django",
-          icon: <Server className="h-5 w-5" />,
+          icon: <SiDjango title="Django" className="h-5 w-5" color="default" />,
         },
         {
           name: "FastAPI",
-          icon: <Zap className="h-5 w-5" />,
+          icon: (
+            <SiFastapi title="FastAPI" className="h-5 w-5" color="default" />
+          ),
         },
         {
           name: "Express.js",
-          icon: <Globe className="h-5 w-5" />,
+          icon: (
+            <SiExpress title="Express.js" className="h-5 w-5" color="default" />
+          ),
         },
       ],
     },
@@ -134,19 +153,33 @@ export default function Stack() {
       technologies: [
         {
           name: "Next.js",
-          icon: <Globe className="h-5 w-5" />,
+          icon: (
+            <SiNextdotjs title="Next.js" className="h-5 w-5" color="default" />
+          ),
         },
         {
           name: "TypeScript",
-          icon: <Code className="h-5 w-5" />,
+          icon: (
+            <SiTypescript
+              title="TypeScript"
+              className="h-5 w-5"
+              color="default"
+            />
+          ),
         },
         {
           name: "Tailwind CSS",
-          icon: <Palette className="h-5 w-5" />,
+          icon: (
+            <SiTailwindcss
+              title="Tailwind CSS"
+              className="h-5 w-5"
+              color="default"
+            />
+          ),
         },
         {
           name: "React",
-          icon: <Workflow className="h-5 w-5" />,
+          icon: <SiReact title="React" className="h-5 w-5" color="default" />,
         },
       ],
     },
@@ -175,27 +208,47 @@ export default function Stack() {
       technologies: [
         {
           name: "PostgreSQL",
-          icon: <Database className="h-5 w-5" />,
+          icon: (
+            <SiPostgresql
+              title="PostgreSQL"
+              className="h-5 w-5"
+              color="default"
+            />
+          ),
         },
         {
           name: "Supabase",
-          icon: <Layers className="h-5 w-5" />,
+          icon: (
+            <SiSupabase title="Supabase" className="h-5 w-5" color="default" />
+          ),
         },
         {
           name: "Docker",
-          icon: <Box className="h-5 w-5" />,
+          icon: <SiDocker title="Docker" className="h-5 w-5" color="default" />,
         },
         {
           name: "Kubernetes",
-          icon: <Settings className="h-5 w-5" />,
+          icon: (
+            <SiKubernetes
+              title="Kubernetes"
+              className="h-5 w-5"
+              color="default"
+            />
+          ),
         },
         {
           name: "AWS",
-          icon: <Cloud className="h-5 w-5" />,
+          icon: (
+            <img
+              src="https://cdn.simpleicons.org/amazonaws"
+              alt="AWS"
+              className="h-5 w-5"
+            />
+          ),
         },
         {
           name: "Redis",
-          icon: <FileText className="h-5 w-5" />,
+          icon: <SiRedis title="Redis" className="h-5 w-5" color="default" />,
         },
       ],
     },
