@@ -17,7 +17,7 @@ export default function Stack() {
   };
 
   return (
-    <div className="container max-w-[65ch] mx-auto px-1">
+    <div className="px-1">
       {/* Code Philosophy */}
       <div className="mb-8">
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">

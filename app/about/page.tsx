@@ -2,12 +2,7 @@
 
 import { Link } from "next-view-transitions";
 import Image from "next/image";
-import {
-  MapPin,
-  ChevronDown,
-  ChevronRight,
-  Mail,
-} from "lucide-react";
+import { MapPin, ChevronDown, ChevronRight, Mail } from "lucide-react";
 import { useState } from "react";
 import { ExperienceCard, HobbiesCard } from "@/components";
 import { experience, education } from "@/data/aboutData";
@@ -24,7 +19,7 @@ export default function About() {
   };
 
   return (
-    <div className="container max-w-[65ch] mx-auto px-1">
+    <div className="px-1">
       {/* Hero Section with Blended Image */}
       <div className="mb-8">
         <div className="flex flex-col md:flex-row md:items-start gap-3 mb-6">
@@ -88,7 +83,7 @@ export default function About() {
       </div>
 
       {/* CV Sections */}
-      <div className="space-y-6">
+      <div className="space-y-4">
         {/* Experience Section */}
         <ExperienceCard
           title="Experience"
