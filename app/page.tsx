@@ -1,4 +1,7 @@
-import { Mail, Github, Linkedin, FileUser } from "lucide-react";
+import Link from "next/link";
+import { FileUser, Linkedin } from "lucide-react";
+import { siGmail, siGithub } from "simple-icons";
+import { personalProjects, learnMoreSections } from "@/data/projectsData";
 
 export default function Home() {
   return (
@@ -21,7 +24,9 @@ export default function Home() {
             href="mailto:ibimalp@gmail.com"
             className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500 transition-colors duration-200"
           >
-            <Mail className="w-4 h-4" />
+            <svg className="w-4 h-4" viewBox="0 0 24 24">
+              <path d={siGmail.path} fill="currentColor" />
+            </svg>
             Email
           </a>
           <a
@@ -30,7 +35,9 @@ export default function Home() {
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500 transition-colors duration-200"
           >
-            <Github className="w-4 h-4" />
+            <svg className="w-4 h-4" viewBox="0 0 24 24">
+              <path d={siGithub.path} fill="currentColor" />
+            </svg>
             GitHub
           </a>
           <a
@@ -39,18 +46,18 @@ export default function Home() {
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500 transition-colors duration-200"
           >
-            <Linkedin className="w-4 h-4" />
+            <svg className="w-4 h-4" viewBox="0 0 24 24">
+              <Linkedin className="w-4 h-4" />
+            </svg>
             LinkedIn
           </a>
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/about"
             className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500 transition-colors duration-200"
           >
             <FileUser className="w-4 h-4" />
-            Resume
-          </a>
+            About
+          </Link>
         </div>
       </div>
 
@@ -60,108 +67,26 @@ export default function Home() {
         </h3>
 
         <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-start gap-6">
-            <div className="sm:w-1/3">
-              <h4 className="font-medium text-sm text-gray-900 dark:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500">
-                Portfolio Website
-              </h4>
+          {personalProjects.map((project, index) => (
+            <div
+              key={index}
+              className="flex flex-col sm:flex-row sm:items-start gap-6"
+            >
+              <div className="sm:w-1/3">
+                <h4 className="font-medium text-sm text-gray-900 dark:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500">
+                  {project.title}
+                </h4>
+              </div>
+              <div className="sm:w-2/3">
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                  {project.description}
+                </p>
+                <span className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 block">
+                  {project.period}
+                </span>
+              </div>
             </div>
-            <div className="sm:w-2/3 space-y-0.5">
-              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                A modern, responsive portfolio built with Next.js and Tailwind
-                CSS, showcasing my work and experience.
-              </p>
-              <span className="text-xs text-gray-500 dark:text-gray-400 block">
-                2024–Now
-              </span>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row sm:items-start gap-6">
-            <div className="sm:w-1/3">
-              <h4 className="font-medium text-sm text-gray-900 dark:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500">
-                E-commerce Platform
-              </h4>
-            </div>
-            <div className="sm:w-2/3">
-              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                Full-stack e-commerce solution with React, Node.js, and
-                PostgreSQL, featuring user authentication and payment
-                processing.
-              </p>
-              <span className="text-xs text-gray-500 dark:text-gray-400 block">
-                2023–2024
-              </span>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row sm:items-start gap-6">
-            <div className="sm:w-1/3">
-              <h4 className="font-medium text-sm text-gray-900 dark:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500">
-                Task Management App
-              </h4>
-            </div>
-            <div className="sm:w-2/3">
-              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                A collaborative task management application built with React and
-                Firebase, supporting real-time updates and team collaboration.
-              </p>
-              <span className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 block">
-                2022–2023
-              </span>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row sm:items-start gap-6">
-            <div className="sm:w-1/3">
-              <h4 className="font-medium text-sm text-gray-900 dark:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500">
-                Weather Dashboard
-              </h4>
-            </div>
-            <div className="sm:w-2/3">
-              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                Interactive weather application using OpenWeatherMap API, built
-                with vanilla JavaScript and CSS Grid for responsive design.
-              </p>
-              <span className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 block">
-                2022
-              </span>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row sm:items-start gap-6">
-            <div className="sm:w-1/3">
-              <h4 className="font-medium text-sm text-gray-900 dark:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500">
-                Blog Platform
-              </h4>
-            </div>
-            <div className="sm:w-2/3">
-              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                A content management system for blogging with markdown support,
-                built with Express.js and MongoDB.
-              </p>
-              <span className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 block">
-                2021–2022
-              </span>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row sm:items-start gap-6">
-            <div className="sm:w-1/3">
-              <h4 className="font-medium text-sm text-gray-900 dark:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500">
-                Recipe Finder
-              </h4>
-            </div>
-            <div className="sm:w-2/3">
-              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                Recipe search application using the Spoonacular API, featuring
-                ingredient-based search and recipe recommendations.
-              </p>
-              <span className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 block">
-                2021
-              </span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
@@ -171,33 +96,23 @@ export default function Home() {
         </h3>
 
         <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-start gap-6">
-            <div className="sm:w-1/3">
-              <h4 className="font-medium text-sm text-gray-900 dark:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500">
-                About Me
-              </h4>
+          {learnMoreSections.map((section, index) => (
+            <div
+              key={index}
+              className="flex flex-col sm:flex-row sm:items-start gap-6"
+            >
+              <div className="sm:w-1/3">
+                <h4 className="font-medium text-sm text-gray-900 dark:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500">
+                  {section.title}
+                </h4>
+              </div>
+              <div className="sm:w-2/3">
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                  {section.description}
+                </p>
+              </div>
             </div>
-            <div className="sm:w-2/3">
-              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                Learn more about my background, experience, and what drives me
-                as a developer.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row sm:items-start gap-6">
-            <div className="sm:w-1/3">
-              <h4 className="font-medium text-sm text-gray-900 dark:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500">
-                Tech Stack
-              </h4>
-            </div>
-            <div className="sm:w-2/3">
-              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                Explore the technologies, frameworks, and tools I use to build
-                modern web applications.
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 

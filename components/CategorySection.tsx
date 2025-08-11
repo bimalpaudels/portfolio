@@ -69,8 +69,8 @@ export function CategorySection({
     <div
       className={`rounded-lg overflow-hidden transition-all duration-200 border border-transparent ${
         isExpanded
-          ? "border-gray-200 dark:border-gray-700"
-          : "hover:border-gray-200 dark:hover:border-gray-700"
+          ? "border-gray-300 dark:border-gray-700"
+          : "hover:border-gray-300 dark:hover:border-gray-700"
       }`}
     >
       <button
