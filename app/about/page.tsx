@@ -26,7 +26,7 @@ export default function About() {
   };
 
   return (
-    <div className="px-1">
+    <div className="animate-fade-in px-1">
       {/* Hero Section with Blended Image */}
       <div className="mb-8">
         <div className="flex flex-col md:flex-row md:items-start gap-3 mb-6">

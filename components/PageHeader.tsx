@@ -14,9 +14,11 @@ export default function PageHeader({ currentPage }: PageHeaderProps) {
   const [previousText, setPreviousText] = useState<string>("");
   const [punIndex, setPunIndex] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
   const pathname = usePathname();
 
   useEffect(() => {
+    setIsMounted(true);
     // Check if we're on a post detail page (posts/[slug])
     if (
       currentPage === "posts" &&
@@ -59,7 +61,8 @@ export default function PageHeader({ currentPage }: PageHeaderProps) {
         </h2>
       </Link>
       <div className="mb-4">
-        {currentPage === "posts" &&
+        {isMounted &&
+        currentPage === "posts" &&
         pathname.startsWith("/posts/") &&
         pathname !== "/posts" ? (
           <>

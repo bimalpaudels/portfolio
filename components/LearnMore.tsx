@@ -32,6 +32,8 @@ export default function LearnMore({ sections }: LearnMoreProps) {
             <Link
               href={getSectionHref(section.title)}
               className="font-medium text-sm text-gray-900 dark:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200"
+              scroll={true}
+              prefetch={true}
             >
               {section.title}
             </Link>
