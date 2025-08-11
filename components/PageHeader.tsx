@@ -2,7 +2,7 @@
 
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
-import { getRandomBreadcrumbPun } from "@/lib/breadcrumbPuns";
+import { breadcrumbPuns, getRandomBreadcrumbPun } from "@/lib/breadcrumbPuns";
 import { useEffect, useState } from "react";
 
 interface PageHeaderProps {
@@ -11,6 +11,9 @@ interface PageHeaderProps {
 
 export default function PageHeader({ currentPage }: PageHeaderProps) {
   const [breadcrumbText, setBreadcrumbText] = useState<string>("");
+  const [previousText, setPreviousText] = useState<string>("");
+  const [punIndex, setPunIndex] = useState<number>(0);
+  const [isAnimating, setIsAnimating] = useState<boolean>(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -20,7 +23,32 @@ export default function PageHeader({ currentPage }: PageHeaderProps) {
       pathname.startsWith("/posts/") &&
       pathname !== "/posts"
     ) {
-      setBreadcrumbText(getRandomBreadcrumbPun());
+      // Initialize with a random pun
+      const initialPun = getRandomBreadcrumbPun();
+      setBreadcrumbText(initialPun);
+      setPunIndex(breadcrumbPuns.indexOf(initialPun));
+      // Rotate with explicit out/in to simulate top-down replacement
+      let timeoutId: ReturnType<typeof setTimeout> | undefined;
+      const intervalId = setInterval(() => {
+        // Trigger out animation on current, then swap and drop in
+        setIsAnimating(true);
+        timeoutId = setTimeout(() => {
+          setPreviousText(breadcrumbText);
+          setPunIndex((prev) => {
+            const nextIndex = (prev + 1) % breadcrumbPuns.length;
+            const nextText = breadcrumbPuns[nextIndex];
+            setBreadcrumbText(nextText);
+            return nextIndex;
+          });
+          // End animation flag shortly after to clean up
+          setTimeout(() => setIsAnimating(false), 300);
+        }, 0);
+      }, 4000);
+
+      return () => {
+        clearInterval(intervalId);
+        if (timeoutId) clearTimeout(timeoutId);
+      };
     }
   }, [currentPage, pathname]);
 
@@ -38,12 +66,29 @@ export default function PageHeader({ currentPage }: PageHeaderProps) {
           <>
             <Link
               href="/posts"
-              className="text-sm text-gray-600 dark:text-gray-400 font-semibold hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+              className="text-sm text-gray-700 dark:text-gray-300 font-semibold underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+              title="View all posts"
             >
               /posts
             </Link>
-            <span className="text-sm text-gray-600 dark:text-gray-400 font-semibold">
-              /{breadcrumbText}
+            <span className="text-sm text-gray-600 dark:text-gray-400 font-semibold ml-0.5 inline-flex overflow-hidden align-baseline leading-[1.2] h-[1.2em]">
+              /
+              <span className="relative inline-block">
+                {isAnimating && previousText && (
+                  <span className="absolute left-0 top-0 inline-block motion-safe:animate-(--animate-breadcrumb-slide-out)">
+                    {previousText}
+                  </span>
+                )}
+                <span
+                  className={`inline-block ${
+                    isAnimating
+                      ? "motion-safe:animate-(--animate-breadcrumb-drop-in)"
+                      : ""
+                  }`}
+                >
+                  {breadcrumbText}
+                </span>
+              </span>
             </span>
           </>
         ) : (

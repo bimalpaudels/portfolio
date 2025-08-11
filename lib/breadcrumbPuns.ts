@@ -10,6 +10,7 @@ export const breadcrumbPuns = [
   "flour-power",
   "yeast-or-west",
   "completely-accurate-breadcrumbs",
+  "<-this-part-works",
 ];
 
 export function getRandomBreadcrumbPun(): string {
