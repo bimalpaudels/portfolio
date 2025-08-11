@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { FileUser, Linkedin } from "lucide-react";
 import { siGmail, siGithub } from "simple-icons";
 import { personalProjects, learnMoreSections } from "@/data/projectsData";

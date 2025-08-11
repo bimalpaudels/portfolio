@@ -29,10 +29,10 @@ export default function ExperienceCard({
 
   return (
     <div
-      className={`rounded-lg overflow-hidden transition-all duration-200 border border-transparent ${
+      className={`rounded-lg overflow-hidden transition-all duration-200 border  ${
         isExpanded
           ? "border-gray-300 dark:border-gray-700"
-          : "hover:border-gray-300 dark:hover:border-gray-700"
+          : "hover:border-gray-300 dark:hover:border-gray-700 border-transparent"
       }`}
     >
       <button
