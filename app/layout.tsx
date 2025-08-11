@@ -69,7 +69,7 @@ export default function RootLayout({
         <body className="antialiased tracking-tight bg-white dark:bg-darkmode font-body">
           <Navigation />
           <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 text-gray-900 dark:text-custom_dark">
-            <main className="max-w-[70ch] mx-auto w-full space-y-8 page-transition px-6 md:px-8">
+            <main className="max-w-[65ch] mx-auto w-full space-y-8 page-transition px-6">
               {children}
             </main>
 

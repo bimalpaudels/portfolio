@@ -149,7 +149,7 @@
   
   /* Paragraph and Text Styles */
   p {
-    margin-bottom: var(--space-md);
+
     color: var(--color-text-primary);
     line-height: var(--leading-relaxed);
   }

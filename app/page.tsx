@@ -15,7 +15,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="mt-8">
+      <div>
         <div className="flex items-center gap-6">
           <a
             href="mailto:ibimalp@gmail.com"
@@ -54,24 +54,24 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-16">
-        <h3 className="font-heading font-medium text-base text-gray-900 dark:text-gray-100 mb-8">
+      <div className="mt-24">
+        <h3 className="font-heading font-medium text-base text-gray-900 dark:text-gray-100 mb-16">
           Personal Projects
         </h3>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-start gap-6">
             <div className="sm:w-1/3">
               <h4 className="font-medium text-sm text-gray-900 dark:text-gray-100 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500">
                 Portfolio Website
               </h4>
             </div>
-            <div className="sm:w-2/3">
+            <div className="sm:w-2/3 space-y-0.5">
               <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
                 A modern, responsive portfolio built with Next.js and Tailwind
                 CSS, showcasing my work and experience.
               </p>
-              <span className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 block">
+              <span className="text-xs text-gray-500 dark:text-gray-400 block">
                 2024–Now
               </span>
             </div>
@@ -89,7 +89,7 @@ export default function Home() {
                 PostgreSQL, featuring user authentication and payment
                 processing.
               </p>
-              <span className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 block">
+              <span className="text-xs text-gray-500 dark:text-gray-400 block">
                 2023–2024
               </span>
             </div>
@@ -165,8 +165,8 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-16">
-        <h3 className="font-heading font-medium text-base text-gray-900 dark:text-gray-100 mb-8">
+      <div className="mt-24">
+        <h3 className="font-heading font-medium text-base text-gray-900 dark:text-gray-100 mb-16">
           Learn More
         </h3>
 
@@ -201,9 +201,9 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-16 pt-8 border-t border-gray-200/60 dark:border-gray-800/60">
+      <div className="mt-20 mb-44">
         <p className="text-xs text-gray-500 dark:text-gray-500 text-center">
-          Thank you for checking out this personal website.
+          Thank you for visiting.
         </p>
       </div>
     </div>
