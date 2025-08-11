@@ -111,34 +111,36 @@ export default async function Page({ params }: PageProps) {
         <div className="article mb-8">
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-6">
             <div className="flex-1">
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3 font-substack">
                 {title.plain_text}
               </h1>
             </div>
           </div>
-
-          {/* Tags using NotionTags component */}
-          {properties.Tags && (
-            <div className="mb-6">
-              <NotionTags
-                tags={properties.Tags as MultiSelectPropertyItemObjectResponse}
-              />
-            </div>
-          )}
-
-          {/* Last Updated using LastUpdated component */}
-          <div className="pb-6 border-b border-gray-200 dark:border-gray-800">
-            <LastUpdated
-              updated={
-                lastEditedForNotionComponent as LastEditedTimePropertyItemObjectResponse
-              }
-            />
-          </div>
         </div>
 
         {/* Post Content */}
-        <div className="article">
+        <div className="article font-substack">
           <NotionBlockRenderer blocks={postContent} />
+        </div>
+
+        {/* Post Meta at the end */}
+        <div className=" pt-4 mt-2 space-y-4">
+          {/* Last Updated */}
+          <LastUpdated
+            updated={
+              lastEditedForNotionComponent as LastEditedTimePropertyItemObjectResponse
+            }
+          />
+
+          {/* Separator line */}
+          <div className="border-t border-gray-200 dark:border-gray-800 mb-32 pt-4">
+            {/* Tags */}
+            {properties.Tags && (
+              <NotionTags
+                tags={properties.Tags as MultiSelectPropertyItemObjectResponse}
+              />
+            )}
+          </div>
         </div>
       </div>
     );

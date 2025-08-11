@@ -13,7 +13,7 @@ export const NotionTags: React.FC<{
   <div className="flex flex-wrap items-center gap-3">
     <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
       <Tag className="w-4 h-4" />
-      <span className="text-sm font-medium">Stack</span>
+      <span className="text-sm font-medium">Tags</span>
     </div>
     <div className="flex flex-wrap gap-2">
       {tags.multi_select.map((tag) => (
@@ -72,4 +72,3 @@ export const PageDescription: React.FC<{
     ))}
   </p>
 );
-

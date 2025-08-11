@@ -11,6 +11,7 @@
   /* Typography Scale */
   --font-body: var(--font-inter);
   --font-heading: var(--font-fraunces);
+  --font-substack: var(--font-substack);
   
   /* Spacing Scale */
   --space-xs: 0.25rem;    /* 4px */
@@ -451,6 +452,19 @@
     }
   }
   
+  /* Substack font for articles */
+  .font-substack {
+    font-family: var(--font-substack);
+    line-height: 1.6;
+    font-size: 1.0625rem; /* 17px - Substack's preferred reading size */
+  }
+
+  @media (max-width: 640px) {
+    .font-substack {
+      font-size: 1rem; /* 16px on mobile */
+    }
+  }
+
   /* Backdrop blur support */
   .backdrop-blur-md {
     backdrop-filter: blur(12px);

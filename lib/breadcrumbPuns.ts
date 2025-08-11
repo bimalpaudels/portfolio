@@ -1,14 +1,15 @@
 export const breadcrumbPuns = [
-  "bread & butter",
-  "loaf around",
-  "toast to success",
-  "bun in the oven",
-  "slice of life",
+  "bread-and-butter",
+  "loaf-around",
+  "toast-to-success",
+  "bun-in-the-oven",
+  "slice-of-life",
   "dough-lightful",
-  "knead to know",
-  "rise to the occasion",
-  "flour power",
-  "yeast or west"
+  "knead-to-know",
+  "rise-to-the-occasion",
+  "flour-power",
+  "yeast-or-west",
+  "completely-accurate-breadcrumbs",
 ];
 
 export function getRandomBreadcrumbPun(): string {
