@@ -9,20 +9,12 @@ import {
   ChevronRight,
   Mail,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ExperienceCard, HobbiesCard } from "@/components";
+import { experience, education } from "@/data/aboutData";
 
 export default function About() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   const toggleSection = (section: string) => {
     setExpandedSections((prev) =>
@@ -32,69 +24,9 @@ export default function About() {
     );
   };
 
-  const experience = [
-    {
-      title: "Senior Full-Stack Developer",
-      company: "TechFlow GmbH",
-      location: "Berlin, Germany",
-      period: "2023 - Present",
-      description:
-        "Leading development of scalable web applications using React, Node.js, and cloud technologies. Mentoring junior developers and architecting microservices solutions.",
-      achievements: [
-        "Reduced application load time by 40% through optimization",
-        "Led migration to microservices architecture",
-        "Mentored 3 junior developers",
-      ],
-    },
-    {
-      title: "Full-Stack Developer",
-      company: "StartupLab",
-      location: "Berlin, Germany",
-      period: "2022 - 2023",
-      description:
-        "Developed MVP products for early-stage startups, focusing on rapid prototyping and user feedback integration.",
-      achievements: [
-        "Built 5+ MVP applications from concept to launch",
-        "Implemented CI/CD pipelines reducing deployment time by 60%",
-        "Collaborated with design team on user experience improvements",
-      ],
-    },
-    {
-      title: "Junior Developer",
-      company: "Digital Solutions Nepal",
-      location: "Kathmandu, Nepal",
-      period: "2021 - 2022",
-      description:
-        "Started career building web applications for local businesses, learning modern development practices and agile methodologies.",
-      achievements: [
-        "Delivered 10+ client projects on time and within budget",
-        "Learned React, Node.js, and modern development workflows",
-        "Contributed to open-source projects",
-      ],
-    },
-  ];
-
-  const education = [
-    {
-      title: "Bachelor of Computer Science",
-      institution: "Tribhuvan University",
-      location: "Kathmandu, Nepal",
-      period: "2018 - 2021",
-      description:
-        "Focused on software engineering, algorithms, and web technologies. Graduated with distinction.",
-    },
-  ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-darkmode text-gray-900 dark:text-custom_dark relative overflow-hidden">
-      <div
-        className="fixed inset-0 opacity-20 transition-all duration-1000 ease-out"
-        style={{
-          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(14, 165, 233, 0.1), transparent 80%)`,
-        }}
-      />
-
-      <div className="container max-w-[65ch] mx-auto px-4 py-16 relative z-10">
+    <div className="container max-w-[65ch] mx-auto px-4 py-16">
         {/* Hero Section with Blended Image */}
         <div className="mb-8">
           <div className="flex flex-col md:flex-row md:items-start gap-3 mb-6">
@@ -284,7 +216,6 @@ export default function About() {
             toggleSection={toggleSection}
           />
         </div>
-      </div>
     </div>
   );
 }
