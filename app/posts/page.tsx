@@ -24,7 +24,7 @@ export default async function Learn() {
   const db_content_response = await fetchDatabaseContent();
   return (
     <div className="animate-fade-in px-1">
-      <div className="space-y-8 animate-slide-in pt-6">
+      <div className="animate-slide-in">
         <DatabaseListView
           pages={db_content_response}
           titleProperty="Title"
