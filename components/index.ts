@@ -12,7 +12,6 @@ export {
   LastUpdated,
   PostMeta,
   PageDescription,
-  Header,
 } from "./NotionComponents";
 
 export {
@@ -27,3 +26,4 @@ export { default as HobbiesCard } from "./HobbiesCard";
 export { default as Projects } from "./Projects";
 export { default as LearnMore } from "./LearnMore";
 export { default as PageHeader } from "./PageHeader";
+export { default as ConditionalPageHeader } from "./ConditionalPageHeader";

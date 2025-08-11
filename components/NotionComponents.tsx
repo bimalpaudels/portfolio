@@ -73,12 +73,3 @@ export const PageDescription: React.FC<{
   </p>
 );
 
-export function Header() {
-  return (
-    <Link href="/" className="inline-block group hover:no-underline">
-      <h2 className="font-heading font-semibold text-xl pt-12 transition-all duration-300 ease-in-out transform group-hover:-translate-y-1 group-hover:rotate-2 text-gray-900 dark:text-gray-100">
-        bimals.net
-      </h2>
-    </Link>
-  );
-}

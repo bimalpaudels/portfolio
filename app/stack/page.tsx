@@ -2,7 +2,6 @@
 
 import { CategorySection } from "@/components/CategorySection";
 import { stackCategories, tldrItems } from "@/data/stackData";
-import { PageHeader } from "@/components";
 
 import { useState } from "react";
 
@@ -19,7 +18,6 @@ export default function Stack() {
 
   return (
     <div className="container max-w-[65ch] mx-auto px-1">
-      <PageHeader currentPage="stack" />
       {/* Code Philosophy */}
       <div className="mb-8">
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">

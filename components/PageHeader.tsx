@@ -12,7 +12,7 @@ export default function PageHeader({ currentPage }: PageHeaderProps) {
           bimals.net
         </h2>
       </Link>
-      <div className="mt-2 mb-4">
+      <div className="mb-4">
         <span className="text-sm text-gray-500 dark:text-gray-400 font-mono">
           /{currentPage}
         </span>

@@ -1,5 +1,5 @@
 import { fetchDatabaseContent } from "@/lib";
-import { DatabaseListView, PageHeader } from "@/components";
+import { DatabaseListView } from "@/components";
 
 export const metadata = {
   title: "Blog Posts by Bimal Paudel",
@@ -24,7 +24,6 @@ export default async function Learn() {
   const db_content_response = await fetchDatabaseContent();
   return (
     <div className="animate-fade-in px-1">
-      <PageHeader currentPage="posts" />
       <div className="space-y-8 animate-slide-in pt-6">
         <DatabaseListView
           pages={db_content_response}

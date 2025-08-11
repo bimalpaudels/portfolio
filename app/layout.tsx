@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Inter, Fraunces } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import { Analytics } from "@vercel/analytics/react";
-import { Navigation } from "@/components";
+import { Navigation, ConditionalPageHeader } from "@/components";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -70,6 +70,7 @@ export default function RootLayout({
           <Navigation />
           <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 text-gray-900 dark:text-custom_dark">
             <main className="max-w-[65ch] mx-auto w-full space-y-8 page-transition px-6">
+              <ConditionalPageHeader />
               {children}
             </main>
 
