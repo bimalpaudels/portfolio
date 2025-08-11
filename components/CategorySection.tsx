@@ -1,13 +1,14 @@
 import React from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { TechItem } from "./TechItem";
+import { SimpleIcon } from "simple-icons";
 
 interface CategorySectionProps {
   title: string;
   description: string;
   technologies: Array<{
     name: string;
-    icon: any;
+    icon: SimpleIcon | React.ReactNode;
   }>;
   isExpanded: boolean;
   onToggle: () => void;

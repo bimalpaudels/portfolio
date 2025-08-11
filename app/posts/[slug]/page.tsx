@@ -13,8 +13,6 @@ import {
 import { NotionTags, LastUpdated } from "@/components";
 import { NotionBlockRenderer } from "@/components";
 
-import { Link } from "next-view-transitions";
-
 export const dynamicParams = true;
 
 export async function generateStaticParams() {

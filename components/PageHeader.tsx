@@ -12,7 +12,7 @@ interface PageHeaderProps {
 export default function PageHeader({ currentPage }: PageHeaderProps) {
   const [breadcrumbText, setBreadcrumbText] = useState<string>("");
   const [previousText, setPreviousText] = useState<string>("");
-  const [punIndex, setPunIndex] = useState<number>(0);
+
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const pathname = usePathname();
@@ -28,7 +28,6 @@ export default function PageHeader({ currentPage }: PageHeaderProps) {
       // Initialize with a random pun
       const initialPun = getRandomBreadcrumbPun();
       setBreadcrumbText(initialPun);
-      setPunIndex(breadcrumbPuns.indexOf(initialPun));
       // Rotate with explicit out/in to simulate top-down replacement
       let timeoutId: ReturnType<typeof setTimeout> | undefined;
       const intervalId = setInterval(() => {
@@ -36,11 +35,8 @@ export default function PageHeader({ currentPage }: PageHeaderProps) {
         setIsAnimating(true);
         timeoutId = setTimeout(() => {
           setPreviousText(breadcrumbText);
-          setPunIndex(() => {
-            const nextIndex = Math.floor(Math.random() * breadcrumbPuns.length);
-            setBreadcrumbText(breadcrumbPuns[nextIndex]);
-            return nextIndex;
-          });
+          const nextIndex = Math.floor(Math.random() * breadcrumbPuns.length);
+          setBreadcrumbText(breadcrumbPuns[nextIndex]);
           // End animation flag shortly after to clean up
           setTimeout(() => setIsAnimating(false), 300);
         }, 0);
@@ -51,7 +47,7 @@ export default function PageHeader({ currentPage }: PageHeaderProps) {
         if (timeoutId) clearTimeout(timeoutId);
       };
     }
-  }, [currentPage, pathname]);
+  }, [currentPage, pathname, breadcrumbText]);
 
   return (
     <div>

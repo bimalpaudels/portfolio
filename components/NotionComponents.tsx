@@ -1,5 +1,4 @@
 import { RichText } from "./RichText";
-import { Link } from "next-view-transitions";
 import {
   MultiSelectPropertyItemObjectResponse,
   LastEditedTimePropertyItemObjectResponse,
