@@ -7,11 +7,11 @@ import { Projects, LearnMore } from "@/components";
 export default function Home() {
   return (
     <div className="animate-fade-in px-1">
-      <h4 className="font-heading font-semibold pt-12 text-gray-900 dark:text-gray-100">
+      <h4 className="font-heading font-semibold pt-12 text-gray-900 dark:text-gray-100 mb-4">
         Bimal Paudel
       </h4>
 
-      <div className="mb-3">
+      <div className="mb-4">
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
           I&apos;m a full-stack developer with over three years of experience
           building scalable web applications—based in Berlin, originally from
@@ -62,7 +62,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-24">
+      <div className="mt-20">
         <h3 className="font-heading font-medium text-base text-gray-900 dark:text-gray-100 mb-16">
           Personal Projects
         </h3>
