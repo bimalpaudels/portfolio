@@ -77,7 +77,7 @@ export default function Footer() {
 
   return (
     <footer className="mt-20 border-t border-gray-200/80 dark:border-gray-800/80 bg-gray-50/50 dark:bg-gray-900/20 backdrop-blur-sm">
-      <div className="max-w-[65ch] mx-auto px-8 py-12">
+      <div className="max-w-[70ch] mx-auto px-6 md:px-8 py-12">
         {/* Main footer content */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Navigation Section */}
