@@ -6,7 +6,7 @@ import { Projects, LearnMore } from "@/components";
 
 export default function Home() {
   return (
-    <div className="animate-fade-in">
+    <div className="animate-fade-in px-1">
       <h4 className="font-heading font-semibold pt-12 text-gray-900 dark:text-gray-100">
         Bimal Paudel
       </h4>

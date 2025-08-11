@@ -18,7 +18,7 @@ export default function Stack() {
   };
 
   return (
-    <div className="container max-w-[65ch] mx-auto px-4 py-16">
+    <div className="container max-w-[65ch] mx-auto px-1">
       <PageHeader currentPage="stack" />
       {/* Code Philosophy */}
       <div className="mb-8">
