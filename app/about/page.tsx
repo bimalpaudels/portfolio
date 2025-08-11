@@ -95,16 +95,6 @@ export default function About() {
       />
 
       <div className="container max-w-[65ch] mx-auto px-4 py-16 relative z-10">
-        <div className="mb-8">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-custom_dark transition-colors duration-200 mb-8"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to home
-          </Link>
-        </div>
-
         {/* Hero Section with Blended Image */}
         <div className="mb-8">
           <div className="flex flex-col md:flex-row md:items-start gap-3 mb-6">

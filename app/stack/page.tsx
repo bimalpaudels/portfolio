@@ -23,27 +23,11 @@ import {
   siRedis,
 } from "simple-icons";
 
-import {
-  ArrowLeft,
-  Brain,
-  Server,
-  Database,
-  Sparkles,
-  Monitor,
-} from "lucide-react";
-import { useState, useEffect } from "react";
+import { ArrowLeft } from "lucide-react";
+import { useState } from "react";
 
 export default function Stack() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [expandedSections, setExpandedSections] = useState<string[]>(["ai"]);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   const toggleSection = (section: string) => {
     setExpandedSections((prev) =>
@@ -57,7 +41,6 @@ export default function Stack() {
     {
       key: "ai",
       title: "AI & Machine Learning",
-      icon: <Brain className="h-5 w-5" />,
       description:
         "I work on deep learning models with PyTorch and work extensively with the Hugging Face Transformers ecosystem for NLP tasks and projects. I use Cursor as my LLM powered IDE to mainly take advantage of its Tab feature but also with designing frontend components, debugging and few other things. Before Cursor, I had integrated v0 to my workflow and I thought that was the best approach. Now I can't even imagine moving back and forth from browser to IDE.",
       technologies: [
@@ -80,7 +63,6 @@ export default function Stack() {
     {
       key: "backend",
       title: "Backend & APIs",
-      icon: <Server className="h-5 w-5" />,
       description:
         "I primarily build backend systems with Django and FastAPI, choosing between them based on project complexity and performance requirements. For Node.js ecosystems, I work with Express.js when a particular project requires it.",
       technologies: [
@@ -93,7 +75,6 @@ export default function Stack() {
     {
       key: "frontend",
       title: "Frontend Development",
-      icon: <Monitor className="h-5 w-5" />,
       description:
         "My go-to stack is Next.js with TypeScript and Tailwind CSS. I've shipped everything from complex dashboards to simple web applications such as this portfolio using this combination.",
       technologies: [
@@ -106,7 +87,6 @@ export default function Stack() {
     {
       key: "data",
       title: "Data & Infrastructure",
-      icon: <Database className="h-5 w-5" />,
       description:
         "I primarily use PostgreSQL for relational data, though I have extensive MySQL experience. Supabase has become my default choice for new projects—its real-time capabilities and especially integrated auth have streamlined my development workflow significantly. Redis is the obvious choice for caching layer. My deployment strategy revolves around Docker for containerization and that's something I have experience with professionally, where I have used it with multiple full-stack applications alongside Compose. I've also learnt and used Kubernetes for orchestration for my personal projects hosted locally.",
       technologies: [
@@ -131,7 +111,6 @@ export default function Stack() {
     {
       key: "exploring",
       title: "Currently Exploring",
-      icon: <Sparkles className="h-5 w-5" />,
       description:
         "Always learning, always growing. Here's what's capturing my attention and expanding my skillset:",
       technologies: [
@@ -144,65 +123,43 @@ export default function Stack() {
     },
   ];
 
-
   return (
-    <div className="min-h-screen bg-white dark:bg-darkmode text-gray-900 dark:text-custom_dark relative overflow-hidden">
-      <div
-        className="fixed inset-0 opacity-20 transition-all duration-1000 ease-out"
-        style={{
-          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(14, 165, 233, 0.1), transparent 80%)`,
-        }}
-      />
+    <div className="container max-w-[65ch] mx-auto px-4 py-16">
+      {/* Code Philosophy */}
+      <div className="mb-8">
+        <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+          I architect solutions primarily in Python, leveraging its versatility
+          across backend development, AI research, and data analytics. I also
+          have experience working with Typescript/Javascript. My approach
+          centers on building scalable systems that can evolve. I try to
+          prioritize clean, maintainable code that performs well technically.
+        </p>
+      </div>
 
-      <div className="container max-w-[65ch] mx-auto px-4 py-16 relative z-10">
-        <div className="mb-8">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-custom_dark transition-colors duration-200 mb-8"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to home
-          </Link>
-        </div>
+      {/* TLDR Section - Comma-separated, blends into body text */}
+      <div className="mb-8">
+        <h3 className="font-heading font-medium text-base text-gray-900 dark:text-custom_dark mb-2">
+          TLDR:
+        </h3>
+        <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+          Python, Django, FastAPI, Next.js, TypeScript, Tailwind, PostgreSQL,
+          Supabase, Docker, Kubernetes, PyTorch, AWS, Cursor, OpenAI API, RAG
+        </p>
+      </div>
 
-        {/* Code Philosophy */}
-        <div className="mb-8">
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
-            I architect solutions primarily in Python, leveraging its
-            versatility across backend development, AI research, and data
-            analytics. I also have experience working with
-            Typescript/Javascript. My approach centers on building scalable
-            systems that can evolve—I try to prioritize clean, maintainable code
-            that performs well technically.
-          </p>
-        </div>
-
-        {/* TLDR Section - Comma-separated, blends into body text */}
-        <div className="mb-8">
-          <h3 className="font-heading font-medium text-base text-gray-900 dark:text-custom_dark mb-2">
-            TLDR:
-          </h3>
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
-            Python, Django, FastAPI, Next.js, TypeScript, Tailwind, PostgreSQL,
-            Supabase, Docker, Kubernetes, PyTorch, AWS, Cursor, OpenAI API, RAG
-          </p>
-        </div>
-
-        {/* Technology Stack - All categories including Currently Exploring */}
-        <div className="space-y-4">
-          {stackCategories.map((category) => (
-            <CategorySection
-              key={category.key}
-              title={category.title}
-              icon={category.icon}
-              description={category.description}
-              technologies={category.technologies}
-              isExpanded={expandedSections.includes(category.key)}
-              onToggle={() => toggleSection(category.key)}
-              isSpecialSection={category.isSpecial || false}
-            />
-          ))}
-        </div>
+      {/* Technology Stack - All categories including Currently Exploring */}
+      <div className="space-y-4">
+        {stackCategories.map((category) => (
+          <CategorySection
+            key={category.key}
+            title={category.title}
+            description={category.description}
+            technologies={category.technologies}
+            isExpanded={expandedSections.includes(category.key)}
+            onToggle={() => toggleSection(category.key)}
+            isSpecialSection={category.isSpecial || false}
+          />
+        ))}
       </div>
     </div>
   );
