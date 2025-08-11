@@ -1,10 +1,29 @@
+"use client";
+
 import { Link } from "next-view-transitions";
+import { usePathname } from "next/navigation";
+import { getRandomBreadcrumbPun } from "@/lib/breadcrumbPuns";
+import { useEffect, useState } from "react";
 
 interface PageHeaderProps {
   currentPage: string;
 }
 
 export default function PageHeader({ currentPage }: PageHeaderProps) {
+  const [breadcrumbText, setBreadcrumbText] = useState<string>("");
+  const pathname = usePathname();
+
+  useEffect(() => {
+    // Check if we're on a post detail page (posts/[slug])
+    if (
+      currentPage === "posts" &&
+      pathname.startsWith("/posts/") &&
+      pathname !== "/posts"
+    ) {
+      setBreadcrumbText(getRandomBreadcrumbPun());
+    }
+  }, [currentPage, pathname]);
+
   return (
     <div>
       <Link href="/" className="inline-block group hover:no-underline">
@@ -13,9 +32,25 @@ export default function PageHeader({ currentPage }: PageHeaderProps) {
         </h2>
       </Link>
       <div className="mb-4">
-        <span className="text-sm text-gray-600 dark:text-gray-400 font-semibold">
-          /{currentPage}
-        </span>
+        {currentPage === "posts" &&
+        pathname.startsWith("/posts/") &&
+        pathname !== "/posts" ? (
+          <>
+            <Link
+              href="/posts"
+              className="text-sm text-gray-600 dark:text-gray-400 font-semibold hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+            >
+              /posts
+            </Link>
+            <span className="text-sm text-gray-600 dark:text-gray-400 font-semibold">
+              /{breadcrumbText}
+            </span>
+          </>
+        ) : (
+          <span className="text-sm text-gray-600 dark:text-gray-400 font-semibold">
+            /{currentPage}
+          </span>
+        )}
       </div>
     </div>
   );

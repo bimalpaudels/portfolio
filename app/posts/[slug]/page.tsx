@@ -12,7 +12,7 @@ import {
 } from "@notionhq/client/build/src/api-endpoints";
 import { NotionTags, LastUpdated } from "@/components";
 import { NotionBlockRenderer } from "@/components";
-import { ArrowLeft } from "lucide-react";
+
 import { Link } from "next-view-transitions";
 
 export const dynamicParams = true;
@@ -107,17 +107,6 @@ export default async function Page({ params }: PageProps) {
 
     return (
       <div className="animate-fade-in">
-        {/* Back Navigation */}
-        <div className="mb-6">
-          <Link
-            href="/posts"
-            className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Posts
-          </Link>
-        </div>
-
         {/* Post Header */}
         <div className="article mb-8">
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-6">
@@ -164,13 +153,6 @@ export default async function Page({ params }: PageProps) {
             The post you&apos;re looking for doesn&apos;t exist or has been
             moved.
           </p>
-          <Link
-            href="/posts"
-            className="inline-flex items-center gap-2 text-sky-600 hover:text-sky-700 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Posts
-          </Link>
         </div>
       </div>
     );
