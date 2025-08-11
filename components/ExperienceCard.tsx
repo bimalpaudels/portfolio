@@ -64,17 +64,18 @@ export default function ExperienceCard({
               <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2">
                 {item.period}
               </p>
-              <p className="text-gray-700 dark:text-gray-300 mb-3 text-sm">
-                {item.description}
-              </p>
-              {item.achievements && (
-                <ul className="space-y-1">
+              {!item.achievements || item.achievements.length === 0 ? (
+                <p className="text-gray-700 dark:text-gray-300 mb-3 text-sm">
+                  {item.description}
+                </p>
+              ) : (
+                <ul className="space-y-1 list-disc pl-4">
                   {item.achievements.map((achievement, i) => (
                     <li
                       key={i}
                       className="text-xs text-gray-600 dark:text-gray-400"
                     >
-                      • {achievement}
+                      {achievement}
                     </li>
                   ))}
                 </ul>

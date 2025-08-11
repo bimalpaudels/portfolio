@@ -2,9 +2,9 @@ import {
   ChevronDown,
   ChevronRight,
   Github,
-  BookOpen,
-  Mountain,
-  Camera,
+  Brain,
+  Bike,
+  Trophy,
   ChefHat,
 } from "lucide-react";
 
@@ -23,32 +23,32 @@ export default function HobbiesCard({
 
   const hobbies = [
     {
+      name: "Cycling",
+      description: "Once did 110 KM in 6 hrs",
+      icon: <Bike className="h-5 w-5" />,
+      color: "orange",
+    },
+    {
+      name: "Chess",
+      description: "Bullet ~1600 ranking",
+      icon: <Brain className="h-5 w-5" />,
+      color: "green",
+    },
+    {
+      name: "Watching Sports",
+      description: "Football, NBA, everything",
+      icon: <Trophy className="h-5 w-5" />,
+      color: "purple",
+    },
+    {
       name: "Open Source",
-      description: "Contributing to projects",
+      description: "Trying to move from interest to hobby",
       icon: <Github className="h-5 w-5" />,
       color: "blue",
     },
     {
-      name: "Reading",
-      description: "Tech & Fiction",
-      icon: <BookOpen className="h-5 w-5" />,
-      color: "green",
-    },
-    {
-      name: "Hiking",
-      description: "Nature trails",
-      icon: <Mountain className="h-5 w-5" />,
-      color: "orange",
-    },
-    {
-      name: "Photography",
-      description: "Street & Nature",
-      icon: <Camera className="h-5 w-5" />,
-      color: "purple",
-    },
-    {
       name: "Cooking",
-      description: "International cuisine",
+      description: "Mostly Nepali food",
       icon: <ChefHat className="h-5 w-5" />,
       color: "amber",
     },

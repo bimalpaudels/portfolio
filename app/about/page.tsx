@@ -2,8 +2,15 @@
 
 import { Link } from "next-view-transitions";
 import Image from "next/image";
-import { MapPin, ChevronDown, ChevronRight, Mail } from "lucide-react";
+import {
+  MapPin,
+  ChevronDown,
+  ChevronRight,
+  Layers,
+  FileText,
+} from "lucide-react";
 import { useState } from "react";
+import { siGmail } from "simple-icons";
 import { ExperienceCard, HobbiesCard } from "@/components";
 import { experience, education } from "@/data/aboutData";
 
@@ -32,46 +39,57 @@ export default function About() {
             </p>
 
             {/* Available Status */}
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-3">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
               <span className="text-xs text-gray-700 dark:text-gray-300 font-medium">
                 Available for hire
               </span>
             </div>
 
-            <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-2">
-              Passionate full-stack developer with 3+ years of experience
-              building scalable web applications. Based in Berlin, originally
-              from Nepal.
+            <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+              Passionate about creating optimized and scalable solutions.
+              Looking for a full-time position where I can contribute to
+              innovative projects.
             </p>
 
-            {/* Contact Information - Same Line */}
+            {/* Contact Information - Single Line */}
             <div className="flex items-center gap-4 text-xs text-gray-600 dark:text-gray-400">
-              <div className="flex items-center gap-2">
-                <Mail className="h-3 w-3 text-gray-600 dark:text-gray-400" />
-                <span>bimal@example.com</span>
-              </div>
+              <a
+                href="mailto:ibimalp@gmail.com"
+                className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-custom_dark transition-colors"
+              >
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" aria-hidden>
+                  <path d={siGmail.path} fill="currentColor" />
+                </svg>
+                <span>ibimalp@gmail.com</span>
+              </a>
               <div className="flex items-center gap-2">
                 <MapPin className="h-3 w-3 text-gray-600 dark:text-gray-400" />
-                <span>Tech Stack</span>
+                <span>Berlin</span>
               </div>
-              <div className="flex items-center gap-2">
-                <a
-                  href="/resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-400 decoration-gray-400 dark:decoration-gray-500 hover:text-gray-900 dark:hover:text-custom_dark transition-colors duration-200"
-                >
-                  resume.pdf
-                </a>
-              </div>
+              <Link
+                href="/stack"
+                className="flex items-center gap-2 text-gray-600 dark:text-gray-400 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500 hover:text-gray-900 dark:hover:text-custom_dark transition-colors duration-200"
+              >
+                <Layers className="w-3.5 h-3.5" />
+                <span>Stack</span>
+              </Link>
+              <Link
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-gray-600 dark:text-gray-400 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500 hover:text-gray-900 dark:hover:text-custom_dark transition-colors duration-200"
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>Resume</span>
+              </Link>
             </div>
           </div>
 
           <div className="md:w-40 flex-shrink-0">
             <div className="w-40 h-42 mt-2 mx-auto md:mx-0 rounded-xl overflow-hidden bg-gradient-to-br from-gray-200/50 to-gray-300/50 dark:from-gray-700/50 dark:to-gray-800/50 border border-gray-200 dark:border-gray-700">
               <Image
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face&auto=format"
+                src="https://res.cloudinary.com/dbluso0oc/image/upload/v1754949510/portfolio_one_ia134.jpg"
                 alt="Bimal Paudel"
                 width={400}
                 height={400}
@@ -162,13 +180,13 @@ export default function About() {
                         German
                       </span>
                       <span className="text-gray-500 dark:text-gray-400 text-xs">
-                        Intermediate
+                        Beginner
                       </span>
                     </div>
                     <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                       <div
                         className="bg-black dark:bg-white h-2 rounded-full shadow-md"
-                        style={{ width: "65%" }}
+                        style={{ width: "25%" }}
                       ></div>
                     </div>
                   </div>
