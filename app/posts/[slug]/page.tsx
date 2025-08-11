@@ -133,7 +133,7 @@ export default async function Page({ params }: PageProps) {
           />
 
           {/* Separator line */}
-          <div className="border-t border-gray-200 dark:border-gray-800 mb-32 pt-4">
+          <div className="border-t border-gray-200 dark:border-gray-800 pt-4">
             {/* Tags */}
             {properties.Tags && (
               <NotionTags

@@ -78,7 +78,7 @@ export default function Home() {
         <LearnMore sections={learnMoreSections} />
       </div>
 
-      <div className="mt-28 mb-44">
+      <div className="mt-28">
         <p className="text-xs text-gray-500 dark:text-gray-500 text-center">
           Thank you for visiting my website.
         </p>

@@ -37,11 +37,11 @@ export const learnMoreSections = [
   {
     title: "About Me",
     description:
-      "Learn more about my background, experience, and what drives me as a developer.",
+      "If you are interested in my background and experience, you can find more about me here.",
   },
   {
     title: "Tech Stack",
     description:
-      "Explore the technologies, frameworks, and tools I use to build modern web applications.",
+      "Checkout the tools and tech I use to work on my projects. And also the tech I'm currently exploring.",
   },
 ];
