@@ -5,7 +5,7 @@ interface Project {
   description: string;
   period: string;
   url: string;
-  status: string;
+  github_url?: string;
 }
 
 interface ProjectsProps {
@@ -14,7 +14,7 @@ interface ProjectsProps {
 
 export default function Projects({ projects }: ProjectsProps) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       {projects.map((project, index) => (
         <div
           key={index}
@@ -34,18 +34,20 @@ export default function Projects({ projects }: ProjectsProps) {
             <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
               {project.description}
             </p>
-            <div className="flex items-center gap-3 mt-2">
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200"
-              >
-                <svg className="w-3 h-3" viewBox="0 0 24 24">
-                  <path d={siGithub.path} fill="currentColor" />
-                </svg>
-                GitHub
-              </a>
+            <div className="flex items-center gap-3 mt-1">
+              {project.github_url && project.github_url.length > 0 && (
+                <a
+                  href={project.github_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200"
+                >
+                  <svg className="w-3 h-3" viewBox="0 0 24 24">
+                    <path d={siGithub.path} fill="currentColor" />
+                  </svg>
+                  GitHub
+                </a>
+              )}
               <span className="text-xs text-gray-500 dark:text-gray-400">
                 {project.period}
               </span>
