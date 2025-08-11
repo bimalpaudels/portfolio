@@ -1,24 +1,28 @@
 "use client";
 
 import Link from "next/link";
+import { CursorIcon, AWSIcon } from "@/components/icons";
+import { TechItem } from "@/components/TechItem";
+// SimpleIcons imports
 import {
-  SiDjango,
-  SiDocker,
-  SiExpress,
-  SiFastapi,
-  SiHuggingface,
-  SiKubernetes,
-  SiNextdotjs,
-  SiOpenai,
-  SiPostgresql,
-  SiPytorch,
-  SiPython,
-  SiReact,
-  SiRedis,
-  SiSupabase,
-  SiTailwindcss,
-  SiTypescript,
-} from "@icons-pack/react-simple-icons";
+  siPytorch,
+  siOpenai,
+  siHuggingface,
+  siPython,
+  siDjango,
+  siFastapi,
+  siExpress,
+  siNextdotjs,
+  siTypescript,
+  siTailwindcss,
+  siReact,
+  siPostgresql,
+  siSupabase,
+  siDocker,
+  siKubernetes,
+  siRedis,
+} from "simple-icons";
+
 import {
   ArrowLeft,
   ChevronDown,
@@ -27,10 +31,10 @@ import {
   Server,
   Database,
   Sparkles,
-  Terminal,
   Monitor,
 } from "lucide-react";
 import { useState, useEffect } from "react";
+
 
 export default function Stack() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -76,27 +80,26 @@ export default function Stack() {
       technologies: [
         {
           name: "PyTorch",
-          icon: (
-            <SiPytorch title="PyTorch" className="h-5 w-5" color="default" />
-          ),
+          icon: { type: 'simple' as const, data: siPytorch },
         },
         {
           name: "Hugging Face",
-          icon: (
-            <SiHuggingface
-              title="Hugging Face"
-              className="h-5 w-5"
-              color="default"
-            />
-          ),
+          icon: { type: 'simple' as const, data: siHuggingface },
         },
         {
           name: "Cursor",
-          icon: <Terminal className="h-5 w-5" />,
+          icon: { 
+            type: 'custom' as const, 
+            component: (
+              <div className="w-5 h-5 flex items-center justify-center" data-icon="cursor">
+                <CursorIcon size={28} />
+              </div>
+            ),
+          },
         },
         {
           name: "OpenAI API",
-          icon: <SiOpenai title="OpenAI" className="h-5 w-5" color="default" />,
+          icon: { type: 'simple' as const, data: siOpenai },
         },
       ],
     },
@@ -117,23 +120,19 @@ export default function Stack() {
       technologies: [
         {
           name: "Python",
-          icon: <SiPython title="Python" className="h-5 w-5" color="default" />,
+          icon: { type: 'simple' as const, data: siPython },
         },
         {
           name: "Django",
-          icon: <SiDjango title="Django" className="h-5 w-5" color="default" />,
+          icon: { type: 'simple' as const, data: siDjango },
         },
         {
           name: "FastAPI",
-          icon: (
-            <SiFastapi title="FastAPI" className="h-5 w-5" color="default" />
-          ),
+          icon: { type: 'simple' as const, data: siFastapi },
         },
         {
           name: "Express.js",
-          icon: (
-            <SiExpress title="Express.js" className="h-5 w-5" color="default" />
-          ),
+          icon: { type: 'simple' as const, data: siExpress },
         },
       ],
     },
@@ -153,33 +152,19 @@ export default function Stack() {
       technologies: [
         {
           name: "Next.js",
-          icon: (
-            <SiNextdotjs title="Next.js" className="h-5 w-5" color="default" />
-          ),
+          icon: { type: 'simple' as const, data: siNextdotjs },
         },
         {
           name: "TypeScript",
-          icon: (
-            <SiTypescript
-              title="TypeScript"
-              className="h-5 w-5"
-              color="default"
-            />
-          ),
+          icon: { type: 'simple' as const, data: siTypescript },
         },
         {
           name: "Tailwind CSS",
-          icon: (
-            <SiTailwindcss
-              title="Tailwind CSS"
-              className="h-5 w-5"
-              color="default"
-            />
-          ),
+          icon: { type: 'simple' as const, data: siTailwindcss },
         },
         {
           name: "React",
-          icon: <SiReact title="React" className="h-5 w-5" color="default" />,
+          icon: { type: 'simple' as const, data: siReact },
         },
       ],
     },
@@ -208,47 +193,34 @@ export default function Stack() {
       technologies: [
         {
           name: "PostgreSQL",
-          icon: (
-            <SiPostgresql
-              title="PostgreSQL"
-              className="h-5 w-5"
-              color="default"
-            />
-          ),
+          icon: { type: 'simple' as const, data: siPostgresql },
         },
         {
           name: "Supabase",
-          icon: (
-            <SiSupabase title="Supabase" className="h-5 w-5" color="default" />
-          ),
+          icon: { type: 'simple' as const, data: siSupabase },
         },
         {
           name: "Docker",
-          icon: <SiDocker title="Docker" className="h-5 w-5" color="default" />,
+          icon: { type: 'simple' as const, data: siDocker },
         },
         {
           name: "Kubernetes",
-          icon: (
-            <SiKubernetes
-              title="Kubernetes"
-              className="h-5 w-5"
-              color="default"
-            />
-          ),
+          icon: { type: 'simple' as const, data: siKubernetes },
         },
         {
           name: "AWS",
-          icon: (
-            <img
-              src="https://cdn.simpleicons.org/amazonaws"
-              alt="AWS"
-              className="h-5 w-5"
-            />
-          ),
+          icon: { 
+            type: 'custom' as const, 
+            component: (
+              <div className="w-5 h-5 flex items-center justify-center" data-icon="aws">
+                <AWSIcon size={28} />
+              </div>
+            ),
+          },
         },
         {
           name: "Redis",
-          icon: <SiRedis title="Redis" className="h-5 w-5" color="default" />,
+          icon: { type: 'simple' as const, data: siRedis },
         },
       ],
     },
@@ -375,21 +347,7 @@ export default function Stack() {
                     {/* Technology Cards */}
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
                       {category.technologies.map((tech, index) => (
-                        <div
-                          key={index}
-                          className="group relative overflow-hidden rounded-xl border border-transparent bg-transparent transition-all duration-300 hover:bg-white/20 dark:hover:bg-gray-800/30 hover:border-gray-200/50 dark:hover:border-gray-700/50 hover:shadow-md hover:backdrop-blur-sm"
-                        >
-                          <div className="p-3">
-                            <div className="flex flex-col items-center text-center gap-2">
-                              <div className="w-10 h-10 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 border border-transparent bg-transparent shadow-sm group-hover:scale-110 transition-all duration-300 group-hover:bg-white/50 dark:group-hover:bg-gray-800/40 group-hover:border-gray-200/50 dark:group-hover:border-gray-700/50 group-hover:backdrop-blur-sm">
-                                {tech.icon}
-                              </div>
-                              <h4 className="font-semibold text-xs text-gray-900 dark:text-custom_dark group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors leading-tight">
-                                {tech.name}
-                              </h4>
-                            </div>
-                          </div>
-                        </div>
+                        <TechItem key={index} name={tech.name} icon={tech.icon} index={index} />
                       ))}
                     </div>
                   </div>
