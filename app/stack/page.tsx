@@ -262,23 +262,6 @@ export default function Stack() {
           </Link>
         </div>
 
-        {/* Hero Section */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 rounded-xl bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-400">
-              <Code className="h-6 w-6" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold font-heading text-gray-900 dark:text-custom_dark">
-                Tech Stack
-              </h1>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                My current technology stack and development philosophy
-              </p>
-            </div>
-          </div>
-        </div>
-
         {/* Philosophy Section - Outside card, styled like landing page */}
         <div className="mb-8">
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
@@ -291,21 +274,14 @@ export default function Stack() {
           </p>
         </div>
 
-        {/* TLDR Section - Plain inline list like connection URLs on home */}
+        {/* TLDR Section - Comma-separated, blends into body text */}
         <div className="mb-8">
           <h3 className="font-heading font-medium text-base text-gray-900 dark:text-custom_dark mb-2">
             TLDR
           </h3>
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
-            {tldrItems.map((item) => (
-              <span
-                key={item}
-                className="text-sm text-gray-700 dark:text-gray-300 underline underline-offset-2 decoration-gray-400 dark:decoration-gray-500"
-              >
-                {item}
-              </span>
-            ))}
-          </div>
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+            {tldrItems.join(", ")}.
+          </p>
         </div>
 
         {/* Technology Stack - Categorized with Individual Tech Cards */}
@@ -321,10 +297,10 @@ export default function Stack() {
             >
               <button
                 onClick={() => toggleSection(category.key)}
-                className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-t-lg"
+                className="group w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-t-lg"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 border border-transparent bg-transparent transition-all duration-200 group-hover:bg-white/50 dark:group-hover:bg-gray-800/40 group-hover:border-gray-200/50 dark:group-hover:border-gray-700/50 group-hover:backdrop-blur-sm">
                     {category.icon}
                   </div>
                   <h3 className="font-medium text-base font-heading text-gray-900 dark:text-custom_dark">
@@ -348,11 +324,11 @@ export default function Stack() {
                       {category.technologies.map((tech, index) => (
                         <div
                           key={index}
-                          className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 border border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 transition-all duration-300 hover:shadow-md"
+                          className="group relative overflow-hidden rounded-xl border border-transparent bg-transparent transition-all duration-300 hover:bg-white/20 dark:hover:bg-gray-800/30 hover:border-gray-200/50 dark:hover:border-gray-700/50 hover:shadow-md hover:backdrop-blur-sm"
                         >
                           <div className="p-3">
                             <div className="flex flex-col items-center text-center gap-2">
-                              <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 flex items-center justify-center text-gray-600 dark:text-gray-400 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                              <div className="w-10 h-10 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 border border-transparent bg-transparent shadow-sm group-hover:scale-110 transition-all duration-300 group-hover:bg-white/50 dark:group-hover:bg-gray-800/40 group-hover:border-gray-200/50 dark:group-hover:border-gray-700/50 group-hover:backdrop-blur-sm">
                                 {tech.icon}
                               </div>
                               <h4 className="font-semibold text-xs text-gray-900 dark:text-custom_dark group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors leading-tight">
@@ -380,10 +356,10 @@ export default function Stack() {
         >
           <button
             onClick={() => toggleSection("exploring")}
-            className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-t-lg"
+            className="group w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-t-lg"
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400">
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 border border-transparent bg-transparent transition-all duration-200 group-hover:bg-white/50 dark:group-hover:bg-gray-800/40 group-hover:border-gray-200/50 dark:group-hover:border-gray-700/50 group-hover:backdrop-blur-sm">
                 <Sparkles className="h-5 w-5" />
               </div>
               <h3 className="font-medium text-base font-heading text-gray-900 dark:text-custom_dark">
@@ -407,11 +383,11 @@ export default function Stack() {
                   {currentlyExploring.map((item, index) => (
                     <div
                       key={index}
-                      className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 border border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 transition-all duration-300 hover:shadow-md"
+                      className="group relative overflow-hidden rounded-xl border border-transparent bg-transparent transition-all duration-300 hover:bg-white/20 dark:hover:bg-gray-800/30 hover:border-gray-200/50 dark:hover:border-gray-700/50 hover:shadow-md hover:backdrop-blur-sm"
                     >
                       <div className="p-3">
                         <div className="flex items-start gap-3">
-                          <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 flex items-center justify-center text-gray-600 dark:text-gray-400 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                          <div className="w-10 h-10 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 border border-transparent bg-transparent shadow-sm group-hover:scale-110 transition-all duration-300 group-hover:bg-white/50 dark:group-hover:bg-gray-800/40 group-hover:border-gray-200/50 dark:group-hover:border-gray-700/50 group-hover:backdrop-blur-sm">
                             <Sparkles className="h-5 w-5" />
                           </div>
                           <div className="flex-1">
