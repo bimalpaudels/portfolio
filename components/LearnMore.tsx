@@ -24,10 +24,7 @@ export default function LearnMore({ sections }: LearnMoreProps) {
   return (
     <div className="space-y-4">
       {sections.map((section, index) => (
-        <div
-          key={index}
-          className="flex flex-col sm:flex-row sm:items-start gap-6"
-        >
+        <div key={index} className="flex flex-col sm:flex-row sm:items-start">
           <div className="sm:w-1/3">
             <Link
               href={getSectionHref(section.title)}

@@ -16,10 +16,7 @@ export default function Projects({ projects }: ProjectsProps) {
   return (
     <div className="space-y-5">
       {projects.map((project, index) => (
-        <div
-          key={index}
-          className="flex flex-col sm:flex-row sm:items-start gap-6"
-        >
+        <div key={index} className="flex flex-col sm:flex-row sm:items-start">
           <div className="sm:w-1/3">
             <a
               href={project.url}
