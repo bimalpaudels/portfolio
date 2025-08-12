@@ -26,7 +26,7 @@ export default function LearnMore({ sections }: LearnMoreProps) {
       {sections.map((section, index) => (
         <div
           key={index}
-          className="flex flex-col sm:flex-row sm:items-start gap-6"
+          className="flex flex-col sm:flex-row sm:items-start gap-2"
         >
           <div className="sm:w-1/3">
             <Link

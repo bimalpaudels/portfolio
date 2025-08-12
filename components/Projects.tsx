@@ -18,7 +18,7 @@ export default function Projects({ projects }: ProjectsProps) {
       {projects.map((project, index) => (
         <div
           key={index}
-          className="flex flex-col sm:flex-row sm:items-start gap-6"
+          className="flex flex-col sm:flex-row sm:items-start gap-2"
         >
           <div className="sm:w-1/3">
             <a
