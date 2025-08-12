@@ -73,7 +73,7 @@ export default function RootLayout({
       >
         <head></head>
         <body
-          className="antialiased tracking-tight bg-white dark:bg-darkmode font-body"
+          className="antialiased tracking-tight bg-[var(--bg-primary-light)] dark:bg-[var(--bg-primary-dark)] font-body"
           suppressHydrationWarning
         >
           <Navigation />
