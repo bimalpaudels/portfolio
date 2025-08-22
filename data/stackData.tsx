@@ -22,6 +22,17 @@ import {
 
 export const stackCategories = [
   {
+    key: "exploring",
+    title: "Currently Exploring",
+    description:
+      "Recently I've been having a lot of fun working with Go, and I'm learning n8n as well.",
+    technologies: [
+      { name: "Go", icon: siGo },
+      { name: "n8n", icon: siN8n },
+    ],
+    isSpecial: true,
+  },
+  {
     key: "ai",
     title: "AI & Machine Learning",
     description:
@@ -90,17 +101,6 @@ export const stackCategories = [
       },
       { name: "Redis", icon: siRedis },
     ],
-  },
-  {
-    key: "exploring",
-    title: "Currently Exploring",
-    description:
-      "Recently I've been having a lot of fun working with Go, and I'm learning n8n as well.",
-    technologies: [
-      { name: "Go", icon: siGo },
-      { name: "n8n", icon: siN8n },
-    ],
-    isSpecial: true,
   },
 ];
 

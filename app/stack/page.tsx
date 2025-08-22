@@ -6,7 +6,9 @@ import { stackCategories, tldrItems } from "@/data/stackData";
 import { useState } from "react";
 
 export default function Stack() {
-  const [expandedSections, setExpandedSections] = useState<string[]>(["ai"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>([
+    "exploring",
+  ]);
 
   const toggleSection = (section: string) => {
     setExpandedSections((prev) =>
